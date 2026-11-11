@@ -4,8 +4,10 @@ Thank you for helping. This project is small and maintained by one person, so cl
 
 ## Ways to help
 
-| Help | How | Effort |
+| Help | How | Where |
 |---|---|---|
+| **Question** | How do I, does it, why does it... | [Discussions, Q&A](https://github.com/Nazhra05/Super-set/discussions/categories/q-a) |
+| **Early idea** | Not sure yet whether it should become a rule or a feature | [Discussions, Ideas](https://github.com/Nazhra05/Super-set/discussions/categories/ideas) |
 | **Field report** | Use a plugin on a real project and tell us what worked, what confused you, and what went wrong. Most wanted: macOS, Linux, the desktop app, and `content-project-workflow` on a real video. | Issue form "Field report" |
 | **Bug report** | Something failed: a setup step, a script, an instruction Claude misread. | Issue form "Bug report" |
 | **Rule or feature idea** | What went wrong without it, and what would have prevented it. | Issue form "Feature request" |
@@ -13,7 +15,7 @@ Thank you for helping. This project is small and maintained by one person, so cl
 | **Knowledge skills** | Better or more content, motion, and design guidance in `content-project-workflow`, with sources. | Pull request |
 | **Translations** | Core docs in another language, as a new `templates/<lang>/` folder that mirrors `templates/id/`. | Pull request |
 
-For anything bigger than a small fix, please open an issue first so we can agree on the approach before you spend time on it.
+For anything bigger than a small fix, please open an issue (or an Ideas discussion) first so we can agree on the approach before you spend time on it.
 
 ## How a pull request works (short version)
 1. Fork the repository on GitHub and create a branch.

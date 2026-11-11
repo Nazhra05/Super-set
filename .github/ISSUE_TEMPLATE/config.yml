@@ -1,5 +1,11 @@
-blank_issues_enabled: true
+blank_issues_enabled: false
 contact_links:
+  - name: Question
+    url: https://github.com/Nazhra05/Super-set/discussions/categories/q-a
+    about: Ask how something works or whether it fits your project.
+  - name: Early idea
+    url: https://github.com/Nazhra05/Super-set/discussions/categories/ideas
+    about: Share an idea before it is ready to be a feature request.
   - name: Contributing guide
     url: https://github.com/Nazhra05/Super-set/blob/main/CONTRIBUTING.md
     about: How to help, the rules for changes, and the checks to run.
