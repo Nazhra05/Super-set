@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.1 (2026-11-11)
+- Fix: the setup skills could not read the templates, because the installed plugin lives outside the project folder. `scripts/stage.sh` (pre-approved in the skills' `allowed-tools`) now copies the setup material into `.workflow-setup/` inside the project; the setup deletes it at the end.
+- Router reads the surface with `printenv WORKFLOW_SURFACE` (a `$VAR` in a command is blocked by permission checks).
+
 ## 0.2.0 (2026-11-11)
 - MIT license; author and repository metadata in the manifests; marketplace `super-set`.
 - Desktop app support: router mode through `.claude/settings.local.json`, and a usage rule for surfaces without a status line.

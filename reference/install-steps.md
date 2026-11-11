@@ -1,6 +1,6 @@
 # Install steps
 
-Shared by the `adopt` and `bootstrap` skills, after the interview in `setup-interview.md`. `TEMPLATES` below means the `templates/` folder of this plugin.
+Shared by the `adopt` and `bootstrap` skills, after the interview in `setup-interview.md`. `TEMPLATES` below means `.workflow-setup/templates/`, staged into the project by `scripts/stage.sh`.
 
 ## 1. Plan the file list before writing
 List every file the setup will create or change in the project, marked `new` or `merge`. Show the list to the owner in plain language and continue after a yes. Nothing in the project is overwritten silently.
@@ -33,6 +33,7 @@ If a file with the same path already exists, never replace it. Merge instead:
 ## 3. `.gitignore` lines (in the repo that contains the project root)
 ```
 _wt/
+.workflow-setup/
 .claude/settings.local.json
 .claude/usage.json
 .env*
@@ -57,4 +58,5 @@ Quote the real output of each step in the report. If a step fails, use `systemat
 - **Desktop app:** the status line does not run there, so skip the `usage.json` check and say so. If the owner wants router mode now, write the keys from `WORKFLOW.md` ("Starting a router session") into `.claude/settings.local.json` (merge, never replace the file), ask them to open a new session in the project, and confirm the router answers by naming `WORKFLOW.md` as its first read. Until that has been seen, report router mode as not verified on this machine.
 
 ## 6. Report and stop
+Delete `.workflow-setup/` first and confirm with `ls -A` that it is gone.
 In plain language in the owner's language: what was created or merged, what was found (for `adopt`), the smoke test result, what was not verified, and the decisions waiting for the owner. Do not commit unless the owner asks. Name how to start the router on the owner's surface: `claude --agent router --model <router model> --effort high` in a terminal, or router mode in `.claude/settings.local.json` for the desktop app.

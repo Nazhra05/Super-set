@@ -4,7 +4,7 @@ Shared by the `adopt` and `bootstrap` skills. Ask with the AskUserQuestion tool,
 
 Reply to the owner in the language they write in. Everything written into the project is in English.
 
-Start by explaining the defaults in `<plugin root>/README.md`, section "Opinionated defaults (and how to change them)", in the owner's language and in plain words, then ask which ones to change. Record each change as a project decision (D-xx) in `DECISIONS.md` with the reason, and apply it to the files named in that table.
+Start by explaining the defaults in `.workflow-setup/README.md`, section "Opinionated defaults (and how to change them)", in the owner's language and in plain words, then ask which ones to change. Record each change as a project decision (D-xx) in `DECISIONS.md` with the reason, and apply it to the files named in that table.
 
 ## Answers to collect, and the placeholder each one fills
 

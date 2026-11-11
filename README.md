@@ -8,7 +8,7 @@ A Claude Code plugin that installs a ticket-based way of working into a project:
 | `/app-project-workflow:adopt` | The project already has code, docs, or its own Claude Code setup | Surveys the project read-only, records a test baseline, asks instead of guessing, merges existing rules and tasks into the templates, never overwrites |
 | `/app-project-workflow:bootstrap` | New or empty folder | Interviews you about the project, sets up the repo layout, fills the core docs for this project, no app scaffolding |
 
-Both explain the defaults below, ask which to change, smoke-test the tools, and end with a plain-language report. Nothing is committed unless you ask.
+Both explain the defaults below, ask which to change, smoke-test the tools, and end with a plain-language report. Nothing is committed unless you ask. During setup the skill copies its material into a temporary `.workflow-setup/` folder in the project (the installed plugin lives outside the project) and deletes it at the end.
 
 ## Install
 From any terminal (macOS, Linux, or Windows):
@@ -69,6 +69,7 @@ To override a W-xx decision in a project, add a project decision (D-xx) in `DECI
 .claude-plugin/   plugin.json, marketplace.json
 skills/           adopt, bootstrap
 reference/        setup-interview.md, install-steps.md (shared by both skills)
+scripts/          stage.sh (copies setup material into the project)
 templates/        everything copied into a project
 ```
 
