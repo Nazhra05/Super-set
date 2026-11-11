@@ -1,7 +1,7 @@
 {
   "name": "content-project-workflow",
-  "description": "Production workflow for video, motion graphics, and content projects in Claude Code: a brief (PRD), art direction, a reference inventory, approval gates from storyboard to final render, producer, asset-builder, visual-reviewer and researcher agents, and knowledge skills for content, motion, and design. Two setup paths: adopt (existing project) and bootstrap (new or empty project).",
-  "version": "0.1.0",
+  "description": "Run video, animation, and content projects with Claude Code like a small studio. Sets up a brief, a style guide, a list of every reference, and approval gates from storyboard to final render. A producer agent hands one shot at a time to builder, frame-checking reviewer, and researcher agents; built-in skills cover content basics, motion, design, and character design. Setup: /content-project-workflow:adopt (existing project) or :bootstrap (new folder).",
+  "version": "0.1.1",
   "author": {
     "name": "Nazhra05",
     "url": "https://github.com/Nazhra05"
@@ -9,5 +9,13 @@
   "homepage": "https://github.com/Nazhra05/Super-set",
   "repository": "https://github.com/Nazhra05/Super-set",
   "license": "MIT",
-  "keywords": ["workflow", "video", "motion-graphics", "content", "design", "subagents", "verification"]
+  "keywords": [
+    "workflow",
+    "video",
+    "motion-graphics",
+    "content",
+    "design",
+    "subagents",
+    "verification"
+  ]
 }

@@ -1,7 +1,7 @@
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
   "name": "super-set",
-  "description": "Claude Code plugins by Nazhra05.",
+  "description": "Ready-made ways of working for Claude Code: plugins that set up a project so Claude plans first, proves its work, and keeps notes between sessions.",
   "owner": {
     "name": "Nazhra05",
     "url": "https://github.com/Nazhra05"
@@ -10,8 +10,8 @@
     {
       "name": "app-project-workflow",
       "source": "./plugins/app-project-workflow",
-      "description": "Ticket workflow for Claude Code with adopt and bootstrap setup paths.",
-      "version": "0.3.1",
+      "description": "For software projects: sets up a PRD, a work board, session notes, and a checked ticket flow (plan, build, test, review) so Claude proves its work and stays in scope.",
+      "version": "0.3.2",
       "author": {
         "name": "Nazhra05"
       },
@@ -21,8 +21,8 @@
     {
       "name": "content-project-workflow",
       "source": "./plugins/content-project-workflow",
-      "description": "Production workflow for video, motion graphics, and content projects with adopt and bootstrap setup paths.",
-      "version": "0.1.0",
+      "description": "For video, animation, and content projects: sets up a brief, style guide, reference list, approval gates, and agents that build, check frames, and research, so Claude follows your references and shows designs before building on them.",
+      "version": "0.1.1",
       "author": {
         "name": "Nazhra05"
       },

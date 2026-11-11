@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.3.2 (2026-11-11)
+- README and plugin description rewritten for new users: who it is for, the problems it solves, and how a job runs. No change in behaviour.
+
 ## 0.3.1 (2026-11-11)
 - The plugin moved to `plugins/app-project-workflow/` in the Super-set repository, so the marketplace can hold more plugins. No change in behaviour. Update with `claude plugin marketplace update super-set`, then `claude plugin update app-project-workflow@super-set`.
 

@@ -1,6 +1,33 @@
 # App Project Workflow
 
-A Claude Code plugin that installs a ticket-based way of working into a project: a router main session, four subagents (worker, tester, reviewer, Explore), one git worktree per ticket, a deterministic guard for scope and test integrity, and evidence-first verification. Every rule exists because something went wrong without it; the reasons are written down in `templates/DECISIONS.md` (W-01 to W-09).
+**Make Claude Code a careful teammate on your software project.** This plugin sets up a project so Claude plans before it builds, proves its work with real test runs, stays inside the task you gave it, and leaves notes for the next session.
+
+## Is it for you?
+Use it if you build an app, website, API, or any code project with Claude Code, alone or in a small team, and you have seen things like:
+- Claude changing files when you only asked a question.
+- "All tests pass" when they did not, or tests quietly weakened or deleted.
+- Edits far outside what you asked for, or code nobody needed.
+- Every new session starting from zero.
+
+For videos, animation, or other content, use `content-project-workflow` instead.
+
+## What it does for you
+| Problem | What the plugin sets up |
+|---|---|
+| Unclear what to build | `PRD.md`: what and why, each requirement with an ID and its status. Setup writes it with you. |
+| Lost context between sessions | `HANDOFF.md` (where things stand), `TODO.md` (one work board), `DECISIONS.md` (why) |
+| Claims without proof | Rules that "done" needs command output just run; new tests must fail first, security logic gets a mutation check |
+| Scope creep and weakened tests | Each job is a ticket with an Allow list; `tools/guard.sh` fails on files outside it, deleted tests, skip markers, or fewer assertions |
+| Big jobs in one long run | A planning agent (the router) splits work into tickets; worker, tester, and reviewer agents each do one ticket in its own git worktree; the router re-checks before merging |
+
+## How a job runs
+1. You put work on the board (`TODO.md`), or ask the router to plan it.
+2. The router writes a ticket: goal, files allowed, checks to run.
+3. A worker (and a tester for risky logic) does the ticket in a separate worktree.
+4. The router runs the guard and the checks itself; a reviewer looks at the diff for risky changes.
+5. Only then is it merged, and the board and notes are updated.
+
+You can also skip the router and just talk to Claude as usual; the rules in `CLAUDE.md` still apply. Every rule exists because something went wrong without it; the reasons are in `templates/DECISIONS.md` (W-01 to W-09).
 
 ## Two setup paths
 | Skill | Use when | What it does |

@@ -1,8 +1,37 @@
 # Content Project Workflow
 
-A Claude Code plugin for video, motion graphics, and other content projects. It installs a production way of working: a brief, art direction, an inventory of every reference, approval gates from storyboard to final render, a producer main session with four subagents (asset-builder, visual-reviewer, researcher, Explore), and knowledge skills for content, motion, design, and character design. The reasons for each rule are written down in `templates/DECISIONS.md` (C-01 to C-09).
+**Run your video or content project with Claude Code like a small studio.** This plugin sets up a project so Claude follows a brief and a style guide, uses every reference you give it, shows you designs for approval before building on them, checks its own frames instead of guessing, and keeps each step short.
 
-For application development, use `app-project-workflow` from the same marketplace.
+## Is it for you?
+Use it if you make explainer videos, social reels, animations, motion graphics, or similar content with Claude Code (for example with HyperFrames or Remotion), and you have seen things like:
+- Claude reading your screenshot wrong and "fixing" the wrong thing.
+- Characters or designs made with little care, or copied from an existing mascot.
+- References you supplied being ignored, or "I checked that repository" with nothing to show.
+- One request turning into an hour-long run that fills the context.
+- Missing basics: weak hook, text under the app buttons, text that does not match the voice-over.
+
+For software projects, use `app-project-workflow` instead.
+
+## What it does for you
+| Problem | What the plugin sets up |
+|---|---|
+| No shared picture of the goal | `PRD.md` (the brief): goal, audience, format, message, facts with sources |
+| Inconsistent look | `STYLE.md`: palette (measured hex values), type, motion, sound, characters, do and don't |
+| Ignored references | `REFERENCES.md`: every file and link with an ID, what it shows, what to take from it, where it was used |
+| Misread screenshots | A rule to write what is seen, then what is inferred, and to measure instead of estimating; ask when it matters |
+| Work built on unapproved designs | Approval gates: brief, style frames, character sheets, animatic, final |
+| Shallow research | A researcher agent that reads the actual files and writes a cited note |
+| Low-effort characters | A character-design skill: options side by side, turnaround, expressions, mouth shapes, poses, rig, and an originality rule |
+| Long runs | A producer agent that hands one shot at a time to builders and reviewers and stops at every gate |
+| Missing craft knowledge | Skills for content basics (hook, pacing, safe zones, captions, loudness), motion (the 12 principles, easing), and design (hierarchy, type, color, contrast) |
+
+## How a project runs
+1. Setup writes the brief, style guide, and reference list with you.
+2. The producer plans the next gate: storyboard, style frames, character sheets, animatic, shots, final.
+3. An asset-builder makes one piece; a visual-reviewer grabs the frames and checks them against the brief, style, script, and references.
+4. At each approval gate the producer shows you the frames or sheets and waits for your yes.
+
+You can also skip the producer and talk to Claude as usual; the rules in `CLAUDE.md` still apply. The reasons for each rule are in `templates/DECISIONS.md` (C-01 to C-09).
 
 ## Two setup paths
 | Skill | Use when | What it does |
