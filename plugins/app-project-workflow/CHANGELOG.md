@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.3.3 (2026-11-11)
+- README: what it looks like (example output from a test setup), when not to use it, cost, and status. No change in behaviour.
+
 ## 0.3.2 (2026-11-11)
 - README and plugin description rewritten for new users: who it is for, the problems it solves, and how a job runs. No change in behaviour.
 

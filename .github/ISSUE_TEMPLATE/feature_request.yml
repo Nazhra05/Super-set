@@ -1,0 +1,31 @@
+name: Feature request
+description: Suggest a new rule, check, document, or improvement.
+labels: ["enhancement"]
+body:
+  - type: dropdown
+    id: plugin
+    attributes:
+      label: Plugin
+      options:
+        - app-project-workflow
+        - content-project-workflow
+        - Both or the marketplace
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What went wrong without it
+      description: Every rule in these plugins exists because of a real problem. Describe yours.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: What would prevent it
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Other options you considered

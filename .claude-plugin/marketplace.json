@@ -11,7 +11,7 @@
       "name": "app-project-workflow",
       "source": "./plugins/app-project-workflow",
       "description": "For software projects: sets up a PRD, a work board, session notes, and a checked ticket flow (plan, build, test, review) so Claude proves its work and stays in scope.",
-      "version": "0.3.2",
+      "version": "0.3.3",
       "author": {
         "name": "Nazhra05"
       },
@@ -22,7 +22,7 @@
       "name": "content-project-workflow",
       "source": "./plugins/content-project-workflow",
       "description": "For video, animation, and content projects: sets up a brief, style guide, reference list, approval gates, and agents that build, check frames, and research, so Claude follows your references and shows designs before building on them.",
-      "version": "0.1.1",
+      "version": "0.1.2",
       "author": {
         "name": "Nazhra05"
       },

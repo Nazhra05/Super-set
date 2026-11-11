@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Contributing guide
+    url: https://github.com/Nazhra05/Super-set/blob/main/CONTRIBUTING.md
+    about: How to help, the rules for changes, and the checks to run.

@@ -1,0 +1,58 @@
+name: Bug report
+description: Something failed or behaved wrongly in a plugin.
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: Thanks for reporting. Please remove anything private (names, paths, secrets) from logs before you paste them.
+  - type: dropdown
+    id: plugin
+    attributes:
+      label: Plugin
+      options:
+        - app-project-workflow
+        - content-project-workflow
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Plugin version
+      description: From `claude plugin list`.
+      placeholder: "0.3.3"
+    validations:
+      required: true
+  - type: dropdown
+    id: os
+    attributes:
+      label: Operating system
+      options:
+        - Windows
+        - macOS
+        - Linux
+    validations:
+      required: true
+  - type: dropdown
+    id: surface
+    attributes:
+      label: Where you ran Claude Code
+      options:
+        - Terminal
+        - Desktop app
+        - IDE extension
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: What you did, what you expected, and what happened instead.
+    validations:
+      required: true
+  - type: textarea
+    id: output
+    attributes:
+      label: Output or messages
+      description: The exact error, command output, or Claude's reply.
+      render: text

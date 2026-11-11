@@ -1,0 +1,37 @@
+name: Field report
+description: You used a plugin on a real project. Tell us what worked and what did not.
+body:
+  - type: markdown
+    attributes:
+      value: Field reports shape what changes next. Short is fine. Please keep private details out.
+  - type: dropdown
+    id: plugin
+    attributes:
+      label: Plugin
+      options:
+        - app-project-workflow
+        - content-project-workflow
+    validations:
+      required: true
+  - type: input
+    id: setup
+    attributes:
+      label: Your setup
+      description: Plugin version, operating system, terminal or desktop app, and the kind of project (for example "0.1.1, macOS, desktop app, 60-second Remotion explainer").
+    validations:
+      required: true
+  - type: textarea
+    id: worked
+    attributes:
+      label: What worked well
+  - type: textarea
+    id: problems
+    attributes:
+      label: What was confusing or went wrong
+      description: Which step, what Claude did, what you expected.
+    validations:
+      required: true
+  - type: textarea
+    id: ideas
+    attributes:
+      label: What would have helped
