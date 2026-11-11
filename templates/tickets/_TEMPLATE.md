@@ -1,6 +1,7 @@
 # <ID>: <short title>
 
 - **Repo:** <repo alias from tools/workflow.conf>
+- **Requirement:** <FR-xx from PRD.md, or `-` for tests, hygiene, docs>
 - **Executor:** router | worker | tester (then reviewer)
 - **Model/effort:** (agent default; write only when different, with the reason)
 - **Budget:** maxTurns = agent limit (tester/worker 40, reviewer 30), target about 60%; report no later than tool call (limit - 8); retry max 2 (W-07)

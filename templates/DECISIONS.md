@@ -13,7 +13,7 @@ Each rule was added after a concrete failure in real use. The evidence is kept s
 
 ### W-02 YAGNI for new and existing code
 - **Reason:** earlier agents added many lines nobody used. Auditing tests alone does not touch excess code that still runs.
-- **Decision:** every line needs a real user today: a requirement or a caller in the code. Three questions per candidate: (1) who calls or uses it (proven by grep or a test)? (2) which requirement does it serve? (3) what breaks when it is removed (proven by a green suite)? No answer to (1) and (2) makes it a removal candidate. No big refactor in the name of YAGNI. Lists of "unreferenced functions" from tools are a starting point only (many false positives from templates and framework entry points).
+- **Decision:** every line needs a real user today: a requirement in `PRD.md` or a caller in the code. Three questions per candidate: (1) who calls or uses it (proven by grep or a test)? (2) which requirement ID in `PRD.md` does it serve? (3) what breaks when it is removed (proven by a green suite)? No answer to (1) and (2) makes it a removal candidate. No big refactor in the name of YAGNI. Lists of "unreferenced functions" from tools are a starting point only (many false positives from templates and framework entry points).
 
 ### W-03 Legacy code: lock behaviour first; TDD for new logic
 - **Decision:** before changing old code of unknown quality: understand the important behaviour, lock it with tests proven honest by mutation (W-01), change in small steps, review the diff with YAGNI (W-02), run the full suite. New logic with clear rules: pure TDD (failing test first). Tests do not replace code review: tests answer "is the behaviour right", review answers "is this code worth keeping".

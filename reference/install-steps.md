@@ -7,8 +7,9 @@ List every file the setup will create or change in the project, marked `new` or 
 
 | Project path | Source |
 |---|---|
-| `CLAUDE.md`, `AGENTS.md`, `WORKFLOW.md`, `TODO.md`, `HANDOFF.md`, `DECISIONS.md` | `TEMPLATES/<same name>` |
-| `tickets/_TEMPLATE.md` | `TEMPLATES/tickets/_TEMPLATE.md` |
+| `CLAUDE.md`, `AGENTS.md`, `WORKFLOW.md`, `TODO.md`, `HANDOFF.md`, `DECISIONS.md` | `TEMPLATES/<same name>`, or `TEMPLATES/id/<same name>` when the document language is Indonesian |
+| `PRD.md` | `TEMPLATES/PRD.md` or `TEMPLATES/id/PRD.md`; not installed when `adopt` keeps an existing PRD (`reference/prd.md`) |
+| `tickets/_TEMPLATE.md` | `TEMPLATES/tickets/_TEMPLATE.md` or `TEMPLATES/id/tickets/_TEMPLATE.md` |
 | `tools/wt.sh`, `tools/guard.sh`, `tools/verify.sh`, `tools/statusline.js`, `tools/workflow.conf` | `TEMPLATES/tools/` |
 | `.claude/agents/{router,worker,tester,reviewer,Explore}.md` | `TEMPLATES/.claude/agents/` |
 | `.claude/skills/` (5 skills, `NOTICE`, `LICENSE-superpowers`) | `TEMPLATES/.claude/skills/`, copied unchanged |
@@ -26,7 +27,7 @@ If a file with the same path already exists, never replace it. Merge instead:
 ## 2. Copy and fill
 1. Copy the files. Use `cp` for the skills folder so it stays byte-identical to the plugin copy.
 2. Replace every `{{PLACEHOLDER}}` with the interview answers.
-3. Check none is left: `grep -rn "{{" CLAUDE.md AGENTS.md WORKFLOW.md TODO.md HANDOFF.md DECISIONS.md tickets/_TEMPLATE.md tools/ .claude/agents/ .claude/settings.json` must print nothing.
+3. Check none is left: `grep -rn "{{" CLAUDE.md AGENTS.md WORKFLOW.md TODO.md HANDOFF.md DECISIONS.md PRD.md tickets/_TEMPLATE.md tools/ .claude/agents/ .claude/settings.json` must print nothing.
 4. Ensure LF line endings and execute bits on scripts: `chmod +x tools/*.sh`, and `grep -c $'\r' tools/*.sh tools/workflow.conf` must print 0 for each file. On Windows the file system does not store the execute bit, so when the scripts are committed also run `git update-index --chmod=+x tools/*.sh`; otherwise macOS and Linux clones get non-executable scripts.
 5. Create `{{SESSION_REPORT_DIR}}` if it does not exist.
 

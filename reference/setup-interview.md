@@ -2,7 +2,7 @@
 
 Shared by the `adopt` and `bootstrap` skills. Ask with the AskUserQuestion tool, at most 4 questions per call. Never guess an answer: when the owner has not given it and it cannot be read from the project, ask. In `adopt`, propose answers found in the project as the first option ("(found in project)") so the owner only confirms.
 
-Reply to the owner in the language they write in. Everything written into the project is in English.
+Reply to the owner in the language they write in. Documents are written in the document language chosen below; code, identifiers, comments, and commits are always English.
 
 Start by explaining the defaults in `.workflow-setup/README.md`, section "Opinionated defaults (and how to change them)", in the owner's language and in plain words, then ask which ones to change. Record each change as a project decision (D-xx) in `DECISIONS.md` with the reason, and apply it to the files named in that table.
 
@@ -14,7 +14,9 @@ Start by explaining the defaults in `.workflow-setup/README.md`, section "Opinio
 | `{{PROJECT_ROOT}}`, `{{PROJECT_ROOT_FWD}}` | Project root | Absolute path; `_FWD` is the same path with forward slashes (for `settings.json`). Never assume; confirm the current directory with the owner. |
 | `{{PROJECT_SUMMARY}}` | What the project is, for whom, and why | Two to four sentences. |
 | `{{OWNER_ROLE}}` | Who the owner is | For example "single developer", "small team lead". |
-| `{{OWNER_LANGUAGE}}` | Language for replies to the owner | Default: the language the owner writes in. Documents stay English. |
+| `{{OWNER_LANGUAGE}}` | Language for replies to the owner | Default: the language the owner writes in. |
+| (no placeholder) | Document language: English or Bahasa Indonesia | Recommended default: Bahasa Indonesia when the owner writes in Indonesian, otherwise English. Decides the source of the core docs in `install-steps.md` step 1. Agent prompts, skills, and tools stay English in both. |
+| `{{PROJECT_TERMS}}` | Project terms: words of the app's domain or UI that stay in one form (for example "link", not "tautan") | Asked when replies or documents are not in English; rows `\| use \| do not mix with \|`. Offer terms seen in the project or the interview as options. None: one row `\| None yet. \| \|`. |
 | `{{REPOS}}`, `{{REPO_TABLE}}` | Repos: alias, path from root, working branch, stack | Single repo: one line `app|.|main`. Multi-repo (docs root plus app repos): one line per app repo. `REPOS` lines go to `tools/workflow.conf` as `alias|path|branch`; `REPO_TABLE` rows go to `CLAUDE.md`. |
 | `{{INSTALL_CMD}}` | Dependency install inside a fresh worktree | For example `npm ci --no-audit --no-fund`, `composer install`, `pip install -r requirements.txt`. Empty if none. If the commands differ per repo, ask how to handle it and record the answer as a pitfall; the template supports one command. |
 | `{{COMMANDS}}` | Test, lint, type-check, build, dev commands per repo | Run each once before writing it down (rule 5); write only the ones that ran, with the date. |
@@ -30,7 +32,7 @@ Start by explaining the defaults in `.workflow-setup/README.md`, section "Opinio
 | `{{SETUP_DATE}}` | Today's date | ISO format. |
 | (no placeholder) | Where the owner works: terminal, desktop app, IDE extension, or several | Decides the surface check in `install-steps.md` step 5. All surfaces use the same files and the same flow. |
 
-The remaining placeholders (`{{CURRENT_STATE}}`, `{{NEXT_STEP}}`, `{{WAITING_OWNER}}`, `{{EXECUTION_ORDER}}`, `{{TASKS}}`, `{{INBOX}}`, `{{PROJECT_DECISIONS}}`, `{{WAITING_DECISIONS}}`) are filled by the skill from what it found and agreed with the owner. When there is nothing, write "None yet." rather than inventing content.
+The remaining placeholders (`{{CURRENT_STATE}}`, `{{NEXT_STEP}}`, `{{WAITING_OWNER}}`, `{{EXECUTION_ORDER}}`, `{{TASKS}}`, `{{INBOX}}`, `{{PROJECT_DECISIONS}}`, `{{WAITING_DECISIONS}}`) are filled by the skill from what it found and agreed with the owner. When there is nothing, write "None yet." rather than inventing content. The `{{PRD_*}}` placeholders in `PRD.md` are filled as described in `prd.md`.
 
 ## Model defaults and recommendation
 
@@ -38,7 +40,7 @@ Show this table, explain it in one or two sentences, then ask "Keep the defaults
 
 | Role | Default | Why |
 |---|---|---|
-| router | strongest model available to the owner, effort high | Plans, writes briefs, judges security findings, merges. A weak router costs more in retries than it saves. |
+| router | `opus`, effort high (the recommended default; ask, never assume, which model the owner's plan offers) | Plans, writes briefs, judges security findings, merges. A weak router costs more in retries than it saves. |
 | worker | `sonnet`, effort low | Works inside a strict Allow list with a detailed brief. Raise to `opus` for a ticket that failed twice. |
 | tester | `sonnet`, effort medium | Red-green and mutation checks need care but follow a fixed procedure. |
 | reviewer | `opus` for auth, session, authorization, security; `sonnet` for tests and ordinary logic; none for text-only | Matches W-05. The router passes `model: sonnet` for the lower tier. |

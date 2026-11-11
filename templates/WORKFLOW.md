@@ -19,7 +19,7 @@ The router profile is `.claude/agents/router.md`. The flow is the same on every 
 ## Roles
 | Role | Model / effort | Task | Limits |
 |---|---|---|---|
-| router (main session) | {{ROUTER_MODEL}} / high | plan, brief, dispatch, verify, merge, write `TODO.md` | only writer of `TODO.md`, `HANDOFF.md`, `DECISIONS.md`, `tickets/` |
+| router (main session) | {{ROUTER_MODEL}} / high | plan, brief, dispatch, verify, merge, write `TODO.md` | only writer of `TODO.md`, `HANDOFF.md`, `DECISIONS.md`, `tickets/`; in `PRD.md` only the Status and Evidence of a requirement |
 | worker | {{WORKER_MODEL}} / low | implement one ticket in a worktree | only files in Allow, no commit |
 | tester | {{TESTER_MODEL}} / medium | red-green tests, mutation checks | only test files |
 | reviewer | opus or sonnet / high, by risk tier (below) | read-only review of ticket + diff | no writes, no test runs |

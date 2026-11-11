@@ -5,8 +5,10 @@ A Claude Code plugin that installs a ticket-based way of working into a project:
 ## Two setup paths
 | Skill | Use when | What it does |
 |---|---|---|
-| `/app-project-workflow:adopt` | The project already has code, docs, or its own Claude Code setup | Surveys the project read-only, records a test baseline, asks instead of guessing, merges existing rules and tasks into the templates, never overwrites |
-| `/app-project-workflow:bootstrap` | New or empty folder | Interviews you about the project, sets up the repo layout, fills the core docs for this project, no app scaffolding |
+| `/app-project-workflow:adopt` | The project already has code, docs, or its own Claude Code setup | Surveys the project read-only, records a test baseline, keeps an existing PRD or drafts one from what is built, asks instead of guessing, merges existing rules and tasks into the templates, never overwrites |
+| `/app-project-workflow:bootstrap` | New or empty folder | Interviews you about the project, writes a first PRD of what will be built, sets up the repo layout, fills the core docs for this project, no app scaffolding |
+
+Both write the PRD into one template (`templates/PRD.md`): what and why, requirements with IDs (`FR-01`), a status, and evidence. You confirm every requirement; anything unknown goes to "Open questions". The two methods are in `reference/prd.md`.
 
 Both explain the defaults below, ask which to change, smoke-test the tools, and end with a plain-language report. Nothing is committed unless you ask. During setup the skill copies its material into a temporary `.workflow-setup/` folder in the project (the installed plugin lives outside the project) and deletes it at the end.
 
@@ -47,13 +49,13 @@ These are deliberate. The setup skills explain them and ask which to change; aft
 | Reviewer model by risk: opus for security, sonnet for ordinary logic, none for text | Reviews cost most of what the reviewed work costs | `WORKFLOW.md`, W-05 |
 | Models: router strongest, worker and tester sonnet, Explore haiku | Cost versus judgement per role | `model:` line in `.claude/agents/*.md` |
 | Tickets sized to about 60% of the agent turn limit | Agents cut off at the limit leave no report | `tickets/_TEMPLATE.md`, W-07 |
-| Documents, code, and commits in English; Claude replies in your language; Conventional Commits; no em dashes in docs | One language for artifacts, yours for conversation | `CLAUDE.md` rules 6 and 8 |
+| Documents in English or Bahasa Indonesia (chosen at setup; recommended: Indonesian when you write in Indonesian); code, identifiers, comments, and commits always English; Claude replies in your language; common terms (ticket, worktree, merge, and the project's own terms) stay in one form; Conventional Commits; no em dashes in docs | Readable docs for you, one language for code, no mixed terms | `CLAUDE.md` rules 6 and 8, section "Terms" |
 | Guard patterns for Jest, Vitest, Playwright, PHPUnit skip | Only patterns proven to catch weakened tests | `tools/workflow.conf`; prove a new pattern with a guard run that must fail |
 
 To override a W-xx decision in a project, add a project decision (D-xx) in `DECISIONS.md` with the reason, then change the file.
 
 ## What lands in the project
-- Core docs: `CLAUDE.md`, `AGENTS.md`, `WORKFLOW.md`, `TODO.md`, `HANDOFF.md`, `DECISIONS.md`, `tickets/_TEMPLATE.md`, filled for that project.
+- Core docs: `PRD.md`, `CLAUDE.md`, `AGENTS.md`, `WORKFLOW.md`, `TODO.md`, `HANDOFF.md`, `DECISIONS.md`, `tickets/_TEMPLATE.md`, filled for that project, in English or Indonesian. Agent prompts, skills, and tools are the same in both.
 - `.claude/agents/`: router, worker, tester, reviewer, Explore.
 - `.claude/skills/`: `verification-before-completion`, `systematic-debugging`, `test-driven-development`, `receiving-code-review`, `writing-plans`.
 - `.claude/settings.json`: Read deny for `.env` files, status line.
@@ -68,9 +70,10 @@ To override a W-xx decision in a project, add a project decision (D-xx) in `DECI
 ```
 .claude-plugin/   plugin.json, marketplace.json
 skills/           adopt, bootstrap
-reference/        setup-interview.md, install-steps.md (shared by both skills)
+reference/        setup-interview.md, prd.md, install-steps.md (shared by both skills)
 scripts/          stage.sh (copies setup material into the project)
-templates/        everything copied into a project
+templates/        everything copied into a project (English core docs)
+templates/id/     the core docs in Indonesian, same structure
 ```
 
 ## License
