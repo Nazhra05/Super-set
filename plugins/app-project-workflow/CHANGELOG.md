@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.3.1 (2026-11-11)
+- The plugin moved to `plugins/app-project-workflow/` in the Super-set repository, so the marketplace can hold more plugins. No change in behaviour. Update with `claude plugin marketplace update super-set`, then `claude plugin update app-project-workflow@super-set`.
+
 ## 0.3.0 (2026-11-11)
 - New core doc `PRD.md` (what and why): requirements with IDs, status, and evidence. One template, two ways to fill it, in `reference/prd.md`: `bootstrap` writes what will be built from the interview; `adopt` keeps an existing PRD or drafts one from what is built, and the owner confirms each requirement.
 - Document language chosen at setup: English or Bahasa Indonesia (`templates/id/`). Agent prompts, skills, and tools stay English; code, identifiers, comments, and commits always English. New "Terms" section in `CLAUDE.md`: workflow terms and the project's own terms stay in one form in replies, reports, and documents.

@@ -22,7 +22,7 @@ Sumber kebenaran nama (tabel, kolom, route, type): {{SOURCE_OF_TRUTH}}.
 7. **Ringkasan untuk saya dalam bahasa sederhana**: apa yang berubah, risikonya, keputusan apa yang dibutuhkan dari saya. Kalau perubahan UI belum dicek di browser, katakan.
 8. Bahasa: balas saya dalam {{OWNER_LANGUAGE}}, mengikuti "Istilah" di bawah. Dokumen dalam Bahasa Indonesia. Kode, identifier, komentar, dan commit dalam bahasa Inggris. Tanpa em dash di dokumen.
 
-## Istilah
+## Istilah (Terms)
 Berlaku untuk balasan, laporan, dan dokumen. Istilah ini tetap dalam bahasa Inggris, satu bentuk saja: ticket, task, worktree, branch, commit, merge, push, router, worker, tester, reviewer, guard, verify, Inbox, Allow, done criteria, blocked by, nilai status (`Ready`, `In progress`, `Planned`, `Met`, dan seterusnya), PRD, ID (`FR-01`, `W-01`, `D-01`), dan nama bagian yang dirujuk agent (misalnya "Execution order"). Istilah project yang disepakati dengan pemilik:
 
 | Pakai | Jangan campur dengan |

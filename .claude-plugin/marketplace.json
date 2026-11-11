@@ -9,14 +9,25 @@
   "plugins": [
     {
       "name": "app-project-workflow",
-      "source": "./",
+      "source": "./plugins/app-project-workflow",
       "description": "Ticket workflow for Claude Code with adopt and bootstrap setup paths.",
-      "version": "0.3.0",
+      "version": "0.3.1",
       "author": {
         "name": "Nazhra05"
       },
       "license": "MIT",
       "category": "development"
+    },
+    {
+      "name": "content-project-workflow",
+      "source": "./plugins/content-project-workflow",
+      "description": "Production workflow for video, motion graphics, and content projects with adopt and bootstrap setup paths.",
+      "version": "0.1.0",
+      "author": {
+        "name": "Nazhra05"
+      },
+      "license": "MIT",
+      "category": "design"
     }
   ]
 }

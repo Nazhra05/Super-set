@@ -1,2 +1,2 @@
-# Keep LF everywhere: the shell scripts in templates/tools break with CRLF.
+# Keep LF everywhere: the shell scripts in plugins/*/templates/tools break with CRLF.
 * text=auto eol=lf

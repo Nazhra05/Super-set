@@ -1,7 +1,7 @@
 {
   "name": "app-project-workflow",
   "description": "Ticket workflow for Claude Code: router, worker, tester, reviewer and Explore agents, one git worktree per ticket, a deterministic scope and test-integrity guard, and evidence-first verification. Two setup paths: adopt (existing project) and bootstrap (new or empty project).",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "author": {
     "name": "Nazhra05",
     "url": "https://github.com/Nazhra05"
