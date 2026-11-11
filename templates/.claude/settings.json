@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "deny": [
+      "Read(**/.env)",
+      "Read(**/.env.local)",
+      "Read(**/.env.production)"
+    ]
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "node \"{{PROJECT_ROOT_FWD}}/tools/statusline.js\""
+  }
+}

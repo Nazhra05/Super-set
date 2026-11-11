@@ -1,0 +1,76 @@
+# App Project Workflow
+
+A Claude Code plugin that installs a ticket-based way of working into a project: a router main session, four subagents (worker, tester, reviewer, Explore), one git worktree per ticket, a deterministic guard for scope and test integrity, and evidence-first verification. Every rule exists because something went wrong without it; the reasons are written down in `templates/DECISIONS.md` (W-01 to W-09).
+
+## Two setup paths
+| Skill | Use when | What it does |
+|---|---|---|
+| `/app-project-workflow:adopt` | The project already has code, docs, or its own Claude Code setup | Surveys the project read-only, records a test baseline, asks instead of guessing, merges existing rules and tasks into the templates, never overwrites |
+| `/app-project-workflow:bootstrap` | New or empty folder | Interviews you about the project, sets up the repo layout, fills the core docs for this project, no app scaffolding |
+
+Both explain the defaults below, ask which to change, smoke-test the tools, and end with a plain-language report. Nothing is committed unless you ask.
+
+## Install
+From any terminal (macOS, Linux, or Windows):
+```
+claude plugin marketplace add Nazhra05/Super-set
+claude plugin install app-project-workflow@super-set
+```
+Or inside a Claude Code session: `/plugin marketplace add Nazhra05/Super-set`, then `/plugin install app-project-workflow@super-set`. Plugins live in your user folder, so the desktop app and the terminal see the same installation.
+
+Then open Claude Code in the target project (terminal or desktop app) and run one of the two skills. After setup the project is self-contained: the agents, skills, and tools are copied into it, so the plugin can be removed without breaking the project.
+
+## Daily use
+The flow is the same on every surface; only starting the router differs.
+- **Terminal:** `claude --agent router --model <router model> --effort high` from the project root.
+- **Desktop app:** router mode is a few keys in `.claude/settings.local.json` (`agent`, `model`, `effortLevel`, and `WORKFLOW_SURFACE=desktop`); the project's `WORKFLOW.md` has the exact block. Every new session in that project then starts as the router until you remove the keys.
+
+The router works through `TODO.md`. Ordinary sessions without the router stay available for discussion and small edits.
+
+### Terminal vs desktop app
+| | Terminal | Desktop app |
+|---|---|---|
+| Start the router | `--agent router` flag | router mode in `.claude/settings.local.json` |
+| Usage guard | reads `.claude/usage.json` from the status line; above 90% of the 5-hour or 7-day limit it stops dispatching | the app does not run status lines, so the router keeps every ticket boundary ready for a stop and stops cleanly when the app shows a usage-limit notice |
+| Everything else | same files, same agents, same tools | same |
+
+## Opinionated defaults (and how to change them)
+These are deliberate. The setup skills explain them and ask which to change; afterwards, change them in the files named.
+
+| Default | Why | Where to change |
+|---|---|---|
+| Discussion first: a question gets an answer, not file changes | Prevents unasked edits | `CLAUDE.md` rule 1 |
+| Approval only for irreversible actions; the router merges into the working branch and pushes on its own | Reversible steps waiting for a yes add friction without safety | `WORKFLOW.md` "Still needs owner approval", W-06 |
+| Claims need fresh command output; existing tests are not assumed genuine; red-green and mutation checks for security logic | Agents reported "passing" for work that was not | `CLAUDE.md` rule 5, W-01 |
+| YAGNI: every line needs a user today | Agents add code nobody calls | `CLAUDE.md` rule 3, W-02 |
+| Subagents never commit; `guard.sh` enforces the ticket's Allow list | Scope creep and silent test weakening | `tickets/_TEMPLATE.md`, `tools/guard.sh` |
+| Reviewer model by risk: opus for security, sonnet for ordinary logic, none for text | Reviews cost most of what the reviewed work costs | `WORKFLOW.md`, W-05 |
+| Models: router strongest, worker and tester sonnet, Explore haiku | Cost versus judgement per role | `model:` line in `.claude/agents/*.md` |
+| Tickets sized to about 60% of the agent turn limit | Agents cut off at the limit leave no report | `tickets/_TEMPLATE.md`, W-07 |
+| Documents, code, and commits in English; Claude replies in your language; Conventional Commits; no em dashes in docs | One language for artifacts, yours for conversation | `CLAUDE.md` rules 6 and 8 |
+| Guard patterns for Jest, Vitest, Playwright, PHPUnit skip | Only patterns proven to catch weakened tests | `tools/workflow.conf`; prove a new pattern with a guard run that must fail |
+
+To override a W-xx decision in a project, add a project decision (D-xx) in `DECISIONS.md` with the reason, then change the file.
+
+## What lands in the project
+- Core docs: `CLAUDE.md`, `AGENTS.md`, `WORKFLOW.md`, `TODO.md`, `HANDOFF.md`, `DECISIONS.md`, `tickets/_TEMPLATE.md`, filled for that project.
+- `.claude/agents/`: router, worker, tester, reviewer, Explore.
+- `.claude/skills/`: `verification-before-completion`, `systematic-debugging`, `test-driven-development`, `receiving-code-review`, `writing-plans`.
+- `.claude/settings.json`: Read deny for `.env` files, status line.
+- `tools/`: `workflow.conf` (repos, branches, install command, guard patterns), `wt.sh`, `guard.sh`, `verify.sh`, `statusline.js`.
+
+## Requirements
+- Git and Node.js.
+- Bash: built in on macOS and Linux. On Windows, Git for Windows (Git Bash), which Claude Code on Windows already uses for its Bash tool.
+- One repo or several: `tools/workflow.conf` lists each repo with its alias, path, and working branch.
+
+## Layout of this repository
+```
+.claude-plugin/   plugin.json, marketplace.json
+skills/           adopt, bootstrap
+reference/        setup-interview.md, install-steps.md (shared by both skills)
+templates/        everything copied into a project
+```
+
+## License
+MIT, see `LICENSE`. The five skills in `templates/.claude/skills/` are adapted from [obra/superpowers](https://github.com/obra/superpowers) (MIT); attribution and changes are in `templates/.claude/skills/NOTICE`.

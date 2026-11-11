@@ -1,0 +1,40 @@
+# CLAUDE.md: {{PROJECT_NAME}}
+
+Short on purpose. Details live in the documents it points to; do not copy them here.
+Last verified: {{SETUP_DATE}}. **New session or after compact: read `HANDOFF.md` first.** Status numbers (test counts, versions) are not written here; take them from command output.
+
+## What this is
+{{PROJECT_SUMMARY}}
+
+| Repo alias | Path | Stack | Working branch |
+|---|---|---|---|
+{{REPO_TABLE}}
+
+Source of truth for names (tables, columns, routes, types): {{SOURCE_OF_TRUTH}}.
+
+## How to work with me (owner: {{OWNER_ROLE}})
+1. **Discussion vs execution.** Default is discussion: when I ask, discuss, or compare, answer only and do not change files. Execute only after a clear work order. Unsure? Ask in one sentence.
+2. **Clear, reversible tasks: do them, do not ask for approval per step.** Approval only for what cannot be undone: see "Still needs owner approval" in `WORKFLOW.md`. In the router flow, merging into the working branch and pushing is done by the router itself (W-06).
+3. **Change only what was asked.** Report other findings, do not act on them. **Replace** old code, do not stack a new version beside it; delete what becomes dead. **YAGNI:** every line needs a real user today (a requirement or a caller in the code); no features, abstractions, options, or fallbacks "for later". The same question applies when reviewing existing code (W-02).
+4. **Do not invent** table, column, function, file names, or numbers. Verify them in the source of truth above and in the code.
+5. **Verify through tools, not reports.** Claim "done" or "passing" only with output of a command just run (skill `verification-before-completion`). Agent reports and old documents are not evidence. Do not weaken or skip tests to make them pass. **Existing tests are not assumed genuine (W-01).** For each change: (a) prove red-green: a new test must fail on the code before the fix; (b) for authorization or security logic, run a mutation check (break the check briefly, the test must fail), then restore and compare with the backup; (c) clean up test leftovers; (d) run the full suite at the end. Text, docs, or config changes without logic need no new test, only the relevant suite.
+6. **Do not commit or push unless asked**, except the router in the ticket flow (W-06). Conventional Commits, subject max 72 characters. Check `git status` first; do not touch local changes outside the task.
+7. **Summaries for me in plain language**: what changed, the risk, what decision you need from me. If a UI change was not checked in a browser, say so.
+8. Language: reply to me in {{OWNER_LANGUAGE}}, technical terms stay in English. Code, identifiers, comments, commits, and documents in English. No em dashes in documents.
+
+## Commands (verified {{SETUP_DATE}})
+{{COMMANDS}}
+
+## Proven pitfalls (do not re-guess)
+Add an entry only after it has been proven by command output, with the date.
+{{PITFALLS}}
+
+## Skills
+- In `.claude/skills/`, no hooks: `verification-before-completion`, `systematic-debugging`, `test-driven-development`, `receiving-code-review`, `writing-plans`. Reasons: `DECISIONS.md` W-08; license: `.claude/skills/NOTICE`.
+- TDD only for business logic (locations in `AGENTS.md`).
+- Built-in review commands: `/code-review`, `/simplify`, `/security-review`.
+- Do not add skills or hooks that force a ritual before every reply, or separate worktree or subagent skills; the ticket flow covers them (W-04, W-08).
+- **Ticket flow (W-04):** splitting work into worktrees and subagents happens only through `WORKFLOW.md`, in a router session (terminal or desktop, see there). Outside that flow, subagents are created only when I ask. Rules 1 to 8 apply to every agent.
+
+## Document map (read what the task needs, not everything)
+`WORKFLOW.md` (ticket flow) · `TODO.md` (the only work board) · `HANDOFF.md` (last session state, start here) · `DECISIONS.md` (decisions and what is waiting) · `AGENTS.md` (code and test rules for any agent){{EXTRA_DOCS}}
