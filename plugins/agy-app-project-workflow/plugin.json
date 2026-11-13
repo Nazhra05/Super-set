@@ -1,0 +1,18 @@
+{
+  "name": "agy-app-project-workflow",
+  "displayName": "App Project Workflow (Antigravity)",
+  "description": "Make Antigravity a careful teammate on software projects. Sets up a PRD, a work board, session notes, and rules that the agent asks before guessing and proves work with real test runs. For bigger jobs a router plans tickets that worker, tester, and reviewer subagents do in separate git worktrees, checked by a scope and test guard.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Nazhra05",
+    "url": "https://github.com/Nazhra05"
+  },
+  "homepage": "https://github.com/Nazhra05/Super-set",
+  "repository": "https://github.com/Nazhra05/Super-set",
+  "suggestedPrompts": [
+    "Adopt the App Project Workflow in this existing project",
+    "Bootstrap the App Project Workflow in this new folder",
+    "Start a router session to work through TODO.md"
+  ]
+}
+

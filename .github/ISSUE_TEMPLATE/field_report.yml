@@ -9,15 +9,17 @@ body:
     attributes:
       label: Plugin
       options:
-        - app-project-workflow
-        - content-project-workflow
+        - app-project-workflow (Claude Code)
+        - content-project-workflow (Claude Code)
+        - agy-app-project-workflow (Google Antigravity)
+        - agy-content-project-workflow (Google Antigravity)
     validations:
       required: true
   - type: input
     id: setup
     attributes:
       label: Your setup
-      description: Plugin version, operating system, terminal or desktop app, and the kind of project (for example "0.1.1, macOS, desktop app, 60-second Remotion explainer").
+      description: Plugin version, operating system, terminal/CLI or desktop app/IDE, and the kind of project (for example "0.1.0, Windows, Antigravity 2.0, 60-second Remotion explainer").
     validations:
       required: true
   - type: textarea
@@ -28,7 +30,7 @@ body:
     id: problems
     attributes:
       label: What was confusing or went wrong
-      description: Which step, what Claude did, what you expected.
+      description: Which step, what the agent did, what you expected.
     validations:
       required: true
   - type: textarea

@@ -1,0 +1,17 @@
+{
+  "env-guard": {
+    "PreToolUse": [
+      {
+        "matcher": "read_file|edit_file|write_file|run_command",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"{{PROJECT_ROOT_FWD}}/tools/env-guard.js\"",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  }
+}
+

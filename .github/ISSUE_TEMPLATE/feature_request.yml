@@ -7,9 +7,11 @@ body:
     attributes:
       label: Plugin
       options:
-        - app-project-workflow
-        - content-project-workflow
-        - Both or the marketplace
+        - app-project-workflow (Claude Code)
+        - content-project-workflow (Claude Code)
+        - agy-app-project-workflow (Google Antigravity)
+        - agy-content-project-workflow (Google Antigravity)
+        - All plugins or the repository
     validations:
       required: true
   - type: textarea
