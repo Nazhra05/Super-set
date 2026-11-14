@@ -13,6 +13,8 @@ body:
         - content-project-workflow (Claude Code)
         - agy-app-project-workflow (Google Antigravity)
         - agy-content-project-workflow (Google Antigravity)
+        - codex-app-project-workflow (OpenAI Codex)
+        - codex-content-project-workflow (OpenAI Codex)
     validations:
       required: true
   - type: input

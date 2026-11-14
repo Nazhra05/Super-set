@@ -8,11 +8,11 @@ Thank you for helping. This project is small and maintained by one person, so cl
 |---|---|---|
 | **Question** | How do I, does it, why does it... | [Discussions, Q&A](https://github.com/Nazhra05/Super-set/discussions/categories/q-a) |
 | **Early idea** | Not sure yet whether it should become a rule or a feature | [Discussions, Ideas](https://github.com/Nazhra05/Super-set/discussions/categories/ideas) |
-| **Field report** | Use a plugin on a real project and tell us what worked, what confused you, and what went wrong. Most wanted: macOS, Linux, the desktop app, Google Antigravity, and the content plugins on a real video. | Issue form "Field report" |
+| **Field report** | Use a plugin on a real project and tell us what worked, what confused you, and what went wrong. Most wanted: macOS, Linux, the desktop app, Google Antigravity, OpenAI Codex, and the content plugins on a real video. | Issue form "Field report" |
 | **Bug report** | Something failed: a setup step, a script, an instruction the agent misread. | Issue form "Bug report" |
 | **Rule or feature idea** | What went wrong without it, and what would have prevented it. | Issue form "Feature request" |
-| **Guard patterns** | Patterns for more test frameworks in `app-project-workflow` and `agy-app-project-workflow` (pytest, Go, Rust, `node:test`, Pest), each proven by a guard run that must fail. | Pull request |
-| **Knowledge skills** | Better or more content, motion, and design guidance in `content-project-workflow` and `agy-content-project-workflow`, with sources. | Pull request |
+| **Guard patterns** | Patterns for more test frameworks in `app-project-workflow`, `agy-app-project-workflow`, and `codex-app-project-workflow` (pytest, Go, Rust, `node:test`, Pest), each proven by a guard run that must fail. | Pull request |
+| **Knowledge skills** | Better or more content, motion, and design guidance in `content-project-workflow`, `agy-content-project-workflow`, and `codex-content-project-workflow`, with sources. | Pull request |
 | **Translations** | Core docs in another language, as a new `templates/<lang>/` folder that mirrors `templates/id/`. | Pull request |
 
 For anything bigger than a small fix, please open an issue (or an Ideas discussion) first so we can agree on the approach before you spend time on it.
@@ -44,6 +44,8 @@ claude plugin validate plugins/app-project-workflow
 claude plugin validate plugins/content-project-workflow
 node -e "JSON.parse(require('fs').readFileSync('plugins/agy-app-project-workflow/plugin.json','utf8'))"
 node -e "JSON.parse(require('fs').readFileSync('plugins/agy-content-project-workflow/plugin.json','utf8'))"
+node -e "JSON.parse(require('fs').readFileSync('plugins/codex-app-project-workflow/plugin.json','utf8'))"
+node -e "JSON.parse(require('fs').readFileSync('plugins/codex-content-project-workflow/plugin.json','utf8'))"
 git ls-files --eol | grep -c 'i/crlf'
 git ls-files -s | grep '\.sh$'
 ```

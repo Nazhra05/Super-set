@@ -1,0 +1,12 @@
+verification-before-completion and systematic-debugging in this folder are adapted from
+obra/superpowers (https://github.com/obra/superpowers, commit 22f0b46, version 7.0.2),
+Copyright (c) 2025 Jesse Vincent, licensed under the MIT License. The full license text
+is in LICENSE-superpowers in this folder.
+
+Changes from the original: references to skills that are not part of this workflow were
+replaced (systematic-debugging: a failing check for visual or audio bugs instead of the
+test-driven-development skill), and the find-polluter.sh helper was replaced by manual
+bisection steps (systematic-debugging/root-cause-tracing.md).
+
+content-fundamentals, motion-principles, design-basics, and character-design are written
+for this plugin under its MIT license. Their sources are listed in each skill.

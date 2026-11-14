@@ -1,17 +1,17 @@
 # Super-set
 
-**Stop Claude Code and Google Antigravity from guessing, overreaching, and saying "done" without proof.**
+**Stop Claude Code, Google Antigravity, and OpenAI Codex from guessing, overreaching, and saying "done" without proof.**
 
-Super-set is a small collection of workflow plugins for **Claude Code** and **Google Antigravity (Gemini)**. Each one sets up your project with a way of working that a careful teammate would follow: answer questions before touching files, look things up instead of inventing them, show proof before claiming success, split big jobs into checked tickets, and leave notes so the next session starts where the last one stopped.
+Super-set is a small collection of workflow plugins for **Claude Code**, **Google Antigravity (Gemini)**, and **OpenAI Codex**. Each one sets up your project with a way of working that a careful teammate would follow: answer questions before touching files, look things up instead of inventing them, show proof before claiming success, split big jobs into checked tickets, and leave notes so the next session starts where the last one stopped.
 
 You run one setup command in your project. It interviews you, writes a few plain Markdown documents for that project, and installs helper agents and tools. Then you keep using your coding agent as usual, with fewer surprises.
 
 ## Which plugin do I need?
 
-| You are making... | Claude Code plugin | Google Antigravity plugin | What you get |
-|---|---|---|---|
-| An app, website, API, or any software project | [`app-project-workflow`](plugins/app-project-workflow/README.md) | [`agy-app-project-workflow`](plugins/agy-app-project-workflow/README.md) | A requirements document (PRD), a work board, session notes, and a ticket flow where a planning agent hands work to builder, tester, and reviewer agents, with a guard that catches deleted tests and edits outside the ticket |
-| A video, animation, or motion graphic | [`content-project-workflow`](plugins/content-project-workflow/README.md) | [`agy-content-project-workflow`](plugins/agy-content-project-workflow/README.md) | A brief, a style guide, a list of every reference, approval steps from storyboard to final render, agents that build, check frames, and research sources, and built-in knowledge about content, motion, and design |
+| You are making... | Claude Code | Google Antigravity | OpenAI Codex | What you get |
+|---|---|---|---|---|
+| An app, website, API, or any software project | [`app-project-workflow`](plugins/app-project-workflow/README.md) | [`agy-app-project-workflow`](plugins/agy-app-project-workflow/README.md) | [`codex-app-project-workflow`](plugins/codex-app-project-workflow/README.md) | A requirements document (PRD), a work board, session notes, and a ticket flow where a planning agent hands work to builder, tester, and reviewer agents, with a guard that catches deleted tests and edits outside the ticket |
+| A video, animation, or motion graphic | [`content-project-workflow`](plugins/content-project-workflow/README.md) | [`agy-content-project-workflow`](plugins/agy-content-project-workflow/README.md) | [`codex-content-project-workflow`](plugins/codex-content-project-workflow/README.md) | A brief, a style guide, a list of every reference, approval steps from storyboard to final render, agents that build, check frames, and research sources, and built-in knowledge about content, motion, and design |
 
 If the result is code that runs, pick the app plugin. If the result is something people watch, pick the content plugin. You can install both; each project uses one.
 
@@ -58,20 +58,28 @@ You can read every rule, change it for your project, and record why.
    - Existing project: invoke the `adopt` skill (`/adopt` or click the starter prompt on the plugin card).
    - New or empty folder: invoke the `bootstrap` skill (`/bootstrap`).
 
+### For OpenAI Codex
+1. **Install** (once per computer):
+   Copy the setup skills from `plugins/codex-app-project-workflow/skills/` (or `plugins/codex-content-project-workflow/skills/`) into `~/.codex/skills/`, and set `CODEX_APP_WORKFLOW_ROOT` / `CODEX_CONTENT_WORKFLOW_ROOT` to the plugin folder path (or run `bash "<path-to-plugin>/scripts/stage.sh" .` in your project folder).
+2. **Open Codex** (`codex` CLI or Codex desktop/IDE) in your project folder.
+3. **Run the setup:**
+   - Existing project: invoke `$codex-app-adopt` (or `$codex-content-adopt`).
+   - New or empty folder: invoke `$codex-app-bootstrap` (or `$codex-content-bootstrap`).
+
 Setup asks its questions, shows the list of files it will add, and waits for your yes. Nothing is committed unless you ask.
 
 4. **Work as usual**, or start the planning agent for bigger jobs (the router for apps, the producer for content). Each plugin's README shows how.
 
 ## What lands in your project
 
-Plain Markdown files you can read and edit, plus an agent customization folder (`.claude/` for Claude Code, `.agents/` for Antigravity):
+Plain Markdown files you can read and edit, plus an agent customization folder (`.claude/` for Claude Code, `.agents/` for Antigravity, `.codex/` for OpenAI Codex):
 
 - `CLAUDE.md` / `AGENTS.md`: how the agent works with you in this project, commands that are proven to work, pitfalls already found.
 - `HANDOFF.md`: where the last session stopped. A new session reads it first.
 - `TODO.md`: the one work board.
 - `DECISIONS.md`: why things are the way they are.
 - `PRD.md`: what you are making and why (for content: the brief).
-- `.claude/agents/` and `.claude/skills/` (or `.agents/agents/` and `.agents/skills/`): the helper subagents and skills.
+- `.claude/`, `.agents/`, or `.codex/`: the helper subagents/role prompts and skills.
 
 Documents can be in English or Bahasa Indonesia; setup asks. Code and commits stay in English. After setup the project is self-contained, so removing the plugin later does not break it.
 
@@ -79,11 +87,11 @@ Documents can be in English or Bahasa Indonesia; setup asks. Code and commits st
 
 All plugins are in version 0.x. What has been tested, and what not yet:
 
-| | app-project-workflow (Claude) | content-project-workflow (Claude) | agy-app / agy-content (Antigravity) |
+| | Claude Code (`app-*`, `content-*`) | Google Antigravity (`agy-*`) | OpenAI Codex (`codex-*`) |
 |---|---|---|---|
-| Setup (`adopt`, `bootstrap`) | Tested end to end on sample projects | `adopt` tested end to end on a sample project; `bootstrap` not yet | Validated (manifest, placeholder parity, hook guard); interactive runs not yet tested |
-| Daily flow (planning agent with helpers) | Used in a real project before it became a plugin | Not yet tried in a real project | Adapted from the proven flow; not yet tried in a real project |
-| Windows, terminal / shell tools | Tested (Git Bash) | Tested (Git Bash) | Tested (`env-guard.js` and `bash` tool wrappers) |
+| Setup (`adopt`, `bootstrap`) | Tested end to end on sample projects (`content:bootstrap` not yet) | Validated (manifest, placeholder parity, hook guard); interactive runs not yet tested | Validated (manifest, placeholder parity, `stage.sh`); interactive runs not yet tested |
+| Daily flow (planning agent with helpers) | App flow used in a real project; content flow not yet | Adapted from the proven flow; not yet tried in a real project | Adapted from the proven flow (`codex exec`); not yet tried in a real project |
+| Windows, terminal / shell tools | Tested (Git Bash) | Tested (`env-guard.js` and `bash` tool wrappers) | Tested (`stage.sh` and `bash` tool wrappers) |
 | macOS, Linux | Not yet tested (scripts are written for them) | Not yet tested | Not yet tested |
 | Desktop app / IDE | Partly tested | Not yet tested | Not yet tested |
 

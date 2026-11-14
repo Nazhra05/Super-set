@@ -1,0 +1,2 @@
+# Shell scripts in tools/ break with CRLF line endings.
+tools/*.sh text eol=lf

@@ -11,6 +11,8 @@ body:
         - content-project-workflow (Claude Code)
         - agy-app-project-workflow (Google Antigravity)
         - agy-content-project-workflow (Google Antigravity)
+        - codex-app-project-workflow (OpenAI Codex)
+        - codex-content-project-workflow (OpenAI Codex)
         - All plugins or the repository
     validations:
       required: true
