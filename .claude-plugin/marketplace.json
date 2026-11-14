@@ -11,7 +11,7 @@
       "name": "app-project-workflow",
       "source": "./plugins/app-project-workflow",
       "description": "For software projects: sets up a PRD, a work board, session notes, and a checked ticket flow (plan, build, test, review) so Claude proves its work and stays in scope.",
-      "version": "0.4.0",
+      "version": "0.5.0",
       "author": {
         "name": "Nazhra05"
       },

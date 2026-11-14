@@ -32,7 +32,7 @@ Start by explaining the defaults in `.workflow-setup/README.md`, section "Opinio
 | `{{SETUP_DATE}}` | Today's date | ISO format. |
 | (no placeholder) | Where the owner works: terminal, desktop app, IDE extension, or several | Decides the surface check in `install-steps.md` step 5. All surfaces use the same files and the same flow. |
 
-The remaining placeholders (`{{CURRENT_STATE}}`, `{{NEXT_STEP}}`, `{{WAITING_OWNER}}`, `{{EXECUTION_ORDER}}`, `{{TASKS}}`, `{{INBOX}}`, `{{PROJECT_DECISIONS}}`, `{{WAITING_DECISIONS}}`) are filled by the skill from what it found and agreed with the owner. When there is nothing, write "None yet." rather than inventing content. The `{{PRD_*}}` placeholders in `PRD.md` are filled as described in `prd.md`.
+The remaining placeholders (`{{CURRENT_STATE}}`, `{{NEXT_STEP}}`, `{{WAITING_OWNER}}`, `{{EXECUTION_ORDER}}`, `{{TASKS}}`, `{{INBOX}}`, `{{PROJECT_DECISIONS}}`, `{{WAITING_DECISIONS}}`) are filled by the skill from what it found and agreed with the owner. When there is nothing, write "None yet." rather than inventing content. The `{{PRD_*}}` placeholders in `PRD.md` are filled as described in `prd.md`, and the `{{DESIGN_*}}` placeholders in `DESIGN.md` are filled as described in `design.md`.
 
 ## Model defaults and recommendation
 
@@ -41,6 +41,7 @@ Show this table, explain it in one or two sentences, then ask "Keep the defaults
 | Role | Default | Why |
 |---|---|---|
 | router | `opus`, effort high (the recommended default; ask, never assume, which model the owner's plan offers) | Plans, writes briefs, judges security findings, merges. A weak router costs more in retries than it saves. |
+| designer | `sonnet`, effort high (`{{WORKER_MODEL}}`) | Explores visual references via `agent-browser`, crafts 3 contrasting HTML mockups in `references/mockups/`, and locks `DESIGN.md` at 99.99% proportional fidelity. |
 | worker | `sonnet`, effort low | Works inside a strict Allow list with a detailed brief. Raise to `opus` for a ticket that failed twice. |
 | tester | `sonnet`, effort medium | Red-green and mutation checks need care but follow a fixed procedure. |
 | reviewer | `opus` for auth, session, authorization, security; `sonnet` for tests and ordinary logic; none for text-only | Matches W-05. The router passes `model: sonnet` for the lower tier. |

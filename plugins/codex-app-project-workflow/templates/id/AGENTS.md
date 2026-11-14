@@ -28,7 +28,7 @@ Sumber kebenaran nama (tabel, kolom, route, type): {{SOURCE_OF_TRUTH}}.
 - **Dokumen:** baca hanya dokumen yang relevan dengan task (petanya di bawah). Tidak wajib membaca semuanya atau melaporkan skill di setiap balasan; sebut skill atau dokumen hanya kalau memengaruhi hasil.
 
 ## Istilah (Terms)
-Berlaku untuk balasan, laporan, dan dokumen. Gunakan Bahasa Indonesia yang natural untuk penjelasan, tetapi **seluruh istilah workflow dan istilah teknis software engineering wajib tetap dalam bahasa Inggris** (jangan diterjemahkan secara kaku): ticket, task, worktree, branch, commit, merge, push, router, scoper, worker, tester, reviewer, guard, verify, Inbox, Allow, done criteria, blocked by, nilai status (`Ready`, `In progress`, `Planned`, `Met`, dan seterusnya), PRD, ID (`FR-01`, `W-01`, `D-01`), nama bagian (misalnya "Execution order"), serta istilah teknis pemrograman seperti endpoint, route, middleware, payload, request, response, query, schema, migration, index, state, props, component, hook, context, render, build, bundle, lint, type-check, runtime, auth, session, token, mock, assertion, regression, dan refactor. Istilah project yang disepakati dengan pemilik:
+Berlaku untuk balasan, laporan, dan dokumen. Gunakan Bahasa Indonesia yang natural untuk penjelasan, tetapi **seluruh istilah workflow dan istilah teknis software engineering wajib tetap dalam bahasa Inggris** (jangan diterjemahkan secara kaku): ticket, task, worktree, branch, commit, merge, push, router, scoper, designer, worker, tester, reviewer, guard, verify, Inbox, Allow, done criteria, blocked by, nilai status (`Ready`, `In progress`, `Planned`, `Met`, `Locked`, dan seterusnya), PRD, ID (`FR-01`, `W-01`, `D-01`, `REF-01`), nama bagian (misalnya "Execution order"), serta istilah teknis pemrograman dan UI seperti endpoint, route, middleware, payload, request, response, query, schema, migration, index, state, props, component, hook, context, render, build, bundle, lint, type-check, runtime, auth, session, token, mock, mockup, viewport, layout, density, assertion, regression, dan refactor. Istilah project yang disepakati dengan pemilik:
 
 | Pakai | Jangan campur dengan |
 |---|---|
@@ -42,12 +42,12 @@ Tambahkan entri hanya setelah terbukti oleh output perintah, dengan tanggal.
 {{PITFALLS}}
 
 ## Skill dan prompt peran
-- Di `.codex/skills/`: `router`, `verification-before-completion`, `systematic-debugging`, `test-driven-development`, `receiving-code-review`, `writing-plans`. Alasan: `DECISIONS.md` W-08; lisensi: `.codex/skills/NOTICE`.
-- Prompt peran di `.codex/agents/`: `scoper.md`, `worker.md`, `tester.md`, `reviewer.md`, `Explore.md` (dijalankan lewat `codex exec`).
-- TDD hanya untuk logika bisnis (lokasinya di atas).
+- Di `.codex/skills/`: `router`, `verification-before-completion`, `systematic-debugging`, `test-driven-development`, `receiving-code-review`, `writing-plans`, `ui-design`. Alasan: `DECISIONS.md` W-08, W-10; lisensi: `.codex/skills/NOTICE`.
+- Prompt peran di `.codex/agents/`: `scoper.md`, `designer.md`, `worker.md`, `tester.md`, `reviewer.md`, `Explore.md` (dijalankan lewat `codex exec`).
+- TDD hanya untuk logika bisnis (lokasinya di atas). Desain UI mengikuti `DESIGN.md` dan `ui-design` (3-mockup gate sebelum ticket UI, standar numerik 99.99%, diverifikasi lewat `agent-browser`).
 - Jangan menambah skill atau hook yang memaksa ritual sebelum setiap balasan, atau skill worktree atau subagent terpisah; alur ticket sudah mencakupnya (W-04, W-08).
 - **Alur ticket (W-04):** membagi kerja ke worktree dan subagent hanya lewat `WORKFLOW.md`, dalam sesi router (`$router` atau skill `router`). Di luar alur itu, subagent dijalankan hanya kalau saya minta. Aturan 1 sampai 8 berlaku untuk setiap agent.
 
 ## Peta dokumen (baca yang dibutuhkan task, bukan semuanya)
-`PRD.md` (apa dan mengapa) · `WORKFLOW.md` (alur ticket) · `TODO.md` (satu-satunya papan kerja) · `HANDOFF.md` (status sesi terakhir, mulai dari sini) · `DECISIONS.md` (keputusan dan yang menunggu) · `AGENTS.md` (aturan kerja, kode, dan test untuk semua agent){{EXTRA_DOCS}}
+`PRD.md` (apa dan mengapa) · `DESIGN.md` (design system UI, 3-mockup gate, `references/`) · `WORKFLOW.md` (alur ticket) · `TODO.md` (satu-satunya papan kerja) · `HANDOFF.md` (status sesi terakhir, mulai dari sini) · `DECISIONS.md` (keputusan dan yang menunggu) · `AGENTS.md` (aturan kerja, kode, dan test untuk semua agent){{EXTRA_DOCS}}
 

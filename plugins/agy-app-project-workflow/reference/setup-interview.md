@@ -32,7 +32,7 @@ Start by explaining the defaults in `.workflow-setup/README.md`, section "Opinio
 | `{{SETUP_DATE}}` | Today's date | ISO format. |
 | (no placeholder) | Where the owner works: Antigravity 2.0 desktop app, Antigravity IDE, Antigravity CLI (`agy`), or several | All surfaces use the same files and the same flow (`router` skill). |
 
-The remaining placeholders (`{{CURRENT_STATE}}`, `{{NEXT_STEP}}`, `{{WAITING_OWNER}}`, `{{EXECUTION_ORDER}}`, `{{TASKS}}`, `{{INBOX}}`, `{{PROJECT_DECISIONS}}`, `{{WAITING_DECISIONS}}`) are filled by the skill from what it found and agreed with the owner. When there is nothing, write "None yet." rather than inventing content. The `{{PRD_*}}` placeholders in `PRD.md` are filled as described in `prd.md`.
+The remaining placeholders (`{{CURRENT_STATE}}`, `{{NEXT_STEP}}`, `{{WAITING_OWNER}}`, `{{EXECUTION_ORDER}}`, `{{TASKS}}`, `{{INBOX}}`, `{{PROJECT_DECISIONS}}`, `{{WAITING_DECISIONS}}`) are filled by the skill from what it found and agreed with the owner. When there is nothing, write "None yet." rather than inventing content. The `{{PRD_*}}` placeholders in `PRD.md` are filled as described in `prd.md`, and the `{{DESIGN_*}}` placeholders in `DESIGN.md` are filled as described in `design.md`.
 
 ## Model defaults and recommendation
 
@@ -41,6 +41,7 @@ Show this table, explain it in one or two sentences, then ask "Keep the defaults
 | Role | Default | Why |
 |---|---|---|
 | router | `pro` (the recommended default for the main session; ask, never assume, which model the owner prefers) | Plans, writes briefs, judges security findings, merges. A weak router costs more in retries than it saves. |
+| designer | `flash` (`{{WORKER_MODEL}}`) | Explores visual references via `agent-browser`, crafts 3 contrasting HTML mockups in `references/mockups/`, and locks `DESIGN.md` at 99.99% proportional fidelity. |
 | worker | `flash` | Works inside a strict Allow list with a detailed brief. Raise to `pro` for a ticket that failed twice. |
 | tester | `flash` | Red-green and mutation checks need care but follow a fixed procedure. |
 | reviewer | `pro` for auth, session, authorization, security; `flash` for tests and ordinary logic; none for text-only | Matches W-05. The router passes `Model: "pro"` or `Model: "flash"` when calling `invoke_subagent`. |

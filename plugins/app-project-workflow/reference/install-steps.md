@@ -9,10 +9,12 @@ List every file the setup will create or change in the project, marked `new` or 
 |---|---|
 | `CLAUDE.md`, `AGENTS.md`, `WORKFLOW.md`, `TODO.md`, `HANDOFF.md`, `DECISIONS.md` | `TEMPLATES/<same name>`, or `TEMPLATES/id/<same name>` when the document language is Indonesian |
 | `PRD.md` | `TEMPLATES/PRD.md` or `TEMPLATES/id/PRD.md`; not installed when `adopt` keeps an existing PRD (`reference/prd.md`) |
+| `DESIGN.md` | `TEMPLATES/DESIGN.md` or `TEMPLATES/id/DESIGN.md` (`reference/design.md`) |
+| `references/{brand,inspiration,mockups}/` | Created automatically for brand assets, reference screenshots, and the 3 foundation mockups |
 | `tickets/_TEMPLATE.md` | `TEMPLATES/tickets/_TEMPLATE.md` or `TEMPLATES/id/tickets/_TEMPLATE.md` |
 | `tools/wt.sh`, `tools/guard.sh`, `tools/verify.sh`, `tools/statusline.js`, `tools/workflow.conf` | `TEMPLATES/tools/` |
-| `.claude/agents/{router,scoper,worker,tester,reviewer,Explore}.md` | `TEMPLATES/.claude/agents/` |
-| `.claude/skills/` (5 skills, `NOTICE`, `LICENSE-superpowers`) | `TEMPLATES/.claude/skills/`, copied unchanged |
+| `.claude/agents/{router,scoper,designer,worker,tester,reviewer,Explore}.md` | `TEMPLATES/.claude/agents/` |
+| `.claude/skills/` (6 skills, `NOTICE`, `LICENSE-superpowers`) | `TEMPLATES/.claude/skills/`, copied unchanged |
 | `.claude/settings.json` | `TEMPLATES/.claude/settings.json` |
 | `.gitattributes` | `TEMPLATES/.gitattributes` |
 | `.gitignore` | lines below |
@@ -27,9 +29,9 @@ If a file with the same path already exists, never replace it. Merge instead:
 ## 2. Copy and fill
 1. Copy the files. Use `cp` for the skills folder so it stays byte-identical to the plugin copy.
 2. Replace every `{{PLACEHOLDER}}` with the interview answers.
-3. Check none is left: `grep -rn "{{" CLAUDE.md AGENTS.md WORKFLOW.md TODO.md HANDOFF.md DECISIONS.md PRD.md tickets/_TEMPLATE.md tools/ .claude/agents/ .claude/settings.json` must print nothing.
+3. Check none is left: `grep -rn "{{" CLAUDE.md AGENTS.md WORKFLOW.md TODO.md HANDOFF.md DECISIONS.md PRD.md DESIGN.md tickets/_TEMPLATE.md tools/ .claude/agents/ .claude/settings.json` must print nothing.
 4. Ensure LF line endings and execute bits on scripts: `chmod +x tools/*.sh`, and `grep -c $'\r' tools/*.sh tools/workflow.conf` must print 0 for each file. On Windows the file system does not store the execute bit, so when the scripts are committed also run `git update-index --chmod=+x tools/*.sh`; otherwise macOS and Linux clones get non-executable scripts.
-5. Create `{{SESSION_REPORT_DIR}}` if it does not exist.
+5. Create `{{SESSION_REPORT_DIR}}` and `references/brand`, `references/inspiration`, `references/mockups` if they do not exist.
 
 ## 3. `.gitignore` lines (in the repo that contains the project root)
 ```

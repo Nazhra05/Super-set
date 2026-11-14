@@ -34,11 +34,15 @@ Each rule was added after a concrete failure in real use. The evidence is kept s
 - **Reason:** agents stopped at `maxTurns` without a report; on one measured day 36% of subagent tokens were wasted on cut-off runs. Raising the limit only makes failed runs larger.
 - **Decision:** budget in the ticket equals the agent's `maxTurns`; work is sized to about 60% of it (tester max 6 to 8 mutations, worker about 8 files, reviewer 5 explicit check items). Every brief names the tool call by which the report must be sent (limit minus 8). Each spawn costs about 20k to 25k tokens of re-reading, so small work is done by the router directly.
 
-### W-08 Five discipline skills plus `.env` hook guard
-- **Decision:** the project ships five discipline skills in `.agents/skills/` (`verification-before-completion`, `systematic-debugging`, `test-driven-development`, `receiving-code-review`, `writing-plans`) plus the `router` skill and a `PreToolUse` `.env` guard in `.agents/hooks.json`. Kept out on purpose: any skill or `SessionStart` hook that forces a ritual before every reply (it burns context and collides with "discussion vs execution"). License and changes: `.agents/skills/NOTICE`.
+### W-08 Five discipline skills, one UI design skill, plus `.env` hook guard
+- **Decision:** the project ships five discipline skills in `.agents/skills/` (`verification-before-completion`, `systematic-debugging`, `test-driven-development`, `receiving-code-review`, `writing-plans`), the `ui-design` skill, the `router` skill, and a `PreToolUse` `.env` guard in `.agents/hooks.json`. Kept out on purpose: any skill or `SessionStart` hook that forces a ritual before every reply (it burns context and collides with "discussion vs execution"). License and changes: `.agents/skills/NOTICE`.
 
 ### W-09 One place for status; short instruction files
 - **Decision:** work status lives only in `TODO.md` and `HANDOFF.md`; other documents hold no status numbers. `AGENTS.md` stays short and points to documents instead of copying them. No rule obliges an agent to read every document or to report skills in each reply; such rituals were ignored or burned context in real use.
+
+### W-10 UI design gate: 3 live mockups, hard numbers, and browser verification
+- **Reason:** text-only design descriptions ("clean, modern") produce generic AI interfaces and drift between tickets, while rushed or open-ended prompts cause agents either to under-build empty shells or over-design cluttered pages.
+- **Decision:** before UI feature tickets run, `designer` inspects visual references in `references/` (or discovers inspiration via `vercel-labs/agent-browser`) and builds 3 contrasting live HTML mockups (`references/mockups/option-1.html` to `option-3.html`) governed by hard numerical anchors adapted from `Leonxlnx/taste-skill` (99.99% proportional fidelity, 92% to 95% neutral / <=3% accent ratio, strict spacing scale, floor and ceiling screen anatomy) and verified in `agent-browser` at `1440x900` and `390x844`. Once the owner picks an option, `DESIGN.md` is locked (`Status: Locked`) and the first UI ticket builds the shared tokens and base components.
 
 ## B. Project decisions
 {{PROJECT_DECISIONS}}

@@ -21,6 +21,7 @@ The router profile is `.claude/agents/router.md`. The flow is the same on every 
 |---|---|---|---|
 | router (main session) | {{ROUTER_MODEL}} / high | plan, brief, dispatch, verify, merge, write `TODO.md` | only writer of `TODO.md`, `HANDOFF.md`, `DECISIONS.md`, `tickets/`; in `PRD.md` only the Status and Evidence of a requirement; does not read raw source files |
 | scoper | {{EXPLORE_MODEL}} / low | locate `path:line` and return a ready ticket draft | read-only, max 35-line report |
+| designer | {{WORKER_MODEL}} / high | inspect `references/` + `agent-browser`, build 3 live HTML mockups in `references/mockups/`, lock `DESIGN.md` | edits only `DESIGN.md` and `references/`; 99.99% numerical fidelity |
 | worker | {{WORKER_MODEL}} / low | implement one ticket in a worktree | only files in Allow, no commit |
 | tester | {{TESTER_MODEL}} / medium | red-green tests, mutation checks | only test files |
 | reviewer | opus or sonnet / high, by risk tier (below) | read-only review of ticket + diff | no writes, no test runs |
@@ -34,6 +35,11 @@ The router profile is `.claude/agents/router.md`. The flow is the same on every 
 - Merge `--no-ff` into the working branch without approval after guard, verify, and reviewer are clean. A merge counts as successful when the suite after the merge is green, the worktree is removed, and test data is cleaned; only then is another ticket in the same repo merged or started.
 - Push automatically after a ticket when the repo has a remote. Small tickets may share a push with the next one; no unpushed working-branch commits at session end. Docs are committed at the end of each ticket.
 - Report to the owner: one concise summary (max 8 to 10 lines) per ticket pair and one when the queue is empty, always writing `<ID> (<short title>)` instead of a bare ID, with 3 bullets: (1) **Done**, (2) **Next** (plus `/compact` reminder after each ticket pair), and (3) **Needs your decision**.
+
+### UI design gate (3 mockups before UI tickets, W-10)
+- When `DESIGN.md` status is `Proposed (awaiting 3-mockup gate)`, the router does not dispatch `worker` on UI feature tickets yet. Instead, the router dispatches `designer` with a **compact brief (max 6 to 8 lines)**: the primary screen and requirement IDs from `PRD.md`, any files or URLs in `references/brand/` and `references/inspiration/`, and viewport/mode constraints. Never write long prose essays describing spacing or visual mood in the brief; `designer` inspects visual references directly and applies the hard numerical rules in `.claude/skills/ui-design/SKILL.md`.
+- `designer` discovers inspiration via `agent-browser` when `references/inspiration/` is empty, builds `references/mockups/option-1.html`, `option-2.html`, and `option-3.html`, and verifies them in `agent-browser` at `1440x900` and `390x844`.
+- The router presents the 3 mockup options and screenshots to the owner. Once the owner picks an option (or a hybrid of layout + palette/typography), the router dispatches `designer` to lock `DESIGN.md` (`Status: Locked`) and runs the first UI foundation ticket (tokens + base components) before feature UI tickets.
 
 ### Reviewer risk tier (W-05)
 | Ticket type | Reviewer |

@@ -28,7 +28,7 @@ Source of truth for names (tables, columns, routes, types): {{SOURCE_OF_TRUTH}}.
 - **Documents:** read only the documents relevant to the task (map below). No duty to read all of them or to report skills in every reply; mention a skill or document only when it affected the result.
 
 ## Terms
-Applies to replies, reports, and documents written in a language other than English. Keep all workflow terms and all standard software engineering terms in English (never translate them into stiff local equivalents): ticket, task, worktree, branch, commit, merge, push, router, scoper, worker, tester, reviewer, guard, verify, Inbox, Allow, done criteria, blocked by, the status values (`Ready`, `In progress`, `Planned`, `Met`, and so on), PRD, IDs (`FR-01`, `W-01`, `D-01`), section names (for example "Execution order"), and technical software terms such as endpoint, route, middleware, payload, request, response, query, schema, migration, index, state, props, component, hook, context, render, build, bundle, lint, type-check, runtime, auth, session, token, mock, assertion, regression, and refactor. Project terms agreed with the owner:
+Applies to replies, reports, and documents written in a language other than English. Keep all workflow terms and all standard software engineering terms in English (never translate them into stiff local equivalents): ticket, task, worktree, branch, commit, merge, push, router, scoper, designer, worker, tester, reviewer, guard, verify, Inbox, Allow, done criteria, blocked by, the status values (`Ready`, `In progress`, `Planned`, `Met`, `Locked`, and so on), PRD, IDs (`FR-01`, `W-01`, `D-01`, `REF-01`), section names (for example "Execution order"), and technical software and UI terms such as endpoint, route, middleware, payload, request, response, query, schema, migration, index, state, props, component, hook, context, render, build, bundle, lint, type-check, runtime, auth, session, token, mock, mockup, viewport, layout, density, assertion, regression, and refactor. Project terms agreed with the owner:
 
 | Use | Do not mix with |
 |---|---|
@@ -42,11 +42,11 @@ Add an entry only after it has been proven by command output, with the date.
 {{PITFALLS}}
 
 ## Skills
-- In `.agents/skills/`: `router`, `verification-before-completion`, `systematic-debugging`, `test-driven-development`, `receiving-code-review`, `writing-plans`. Reasons: `DECISIONS.md` W-08; license: `.agents/skills/NOTICE`.
-- TDD only for business logic (locations above).
+- In `.agents/skills/`: `router`, `verification-before-completion`, `systematic-debugging`, `test-driven-development`, `receiving-code-review`, `writing-plans`, `ui-design`. Reasons: `DECISIONS.md` W-08, W-10; license: `.agents/skills/NOTICE`.
+- TDD only for business logic (locations above). UI design follows `DESIGN.md` and `ui-design` (3-mockup gate before UI tickets, 99.99% numerical fidelity, verified via `agent-browser`).
 - Do not add skills or hooks that force a ritual before every reply, or separate worktree or subagent skills; the ticket flow covers them (W-04, W-08).
 - **Ticket flow (W-04):** splitting work into worktrees and subagents happens only through `WORKFLOW.md`, in a router session (`router` skill). Outside that flow, subagents are created only when I ask. Rules 1 to 8 apply to every agent.
 
 ## Document map (read what the task needs, not everything)
-`PRD.md` (what and why) · `WORKFLOW.md` (ticket flow) · `TODO.md` (the only work board) · `HANDOFF.md` (last session state, start here) · `DECISIONS.md` (decisions and what is waiting) · `AGENTS.md` (working, code, and test rules for any agent){{EXTRA_DOCS}}
+`PRD.md` (what and why) · `DESIGN.md` (UI design system, 3-mockup gate, `references/`) · `WORKFLOW.md` (ticket flow) · `TODO.md` (the only work board) · `HANDOFF.md` (last session state, start here) · `DECISIONS.md` (decisions and what is waiting) · `AGENTS.md` (working, code, and test rules for any agent){{EXTRA_DOCS}}
 

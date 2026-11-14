@@ -34,11 +34,15 @@ Setiap aturan ditambahkan setelah kegagalan nyata dalam pemakaian. Buktinya ditu
 - **Alasan:** agent berhenti di `maxTurns` tanpa laporan; pada satu hari yang diukur, 36% token subagent terbuang di run yang terpotong. Menaikkan batas hanya memperbesar run yang gagal.
 - **Keputusan:** budget di ticket sama dengan `maxTurns` agent; pekerjaan diukur sekitar 60% darinya (tester maksimal 6 sampai 8 mutasi, worker sekitar 8 file, reviewer 5 butir cek eksplisit). Setiap brief menyebut tool call tempat laporan harus dikirim (batas dikurangi 8). Setiap spawn memakan sekitar 20k sampai 25k token untuk membaca ulang, jadi kerja kecil dikerjakan router langsung.
 
-### W-08 Lima skill disiplin ditambah penjaga hook `.env`
-- **Keputusan:** project membawa lima skill disiplin di `.agents/skills/` (`verification-before-completion`, `systematic-debugging`, `test-driven-development`, `receiving-code-review`, `writing-plans`) ditambah skill `router` dan penjaga `.env` `PreToolUse` di `.agents/hooks.json`. Sengaja tidak dipasang: skill atau hook `SessionStart` yang memaksa ritual sebelum setiap balasan (menghabiskan konteks dan bertabrakan dengan "diskusi vs eksekusi"). Lisensi dan perubahan: `.agents/skills/NOTICE`.
+### W-08 Lima skill disiplin, satu skill desain UI, ditambah penjaga hook `.env`
+- **Keputusan:** project membawa lima skill disiplin di `.agents/skills/` (`verification-before-completion`, `systematic-debugging`, `test-driven-development`, `receiving-code-review`, `writing-plans`), skill `ui-design`, skill `router`, dan penjaga `.env` `PreToolUse` di `.agents/hooks.json`. Sengaja tidak dipasang: skill atau hook `SessionStart` yang memaksa ritual sebelum setiap balasan (menghabiskan konteks dan bertabrakan dengan "diskusi vs eksekusi"). Lisensi dan perubahan: `.agents/skills/NOTICE`.
 
 ### W-09 Satu tempat untuk status; file instruksi pendek
 - **Keputusan:** status kerja hanya ada di `TODO.md` dan `HANDOFF.md`; dokumen lain tidak memuat angka status. `AGENTS.md` tetap pendek dan merujuk dokumen alih-alih menyalinnya. Tidak ada aturan yang mewajibkan agent membaca semua dokumen atau melaporkan skill di setiap balasan; ritual seperti itu diabaikan atau menghabiskan konteks dalam pemakaian nyata.
+
+### W-10 Gate desain UI: 3 mockup nyata, angka keras, dan verifikasi browser
+- **Alasan:** deskripsi desain berbasis teks semata ("bersih, modern") menghasilkan antarmuka generik khas AI dan tidak konsisten antar-ticket, sementara prompt yang terburu-buru atau tanpa batas membuat agent menghasilkan halaman yang terlalu kosong atau justru berlebihan.
+- **Keputusan:** sebelum ticket fitur UI dijalankan, `designer` memeriksa referensi visual di `references/` (atau mencari inspirasi lewat `vercel-labs/agent-browser`) dan membangun 3 mockup HTML yang kontras (`references/mockups/option-1.html` sampai `option-3.html`) dengan patokan angka keras yang diadaptasi dari `Leonxlnx/taste-skill` (99.99% proportional fidelity, rasio warna 92% sampai 95% netral / <=3% accent, skala spacing ketat, serta batas bawah dan batas atas anatomi layar) dan diverifikasi di `agent-browser` pada `1440x900` dan `390x844`. Setelah pemilik memilih satu opsi, `DESIGN.md` dikunci (`Status: Locked`) dan ticket UI pertama membangun shared tokens serta base components.
 
 ## B. Keputusan project
 {{PROJECT_DECISIONS}}

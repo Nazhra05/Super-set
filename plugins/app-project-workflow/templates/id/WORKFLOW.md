@@ -21,6 +21,7 @@ Profil router adalah `.claude/agents/router.md`. Alurnya sama di setiap surface;
 |---|---|---|---|
 | router (sesi utama) | {{ROUTER_MODEL}} / high | merencanakan, menulis brief, dispatch, verify, merge, menulis `TODO.md` | satu-satunya penulis `TODO.md`, `HANDOFF.md`, `DECISIONS.md`, `tickets/`; di `PRD.md` hanya Status dan Bukti sebuah persyaratan; tidak membaca file kode mentah |
 | scoper | {{EXPLORE_MODEL}} / low | mencari `path:line` dan mengembalikan draf ticket siap pakai | read-only, laporan maksimal 35 baris |
+| designer | {{WORKER_MODEL}} / high | memeriksa `references/` + `agent-browser`, membuat 3 mockup HTML di `references/mockups/`, mengunci `DESIGN.md` | hanya mengubah `DESIGN.md` dan `references/`; standar numerik 99.99% |
 | worker | {{WORKER_MODEL}} / low | mengerjakan satu ticket di worktree | hanya file di Allow, tanpa commit |
 | tester | {{TESTER_MODEL}} / medium | test red-green, mutation check | hanya file test |
 | reviewer | opus atau sonnet / high, sesuai tingkat risiko (di bawah) | review read-only atas ticket dan diff | tidak menulis, tidak menjalankan test |
@@ -34,6 +35,11 @@ Profil router adalah `.claude/agents/router.md`. Alurnya sama di setiap surface;
 - Merge `--no-ff` ke working branch tanpa persetujuan setelah guard, verify, dan reviewer bersih. Merge dianggap berhasil kalau suite setelah merge hijau, worktree sudah dihapus, dan data test sudah dibersihkan; baru setelah itu ticket lain di repo yang sama boleh di-merge atau dimulai.
 - Push otomatis setelah satu ticket kalau repo punya remote. Ticket kecil boleh berbagi push dengan ticket berikutnya; tidak boleh ada commit working branch yang belum di-push di akhir sesi. Dokumen di-commit di akhir setiap ticket.
 - Laporan ke pemilik: satu ringkasan singkat (maksimal 8 sampai 10 baris) per pasang ticket dan satu ketika antrian kosong, selalu menulis `<ID> (<judul singkat>)` (bukan ID saja), dengan 3 butir: (1) **Done**, (2) **Next** (ditambah pengingat `/compact` setiap selesai sepasang ticket), dan (3) **Needs your decision**.
+
+### Gate desain UI (3 mockup sebelum ticket UI, W-10)
+- Ketika status `DESIGN.md` adalah `Proposed (awaiting 3-mockup gate)`, router belum men-dispatch `worker` untuk ticket fitur UI. Sebagai gantinya, router men-dispatch `designer` dengan **brief ringkas (maksimal 6 sampai 8 baris)**: layar utama dan ID persyaratan dari `PRD.md`, file atau URL di `references/brand/` dan `references/inspiration/`, serta batasan viewport/mode. Jangan menulis karangan teks panjang untuk menjelaskan jarak atau gaya visual di brief; `designer` melihat langsung gambar referensi dan menerapkan aturan numerik keras di `.claude/skills/ui-design/SKILL.md`.
+- `designer` mencari inspirasi lewat `agent-browser` bila `references/inspiration/` kosong, membangun `references/mockups/option-1.html`, `option-2.html`, dan `option-3.html`, serta memverifikasinya di `agent-browser` pada ukuran `1440x900` dan `390x844`.
+- Router menunjukkan ketiga opsi mockup dan screenshot-nya kepada pemilik. Setelah pemilik memilih satu opsi (atau gabungan layout + palet/tipografi), router men-dispatch `designer` untuk mengunci `DESIGN.md` (`Status: Locked`) dan menjalankan ticket pondasi UI pertama (tokens + base components) sebelum ticket fitur UI lainnya.
 
 ### Tingkat risiko reviewer (W-05)
 | Jenis ticket | Reviewer |

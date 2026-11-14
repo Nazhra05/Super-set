@@ -10,7 +10,7 @@ You run one setup command in your project. It interviews you, writes a few plain
 
 | You are making... | Claude Code | Google Antigravity | OpenAI Codex | What you get |
 |---|---|---|---|---|
-| An app, website, API, or any software project | [`app-project-workflow`](plugins/app-project-workflow/README.md) | [`agy-app-project-workflow`](plugins/agy-app-project-workflow/README.md) | [`codex-app-project-workflow`](plugins/codex-app-project-workflow/README.md) | A requirements document (PRD), a work board, session notes, and a ticket flow where a planning agent hands work to builder, tester, and reviewer agents, with a guard that catches deleted tests and edits outside the ticket |
+| An app, website, API, or any software project | [`app-project-workflow`](plugins/app-project-workflow/README.md) | [`agy-app-project-workflow`](plugins/agy-app-project-workflow/README.md) | [`codex-app-project-workflow`](plugins/codex-app-project-workflow/README.md) | A requirements document (PRD), a UI design system (`DESIGN.md`) with a 3-mockup exploration gate (`references/`), a work board, session notes, and a ticket flow where a planning agent hands work to designer, builder, tester, and reviewer agents, with a guard that catches deleted tests and edits outside the ticket |
 | A video, animation, or motion graphic | [`content-project-workflow`](plugins/content-project-workflow/README.md) | [`agy-content-project-workflow`](plugins/agy-content-project-workflow/README.md) | [`codex-content-project-workflow`](plugins/codex-content-project-workflow/README.md) | A brief, a style guide, a list of every reference, approval steps from storyboard to final render, agents that build, check frames, and research sources, and built-in knowledge about content, motion, and design |
 
 If the result is code that runs, pick the app plugin. If the result is something people watch, pick the content plugin. You can install both; each project uses one.
@@ -79,6 +79,7 @@ Plain Markdown files you can read and edit, plus an agent customization folder (
 - `TODO.md`: the one work board.
 - `DECISIONS.md`: why things are the way they are.
 - `PRD.md`: what you are making and why (for content: the brief).
+- `DESIGN.md` and `references/` (app plugins): UI design system, brand/inspiration references, and a 3-mockup gate (`references/mockups/option-1..3.html`) before UI tickets run. Installing [`agent-browser`](https://github.com/vercel-labs/agent-browser) (`npm i -g agent-browser && agent-browser install`) is strongly recommended for live inspiration discovery and headless-browser verification.
 - `.claude/`, `.agents/`, or `.codex/`: the helper subagents/role prompts and skills.
 
 Documents can be in English or Bahasa Indonesia; setup asks. Code and commits stay in English. After setup the project is self-contained, so removing the plugin later does not break it.
@@ -116,4 +117,4 @@ Help is welcome, and you do not need to write code to give it. The most useful c
 Questions go to [Discussions, Q&A](https://github.com/Nazhra05/Super-set/discussions/categories/q-a), early ideas to [Discussions, Ideas](https://github.com/Nazhra05/Super-set/discussions/categories/ideas), and bugs and field reports to [Issues](https://github.com/Nazhra05/Super-set/issues/new/choose). Read [CONTRIBUTING.md](CONTRIBUTING.md) before opening a pull request.
 
 ## License
-MIT, see `LICENSE`. Each plugin carries its own copy and any third-party notices. The bundled discipline skills (`verification-before-completion`, `systematic-debugging`, `test-driven-development`, `receiving-code-review`, `writing-plans`) are adapted from [obra/superpowers](https://github.com/obra/superpowers) by Jesse Vincent (MIT); see each plugin's `NOTICE` and `LICENSE-superpowers`.
+MIT, see `LICENSE`. Each plugin carries its own copy and any third-party notices. The bundled discipline skills (`verification-before-completion`, `systematic-debugging`, `test-driven-development`, `receiving-code-review`, `writing-plans`) are adapted from [obra/superpowers](https://github.com/obra/superpowers) by Jesse Vincent (MIT). The `ui-design` skill in the app workflow plugins adapts numerical art-direction, layout discipline, and browser verification principles from [Leonxlnx/taste-skill](https://github.com/Leonxlnx/taste-skill) (MIT) and integrates browser automation workflows for [vercel-labs/agent-browser](https://github.com/vercel-labs/agent-browser) (Apache-2.0); see each plugin's `NOTICE` and `LICENSE-superpowers`.

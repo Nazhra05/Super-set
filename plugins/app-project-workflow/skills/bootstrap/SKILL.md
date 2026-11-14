@@ -30,8 +30,8 @@ Ask, with AskUserQuestion (max 4 per call):
 - Whether the repo will get a remote now or later.
 Then follow `.workflow-setup/reference/setup-interview.md` for the remaining answers. Commands that do not exist yet (no test runner installed) are written as "Not set up yet" and added as the first Inbox or Proposed tasks, never invented.
 
-## 4. Product requirements (PRD)
-Follow `.workflow-setup/reference/prd.md`, section "Bootstrap": build on the answers above, ask what is missing, every requirement `Planned`.
+## 4. Product requirements (PRD) and UI design setup
+Follow `.workflow-setup/reference/prd.md`, section "Bootstrap": build on the answers above, ask what is missing, every requirement `Planned`. Then follow `.workflow-setup/reference/design.md`, section "Bootstrap": ask the 3 UI design questions (or mark `Not applicable (no UI)`), prepare `DESIGN.md` and `references/{brand,inspiration,mockups}/`, and check whether `agent-browser` is installed.
 
 ## 5. Create the repo layout
 - `git init` each repo the owner chose (reversible; mention it). Create the working branch name the owner chose.
@@ -40,6 +40,7 @@ Follow `.workflow-setup/reference/prd.md`, section "Bootstrap": build on the ans
 ## 6. Install
 Follow `.workflow-setup/reference/install-steps.md` in full. In a new project there is nothing to merge, so the file list is all `new`. Fill the docs for this project:
 - `PRD.md`: the draft the owner approved in step 4.
+- `DESIGN.md`: the initial UI design setup and reference inventory from step 4.
 - `TODO.md`: execution order with the first tickets agreed with the owner (for example "set up test runner", "decide stack"), status `Proposed` unless the owner says `Ready`. A task that builds a feature names its requirement ID.
 - `DECISIONS.md`: section B with the decisions made in the interview (stack, repo layout), each with date and reason; section C with what is still open.
 - `HANDOFF.md`: current state (empty project, workflow installed) and the next step.

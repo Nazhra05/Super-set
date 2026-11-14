@@ -20,7 +20,8 @@ Use it if you build an app, website, API, or any code project with Google Antigr
 | Lost context between sessions | `HANDOFF.md` (where things stand), `TODO.md` (one work board), `DECISIONS.md` (why) |
 | Claims without proof | Rules in `AGENTS.md` that "done" needs command output just run; new tests must fail first; security logic gets a mutation check |
 | Scope creep and weakened tests | Each job is a ticket with an Allow list; `tools/guard.sh` fails on files outside it, deleted tests, skip markers, or fewer assertions |
-| Big jobs in one long run | The `router` skill plans tickets; `worker`, `tester`, and `reviewer` subagents each do one ticket in its own git worktree; the router re-checks before merging |
+| Generic AI UI and inconsistent styling | `DESIGN.md`, `references/`, `designer` subagent, and `ui-design` skill: before UI tickets run, `designer` inspects references (or searches inspiration via `agent-browser`) and builds 3 live HTML mockups (`references/mockups/option-1..3.html`) governed by 99.99% numerical fidelity rules so you pick a visual direction before tokens are locked |
+| Big jobs in one long run | The `router` skill plans tickets; `designer`, `worker`, `tester`, and `reviewer` subagents each do their job within strict boundaries; the router re-checks before merging |
 
 ## How a job runs
 1. You put work on the board (`TODO.md`), or ask the router to plan it.
@@ -63,29 +64,32 @@ Setup explains these and asks which to change; afterwards, change them in the fi
 | Reviewer model by risk (`pro` vs `flash`) | Reviews cost most of what they review | `WORKFLOW.md`, W-05 |
 | Tickets sized to about 60% of the agent turn limit | Cut-off agents leave no report | `tickets/_TEMPLATE.md`, W-07 |
 | Docs in English or Bahasa Indonesia; code and commits in English; common terms in one form | Readable docs, one language for code | `AGENTS.md` rule 8, "Terms" |
+| 3-mockup UI design gate with 99.99% numerical fidelity and browser check before UI tickets | Text-only design rules produce generic AI UI; 3 live HTML mockups let you choose visually before tokens are locked | `DESIGN.md`, `.agents/skills/ui-design/SKILL.md`, W-10 |
 | Guard patterns for Jest, Vitest, Playwright, PHPUnit skip | Only patterns proven to catch weakened tests | `tools/workflow.conf` |
 
 ## What lands in the project
-- Docs: `PRD.md`, `AGENTS.md`, `WORKFLOW.md`, `TODO.md`, `HANDOFF.md`, `DECISIONS.md`, `tickets/_TEMPLATE.md`, in English or Indonesian.
-- `.agents/agents/`: `scoper`, `worker`, `tester`, `reviewer`, `Explore`.
-- `.agents/skills/`: `router`, `verification-before-completion`, `systematic-debugging`, `test-driven-development`, `receiving-code-review`, `writing-plans`.
+- Docs: `PRD.md`, `DESIGN.md`, `AGENTS.md`, `WORKFLOW.md`, `TODO.md`, `HANDOFF.md`, `DECISIONS.md`, `tickets/_TEMPLATE.md`, in English or Indonesian.
+- `references/`: `references/brand/`, `references/inspiration/`, and `references/mockups/` (for the 3 foundation mockups and screenshots).
+- `.agents/agents/`: `scoper`, `designer`, `worker`, `tester`, `reviewer`, `Explore`.
+- `.agents/skills/`: `router`, `verification-before-completion`, `systematic-debugging`, `test-driven-development`, `receiving-code-review`, `writing-plans`, `ui-design`.
 - `.agents/hooks.json` + `tools/env-guard.js`: `PreToolUse` hook that blocks reading, editing, writing, or running shell commands on `.env` files.
 - `tools/`: `workflow.conf`, `wt.sh` (worktrees), `guard.sh`, `verify.sh`, `env-guard.js`.
 
 ## Requirements
 - Git and Node.js.
 - Bash: built in on macOS and Linux; on Windows, Git for Windows (Git Bash). All `.sh` tools are invoked with `bash tools/<script>.sh` so they run cleanly from Windows PowerShell.
+- **Strongly recommended for UI projects:** [`agent-browser`](https://github.com/vercel-labs/agent-browser) by Vercel Labs (`npm i -g agent-browser && agent-browser install`), used by `designer`, `worker`, and `tester` to research live design inspiration and verify the 3 HTML mockups and built UI pages in a headless browser at desktop (`1440x900`) and mobile (`390x844`).
 
 ## Layout of this plugin
 ```
 plugin.json       Antigravity plugin manifest
 skills/           adopt, bootstrap
-reference/        setup-interview.md, prd.md, install-steps.md
+reference/        setup-interview.md, prd.md, design.md, install-steps.md
 scripts/          stage.sh (copies setup material into the project during setup)
 templates/        everything copied into a project (English docs)
 templates/id/     the docs in Indonesian
 ```
 
 ## License
-MIT, see `LICENSE`. The five discipline skills in `templates/.agents/skills/` are adapted from [obra/superpowers](https://github.com/obra/superpowers) (MIT); attribution and changes are in `templates/.agents/skills/NOTICE`.
+MIT, see `LICENSE`. The five discipline skills in `templates/.agents/skills/` are adapted from [obra/superpowers](https://github.com/obra/superpowers) (MIT). The `ui-design` skill adapts numerical art-direction, layout discipline, and browser verification principles from [Leonxlnx/taste-skill](https://github.com/Leonxlnx/taste-skill) (MIT) and integrates browser automation workflows for [vercel-labs/agent-browser](https://github.com/vercel-labs/agent-browser) (Apache-2.0). Full attribution and changes are in `templates/.agents/skills/NOTICE`.
 

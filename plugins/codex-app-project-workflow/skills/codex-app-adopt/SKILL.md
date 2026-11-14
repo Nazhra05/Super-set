@@ -36,8 +36,8 @@ Follow `.workflow-setup/reference/setup-interview.md`. Offer what the survey fou
 - Whether existing TODO items should be imported into the `TODO.md` Inbox (default: yes, imported as Inbox, never executed).
 - Which existing docs to list in the document map.
 
-## 5. Product requirements (PRD)
-Follow `.workflow-setup/reference/prd.md`, section "Adopt": keep an existing PRD or draft one from what is built, and let the owner confirm each requirement.
+## 5. Product requirements (PRD) and UI design setup
+Follow `.workflow-setup/reference/prd.md`, section "Adopt": keep an existing PRD or draft one from what is built, and let the owner confirm each requirement. Then follow `.workflow-setup/reference/design.md`, section "Adopt": survey existing UI tokens/components and `references/`, prepare `DESIGN.md`, and check whether `agent-browser` is installed.
 
 ## 6. Map existing content into the templates
 - Existing instructions: each rule goes to the matching section of `AGENTS.md`. A rule that conflicts with the workflow becomes a question for the owner, or a project decision `D-01...` in `DECISIONS.md` that overrides a W-xx entry, with the reason.

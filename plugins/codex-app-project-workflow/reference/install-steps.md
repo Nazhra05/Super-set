@@ -9,11 +9,13 @@ List every file the setup will create or change in the project, marked `new` or 
 |---|---|
 | `AGENTS.md`, `WORKFLOW.md`, `TODO.md`, `HANDOFF.md`, `DECISIONS.md` | `TEMPLATES/<same name>`, or `TEMPLATES/id/<same name>` when the document language is Indonesian |
 | `PRD.md` | `TEMPLATES/PRD.md` or `TEMPLATES/id/PRD.md`; not installed when `adopt` keeps an existing PRD (`reference/prd.md`) |
+| `DESIGN.md` | `TEMPLATES/DESIGN.md` or `TEMPLATES/id/DESIGN.md` (`reference/design.md`) |
+| `references/{brand,inspiration,mockups}/` | Created automatically for brand assets, reference screenshots, and the 3 foundation mockups |
 | `tickets/_TEMPLATE.md` | `TEMPLATES/tickets/_TEMPLATE.md` or `TEMPLATES/id/tickets/_TEMPLATE.md` |
 | `tools/wt.sh`, `tools/guard.sh`, `tools/verify.sh`, `tools/workflow.conf` | `TEMPLATES/tools/` |
-| `.codex/agents/{scoper,worker,tester,reviewer,Explore}.md` | `TEMPLATES/.codex/agents/` |
+| `.codex/agents/{scoper,designer,worker,tester,reviewer,Explore}.md` | `TEMPLATES/.codex/agents/` |
 | `.codex/skills/router/SKILL.md` | `TEMPLATES/.codex/skills/router/SKILL.md` |
-| `.codex/skills/` (5 discipline skills, `NOTICE`, `LICENSE-superpowers`) | `TEMPLATES/.codex/skills/`, copied unchanged |
+| `.codex/skills/` (5 discipline skills, `ui-design`, `NOTICE`, `LICENSE-superpowers`) | `TEMPLATES/.codex/skills/`, copied unchanged |
 | `.gitattributes` | `TEMPLATES/.gitattributes` |
 | `.gitignore` | lines below |
 
@@ -26,9 +28,9 @@ If a file with the same path already exists, never replace it. Merge instead:
 ## 2. Copy and fill
 1. Copy the files. Use `cp` for the five discipline skills so they stay byte-identical to the plugin copy.
 2. Replace every `{{PLACEHOLDER}}` with the interview answers.
-3. Check none is left: `bash -c 'grep -rn "{{" AGENTS.md WORKFLOW.md TODO.md HANDOFF.md DECISIONS.md PRD.md tickets/_TEMPLATE.md tools/ .codex/agents/ .codex/skills/router/'` must print nothing.
+3. Check none is left: `bash -c 'grep -rn "{{" AGENTS.md WORKFLOW.md TODO.md HANDOFF.md DECISIONS.md PRD.md DESIGN.md tickets/_TEMPLATE.md tools/ .codex/agents/ .codex/skills/router/'` must print nothing.
 4. Ensure LF line endings and execute bits on scripts: `bash -c "chmod +x tools/*.sh && grep -c $'\r' tools/*.sh tools/workflow.conf"` must print 0 for each file. On Windows the file system does not store the execute bit, so when the scripts are committed also run `git update-index --chmod=+x tools/*.sh`; otherwise macOS and Linux clones get non-executable scripts.
-5. Create `{{SESSION_REPORT_DIR}}` if it does not exist.
+5. Create `{{SESSION_REPORT_DIR}}` and `references/brand`, `references/inspiration`, `references/mockups` if they do not exist.
 
 ## 3. `.gitignore` lines (in the repo that contains the project root)
 ```
