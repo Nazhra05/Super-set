@@ -20,11 +20,11 @@ Tool: {{TOOLCHAIN}}. Brief: `PRD.md`. Look and sound: `STYLE.md`. References: `R
 5. **Look before you interpret (C-01).** For every image (my screenshots, references, frames): first write what you see, marked `seen`, then what you infer, marked `inferred`, and restate what I asked in one sentence. When the meaning decides the work, ask before acting. Never claim exact positions, sizes, or colors from looking; measure them (crop, zoom, pixel samples, frame grabs at a time code).
 6. **Verify through tools, not reports (C-02).** Claim "done" only with output of a command just run **and** the frames looked at (skill `verification-before-completion`). Agent reports and old documents are not evidence. Say plainly what was not done: not rendered, not watched with sound, not checked on a phone.
 7. **Do not commit or push unless asked**, except the producer committing in the ticket flow (`WORKFLOW.md`). Conventional Commits, subject max 72 characters.
-8. **Summaries for me in plain language**: what changed, how it looks (with the frame), the risk, what decision you need from me.
+8. **Concise summaries for me in plain language (max 8 to 10 lines)**: always write `<ID> (<short title>)` instead of a bare ID (`T-xx`, `R-xx`, `REF-xx`, `D-xx`). State what changed, how it looks (with the frame), the risk, and what decision you need from me (no command log dumps).
 9. Language: reply to me in {{OWNER_LANGUAGE}}, following "Terms" below. Code, identifiers, comments, commits, and documents in English. No em dashes in documents.
 
 ## Terms
-Applies to replies, reports, and documents written in a language other than English. These stay in English, in one form only: ticket, task, gate, brief, storyboard, style frame, animatic, character sheet, turnaround, render, frame, shot, scene, asset, reference, producer, asset-builder, visual-reviewer, researcher, Inbox, Allow, verify, the status values (`Ready`, `In progress`, `Planned`, `Met`, and so on), IDs (`R-01`, `REF-01`, `C-01`, `D-01`), and section names that agents refer to (for example "Execution order"). Project terms agreed with the owner:
+Applies to replies, reports, and documents written in a language other than English. Keep all workflow terms and all standard motion graphics, video, graphic design, and software terms in English (never translate them into stiff local equivalents): ticket, task, gate, brief, storyboard, style frame, animatic, character sheet, turnaround, expression sheet, mouth chart, pose sheet, rig, render, frame, contact sheet, shot, scene, asset, reference, producer, asset-builder, frame-prep, visual-reviewer, researcher, Inbox, Allow, verify, the status values (`Ready`, `In progress`, `Planned`, `Met`, and so on), IDs (`R-01`, `REF-01`, `C-01`, `D-01`), section names (for example "Execution order"), and craft terms such as keyframe, easing, anticipation, follow-through, overlap, timing, pacing, hook, safe zone, aspect ratio, frame rate, resolution, lower third, rough cut, hierarchy, typography, kerning, leading, contrast, palette, saturation, voice-over, loudness, and caption. Project terms agreed with the owner:
 
 | Use | Do not mix with |
 |---|---|
@@ -39,7 +39,7 @@ Add an entry only after it has been proven by command output, with the date.
 
 ## Skills and role prompts
 - In `.codex/skills/`: `producer`, `content-fundamentals`, `motion-principles`, `design-basics`, `character-design` (knowledge, read when the task needs it), `verification-before-completion`, `systematic-debugging`. License: `.codex/skills/NOTICE`.
-- Role prompts in `.codex/agents/`: `asset-builder.md`, `visual-reviewer.md`, `researcher.md`, `Explore.md` (dispatched via `codex exec`).
+- Role prompts in `.codex/agents/`: `asset-builder.md`, `frame-prep.md`, `visual-reviewer.md`, `researcher.md`, `Explore.md` (dispatched via `codex exec`).
 - Skills for the video tool: {{TOOL_SKILLS}}.
 - **Ticket flow:** splitting work into subagents happens only through `WORKFLOW.md`, in a producer session (`$producer` or `producer` skill). Outside that flow, subagents are run only when I ask. Rules 1 to 9 apply to every agent.
 

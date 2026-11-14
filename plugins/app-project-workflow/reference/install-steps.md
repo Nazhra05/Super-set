@@ -11,7 +11,7 @@ List every file the setup will create or change in the project, marked `new` or 
 | `PRD.md` | `TEMPLATES/PRD.md` or `TEMPLATES/id/PRD.md`; not installed when `adopt` keeps an existing PRD (`reference/prd.md`) |
 | `tickets/_TEMPLATE.md` | `TEMPLATES/tickets/_TEMPLATE.md` or `TEMPLATES/id/tickets/_TEMPLATE.md` |
 | `tools/wt.sh`, `tools/guard.sh`, `tools/verify.sh`, `tools/statusline.js`, `tools/workflow.conf` | `TEMPLATES/tools/` |
-| `.claude/agents/{router,worker,tester,reviewer,Explore}.md` | `TEMPLATES/.claude/agents/` |
+| `.claude/agents/{router,scoper,worker,tester,reviewer,Explore}.md` | `TEMPLATES/.claude/agents/` |
 | `.claude/skills/` (5 skills, `NOTICE`, `LICENSE-superpowers`) | `TEMPLATES/.claude/skills/`, copied unchanged |
 | `.claude/settings.json` | `TEMPLATES/.claude/settings.json` |
 | `.gitattributes` | `TEMPLATES/.gitattributes` |

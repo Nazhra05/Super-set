@@ -10,7 +10,7 @@ List every file the setup will create or change in the project, marked `new` or 
 | `CLAUDE.md`, `WORKFLOW.md`, `TODO.md`, `HANDOFF.md`, `DECISIONS.md`, `PRD.md`, `STYLE.md`, `REFERENCES.md` | `TEMPLATES/<same name>`, or `TEMPLATES/id/<same name>` when the document language is Indonesian. `PRD.md` is not installed when `adopt` keeps an existing brief. |
 | `tickets/_TEMPLATE.md` | `TEMPLATES/tickets/_TEMPLATE.md` or `TEMPLATES/id/tickets/_TEMPLATE.md` |
 | `tools/scope.sh`, `tools/verify.sh`, `tools/statusline.js` | `TEMPLATES/tools/` |
-| `.claude/agents/{producer,asset-builder,visual-reviewer,researcher,Explore}.md` | `TEMPLATES/.claude/agents/` |
+| `.claude/agents/{producer,asset-builder,frame-prep,visual-reviewer,researcher,Explore}.md` | `TEMPLATES/.claude/agents/` |
 | `.claude/skills/` (6 skills, `NOTICE`, `LICENSE-superpowers`) | `TEMPLATES/.claude/skills/`, copied unchanged |
 | `.claude/settings.json` | `TEMPLATES/.claude/settings.json` |
 | `.gitattributes` | `TEMPLATES/.gitattributes` |

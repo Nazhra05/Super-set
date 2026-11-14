@@ -9,9 +9,10 @@ Skill producer adalah `.codex/skills/producer/SKILL.md`. Alurnya sama di OpenAI 
 ## Peran
 | Peran | Model tier (`codex exec -m`) | Tugas | Batas |
 |---|---|---|---|
-| producer (sesi utama) | {{PRODUCER_MODEL}} | merencanakan gate dan ticket, menulis brief, dispatch, verify, melapor ke pemilik | satu-satunya penulis `TODO.md`, `HANDOFF.md`, `DECISIONS.md`, `REFERENCES.md`, `tickets/`; di `PRD.md` hanya Status dan Bukti; `STYLE.md` hanya setelah gate yang disetujui pemilik |
+| producer (sesi utama) | {{PRODUCER_MODEL}} | merencanakan gate dan ticket, menulis brief, dispatch, verify, melapor ke pemilik | satu-satunya penulis `TODO.md`, `HANDOFF.md`, `DECISIONS.md`, `REFERENCES.md`, `tickets/`; di `PRD.md` hanya Status dan Bukti; `STYLE.md` hanya setelah gate yang disetujui pemilik; hanya membuka frame di approval gate |
 | asset-builder | {{BUILDER_MODEL}} | mengerjakan satu ticket: art, karakter, scene, cue audio | hanya file di Allow, tanpa commit; satu builder pada satu waktu |
-| visual-reviewer | {{REVIEWER_MODEL}} | review read-only atas frame dan file terhadap ticket, `STYLE.md`, `PRD.md`, dan referensi yang disebut | tidak mengubah file project; frame grab disimpan di `.review/` |
+| frame-prep | {{EXPLORE_MODEL}} | menjalankan `verify.sh --with-scope`, mengekstrak frame review dan contact sheet ke `.review/`, mengukur hex/audio | tidak mengubah file project, tidak menilai kualitas visual |
+| visual-reviewer | {{REVIEWER_MODEL}} | review read-only atas frame di `.review/` dan file terhadap ticket, `STYLE.md`, `PRD.md`, dan referensi yang disebut | tidak mengubah file project; membaca `.review/` |
 | researcher | {{RESEARCHER_MODEL}} | membaca sumber luar dan menulis satu catatan bersumber | hanya menulis `docs/research/<topic>.md` dan clone di `.research/` |
 | Explore | {{EXPLORE_MODEL}} | mencari lokasi file dan baris | `--sandbox read-only`, tidak menilai |
 
@@ -34,11 +35,11 @@ Gate hanya boleh dilewati lewat keputusan project (D-xx) beserta alasannya, misa
 1. Ambil item berikutnya dari "Execution order" di `TODO.md`. Lewati item dengan `Blocked by` atau `Waiting decision` yang masih terbuka, atau yang berada di balik gate yang belum disetujui.
 2. Isi ticket dari `tickets/_TEMPLATE.md`: tujuan, persyaratan (`R-xx`), referensi (`REF-xx`) dan apa yang diambil dari masing-masing, glob Allow, perintah verify, frame yang harus dicek reviewer. Ukurannya satu shot, satu asset, atau satu sheet.
 3. Dispatch satu `asset-builder` lewat `codex exec --full-auto -m {{BUILDER_MODEL}}` dengan `.codex/agents/asset-builder.md` dan path ticket. Builder bekerja di folder project (tanpa worktree: render dan art berukuran besar), jadi hanya satu builder berjalan pada satu waktu; researcher, visual-reviewer, dan Explore boleh berjalan bersamaan.
-4. Saat selesai, output-nya adalah klaim. Jalankan sendiri `bash tools/scope.sh <ticket>` (hanya di git) dan `bash tools/verify.sh <ticket>`.
-5. Dispatch `visual-reviewer` lewat `codex exec --full-auto -m {{REVIEWER_MODEL}}` dengan `.codex/agents/visual-reviewer.md` dan path ticket. Reviewer mengambil frame yang disebut di ticket (menulis hanya ke `.review/`) dan melaporkan setiap butir cek sebagai `seen` atau `inferred`, beserta file frame-nya.
+4. Saat selesai, output-nya adalah klaim. Dispatch `frame-prep` lewat `codex exec --full-auto -m {{EXPLORE_MODEL}}` dengan `.codex/agents/frame-prep.md` dan path ticket: subagent ini menjalankan `bash tools/verify.sh --with-scope <ticket>`, mengekstrak frame review dan contact sheet ke `.review/`, serta mencatat pengukuran piksel/audio.
+5. Dispatch `visual-reviewer` lewat `codex exec --full-auto -m {{REVIEWER_MODEL}}` dengan `.codex/agents/visual-reviewer.md`, path ticket, dan path `.review/` dari `frame-prep`. Reviewer memeriksa frame yang sudah disiapkan dan melaporkan setiap butir cek sebagai `seen` atau `inferred`. Producer tidak membuka gambar frame mentah di ticket shot biasa; producer hanya membuka contact sheet atau frame saat berhenti di **approval** gate.
 6. Putaran perbaikan maksimal dua; setelah itu diagnosis (`systematic-debugging`) atau pecah ticket. Tidak ada percobaan ketiga yang buta.
 7. Selesai: perbarui ticket, `TODO.md`, Status dan Bukti persyaratan di `PRD.md`, dan "Dipakai di" di `REFERENCES.md`. Di repo git, commit file ticket dan dokumen. Push hanya dengan persetujuan pemilik, kecuali keputusan project mengizinkan.
-8. Lapor ke pemilik sekali per gate dan sekali per pasang ticket shot, dengan frame-nya.
+8. Lapor ke pemilik sekali per gate dan sekali per pasang ticket shot, maksimal 8 sampai 10 baris, selalu menulis `<ID> (<judul singkat>)` (bukan ID saja), dengan 3 butir: (1) **Done** (dengan path frame-nya), (2) **Next / Gate** (ditambah pengingat `/compact` di setiap batas gate), dan (3) **Needs your decision**.
 
 ## Gambar dari pemilik (C-01)
 Saat pemilik mengirim screenshot atau frame: tulis apa yang terlihat (`seen`), tafsiran Anda (`inferred`), dan permintaannya dalam satu kalimat. Kalau gambar bisa berarti dua perbaikan berbeda, tanyakan sebelum membangun. Temukan masalahnya dengan pengukuran atau frame grab di waktu yang tepat, bukan dengan perkiraan mata.

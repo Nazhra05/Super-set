@@ -9,7 +9,8 @@ The router skill is `.codex/skills/router/SKILL.md`. The flow is the same in the
 ## Roles
 | Role | Model tier (`codex exec -m`) | Task | Limits |
 |---|---|---|---|
-| router (main session) | {{ROUTER_MODEL}} | plan, brief, dispatch, verify, merge, write `TODO.md` | only writer of `TODO.md`, `HANDOFF.md`, `DECISIONS.md`, `tickets/`; in `PRD.md` only the Status and Evidence of a requirement |
+| router (main session) | {{ROUTER_MODEL}} | plan, brief, dispatch, verify, merge, write `TODO.md` | only writer of `TODO.md`, `HANDOFF.md`, `DECISIONS.md`, `tickets/`; in `PRD.md` only the Status and Evidence of a requirement; does not read raw source files |
+| scoper | {{EXPLORE_MODEL}} | locate `path:line` and return a ready ticket draft | `--sandbox read-only`, max 35-line report |
 | worker | {{WORKER_MODEL}} | implement one ticket in a worktree | only files in Allow, no commit |
 | tester | {{TESTER_MODEL}} | red-green tests, mutation checks | only test files |
 | reviewer | `gpt-5-codex` or `codex-mini-latest`, by risk tier (below) | read-only review of ticket + diff | `--sandbox read-only`, no writes, no test runs |
@@ -22,7 +23,7 @@ The router skill is `.codex/skills/router/SKILL.md`. The flow is the same in the
 - The router runs the "Execution order" in `TODO.md` until it is empty, without `Ready` per ticket. Inbox or `Proposed` items may be promoted to the next ticket when they need no owner decision and are not irreversible; the reason goes in one line in the queue.
 - Merge `--no-ff` into the working branch without approval after guard, verify, and reviewer are clean. A merge counts as successful when the suite after the merge is green, the worktree is removed, and test data is cleaned; only then is another ticket in the same repo merged or started.
 - Push automatically after a ticket when the repo has a remote. Small tickets may share a push with the next one; no unpushed working-branch commits at session end. Docs are committed at the end of each ticket.
-- Report to the owner: one summary per ticket pair, and one when the queue is empty.
+- Report to the owner: one concise summary (max 8 to 10 lines) per ticket pair and one when the queue is empty, always writing `<ID> (<short title>)` instead of a bare ID, with 3 bullets: (1) **Done**, (2) **Next** (plus `/compact` reminder after each ticket pair), and (3) **Needs your decision**.
 
 ### Reviewer risk tier (W-05)
 | Ticket type | Reviewer (`codex exec -m`) |
@@ -41,7 +42,11 @@ One round of fixes for reviewer findings may be verified by the router without a
 ## Tools (`tools/`)
 On Windows, if the shell is PowerShell, always invoke `.sh` scripts with `bash tools/<script>.sh ...`.
 - `workflow.conf`: repos (alias, path, working branch), files copied into worktrees, install command, guard patterns.
-- `wt.sh add|rm <repo-alias> <ID>`: worktree in `_wt/<ID>-<alias>`, branch `t/<ID>` from the working branch, copies `COPY_FILES` without reading them, runs `INSTALL_CMD`. `rm` refuses a worktree with uncommitted changes (`WT_DISCARD=1` to discard on purpose), then removes it and runs `branch -d` (refuses if unmerged).
+- `wt.sh add|rm|check|land <repo-alias> <ID> [args...]`:
+  - `add`: creates worktree in `_wt/<ID>-<alias>`, branch `t/<ID>` from the working branch, copies `COPY_FILES` without reading them, runs `INSTALL_CMD`.
+  - `check`: runs `guard.sh`, `verify.sh`, and `git diff --stat` in one command before any commit.
+  - `land "<commit-msg>"`: checks `guard.sh`, commits on `t/<ID>`, merges `--no-ff` into the working branch, removes the worktree and branch, and reruns `verify.sh` on the working branch in one command.
+  - `rm`: refuses a worktree with uncommitted changes (`WT_DISCARD=1` to discard on purpose), then removes it and runs `branch -d` (refuses if unmerged).
 - `guard.sh <wt> <base> <ticket>`: fails on a file outside Allow, a deleted test, an added skip/only/todo marker, fewer assertion lines, or any commit on the ticket branch above base (subagents must not commit). So the router runs guard **before** it commits.
 - `verify.sh <wt> <ticket>`: runs the ticket's `verify` block, prints the last 25 lines and the exit code of each line.
 

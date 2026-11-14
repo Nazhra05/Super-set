@@ -48,7 +48,7 @@ The flow is identical in the OpenAI Codex CLI (`codex`) and the Codex desktop/ID
 - Every ticket boundary is kept compact-ready (`TODO.md`, the ticket, and `HANDOFF.md` current; docs committed; no subagent running).
 
 ## Cost and model tiers
-- During work: the router runs in your main session (`gpt-5-codex` recommended); `worker`, `tester`, and `Explore` default to `codex-mini-latest`; `reviewer` uses `gpt-5-codex` for security/auth work and `codex-mini-latest` otherwise. Each `codex exec` subagent re-reads its ticket and files, so the router does small jobs itself. You can change every model tier at setup.
+- During work: the router runs in your main session (`gpt-5-codex` recommended); `scoper`, `worker`, `tester`, and `Explore` default to `codex-mini-latest`; `reviewer` uses `gpt-5-codex` for security/auth work and `codex-mini-latest` otherwise. Each `codex exec` subagent re-reads its ticket and files, so the router does small jobs itself and uses `scoper` to locate `path:line` ranges without reading raw source files into its own context. You can change every model tier at setup.
 
 ## Opinionated defaults (and how to change them)
 Setup explains these and asks which to change; afterwards, change them in the files named. To override a decision (W-xx), add a project decision (D-xx) in `DECISIONS.md` with the reason.
@@ -67,7 +67,7 @@ Setup explains these and asks which to change; afterwards, change them in the fi
 
 ## What lands in the project
 - Docs: `PRD.md`, `AGENTS.md`, `WORKFLOW.md`, `TODO.md`, `HANDOFF.md`, `DECISIONS.md`, `tickets/_TEMPLATE.md`, in English or Indonesian.
-- `.codex/agents/`: `worker.md`, `tester.md`, `reviewer.md`, `Explore.md`.
+- `.codex/agents/`: `scoper.md`, `worker.md`, `tester.md`, `reviewer.md`, `Explore.md`.
 - `.codex/skills/`: `router`, `verification-before-completion`, `systematic-debugging`, `test-driven-development`, `receiving-code-review`, `writing-plans`.
 - `tools/`: `workflow.conf`, `wt.sh` (worktrees), `guard.sh`, `verify.sh`.
 

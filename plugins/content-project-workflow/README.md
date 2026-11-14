@@ -76,7 +76,7 @@ The producer works through the gates and tickets in `TODO.md`, stops at every ap
 
 ## Cost
 - Always loaded: about 200 tokens per session for the two setup skills (`claude plugin details`).
-- During work: the producer, the asset-builder, and the visual-reviewer default to `opus`, because design and visual judgement were where cheaper settings failed; the researcher uses `sonnet` and Explore `haiku`. Images cost many tokens, so frames are checked as small contact sheets first. On a plan with tight limits, setup can set the asset-builder to `sonnet` for routine tickets.
+- During work: the producer, the asset-builder, and the visual-reviewer default to `opus`, because design and visual judgement were where cheaper settings failed; the researcher uses `sonnet`, and `frame-prep` and `Explore` use `haiku`. Images cost many tokens, so `frame-prep` extracts frames and contact sheets first and the producer only opens images at approval gates. On a plan with tight limits, setup can set the asset-builder to `sonnet` for routine tickets.
 
 ## Opinionated defaults (and how to change them)
 Setup explains these and asks which to change; afterwards, change them in the files named. To override a decision (C-xx), add a project decision (D-xx) in `DECISIONS.md` with the reason.
@@ -97,7 +97,7 @@ Setup explains these and asks which to change; afterwards, change them in the fi
 
 ## What lands in the project
 - Docs: `CLAUDE.md`, `WORKFLOW.md`, `TODO.md`, `HANDOFF.md`, `DECISIONS.md`, `PRD.md` (brief), `STYLE.md`, `REFERENCES.md`, `tickets/_TEMPLATE.md`, in English or Indonesian.
-- `.claude/agents/`: producer, asset-builder, visual-reviewer, researcher, Explore.
+- `.claude/agents/`: producer, frame-prep, asset-builder, visual-reviewer, researcher, Explore.
 - `.claude/skills/`: `content-fundamentals`, `motion-principles`, `design-basics`, `character-design`, `verification-before-completion`, `systematic-debugging`.
 - `.claude/settings.json`: Read deny for `.env` files, status line.
 - `tools/`: `scope.sh` (files changed outside a ticket's Allow list; needs git), `verify.sh` (runs a ticket's checks), `statusline.js`.
@@ -108,7 +108,7 @@ Setup explains these and asks which to change; afterwards, change them in the fi
 - Frame grabs usually need `ffmpeg` or the video tool's snapshot command.
 
 ## Status
-Version 0.1, early. Tested: `adopt` end to end on a sample project, and the `scope.sh` and `verify.sh` tools, on Windows (Git Bash). Not yet tested: `bootstrap`, the producer with its helper agents on a real project, macOS, Linux, and the desktop app. The rules come from problems seen in a real video project. Field reports are the most valuable help right now: see [Contributing](../../CONTRIBUTING.md).
+Version 0.2, early. Tested: `adopt` end to end on a sample project, and the `scope.sh` and `verify.sh` tools, on Windows (Git Bash). Not yet tested: `bootstrap`, the producer with its helper agents on a real project, macOS, Linux, and the desktop app. The rules come from problems seen in a real video project. Field reports are the most valuable help right now: see [Contributing](../../CONTRIBUTING.md).
 
 ## Layout of this plugin
 ```

@@ -10,7 +10,7 @@ List every file the setup will create or change in the project, marked `new` or 
 | `AGENTS.md`, `WORKFLOW.md`, `TODO.md`, `HANDOFF.md`, `DECISIONS.md`, `PRD.md`, `STYLE.md`, `REFERENCES.md` | `TEMPLATES/<same name>`, or `TEMPLATES/id/<same name>` when the document language is Indonesian. `PRD.md` is not installed when `adopt` keeps an existing brief. |
 | `tickets/_TEMPLATE.md` | `TEMPLATES/tickets/_TEMPLATE.md` or `TEMPLATES/id/tickets/_TEMPLATE.md` |
 | `tools/scope.sh`, `tools/verify.sh`, `tools/env-guard.js` | `TEMPLATES/tools/` |
-| `.agents/agents/{asset-builder,visual-reviewer,researcher,Explore}.md` | `TEMPLATES/.agents/agents/` |
+| `.agents/agents/{asset-builder,frame-prep,visual-reviewer,researcher,Explore}.md` | `TEMPLATES/.agents/agents/` |
 | `.agents/skills/producer/SKILL.md` | `TEMPLATES/.agents/skills/producer/SKILL.md` |
 | `.agents/skills/` (6 skills, `NOTICE`, `LICENSE-superpowers`) | `TEMPLATES/.agents/skills/`, copied unchanged |
 | `.agents/hooks.json` | `TEMPLATES/.agents/hooks.json` |

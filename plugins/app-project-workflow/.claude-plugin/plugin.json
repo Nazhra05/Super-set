@@ -1,7 +1,7 @@
 {
   "name": "app-project-workflow",
   "description": "Make Claude Code a careful teammate on software projects. Sets up a PRD, a work board, session notes, and rules that Claude asks before guessing and proves work with real test runs. For bigger jobs a router agent plans tickets that worker, tester, and reviewer agents do in separate git worktrees, checked by a scope and test guard. Setup: /app-project-workflow:adopt (existing project) or :bootstrap (new folder).",
-  "version": "0.3.3",
+  "version": "0.4.0",
   "author": {
     "name": "Nazhra05",
     "url": "https://github.com/Nazhra05"

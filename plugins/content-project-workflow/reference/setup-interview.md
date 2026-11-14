@@ -43,6 +43,6 @@ Show this table, explain it in one or two sentences, then ask "Keep the defaults
 | asset-builder | `opus`, effort medium | Draws characters and builds scenes in code; low effort here produced flat, unconvincing art in real use. Lower to `sonnet` for mechanical tasks (renaming layers, timing data). |
 | visual-reviewer | `opus`, effort high | Reads frames against the storyboard, style, and references; must separate what it sees from what it infers. |
 | researcher | `sonnet`, effort medium | Clones and reads sources, writes cited notes; follows a fixed procedure. |
-| Explore | `haiku`, effort low | Only locates files and lines. |
+| Explore, frame-prep | `haiku`, effort low | Only locates files/lines (`Explore`) or runs `verify --with-scope` and extracts frames into `.review/` (`frame-prep`). |
 
 On a plan with tight usage limits, `sonnet` for the asset-builder on routine tickets is the cheaper option; say so as a trade-off. When a model changes, edit the `model:` line in that agent file and the Roles table in `WORKFLOW.md`.

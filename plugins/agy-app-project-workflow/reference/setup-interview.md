@@ -44,7 +44,7 @@ Show this table, explain it in one or two sentences, then ask "Keep the defaults
 | worker | `flash` | Works inside a strict Allow list with a detailed brief. Raise to `pro` for a ticket that failed twice. |
 | tester | `flash` | Red-green and mutation checks need care but follow a fixed procedure. |
 | reviewer | `pro` for auth, session, authorization, security; `flash` for tests and ordinary logic; none for text-only | Matches W-05. The router passes `Model: "pro"` or `Model: "flash"` when calling `invoke_subagent`. |
-| Explore | `flash_lite` | Only locates `path:line`; never judges. |
+| Explore, scoper | `flash_lite` | Only locates `path:line` and prepares read-only ticket drafts (`scoper`); never judges. |
 
 Adjust the recommendation to what the owner says about their quota: on a plan with tight quota limits, `flash` for the router with `pro` kept for security reviews is the cheaper option; say so as a trade-off, not as the default. When a model changes, update the Roles table in `WORKFLOW.md` and the `router` skill instructions.
 

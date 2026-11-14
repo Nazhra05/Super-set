@@ -52,7 +52,7 @@ The flow is identical across Antigravity 2.0 desktop app, Antigravity IDE, and A
 - The producer works through the gates and tickets in `TODO.md`, stops at every approval gate, and sends heavy work (building assets, reviewing frames, research) to subagents via `invoke_subagent` so its own turns stay short.
 
 ## Cost and model tiers
-- During work: the `producer`, `asset-builder`, and `visual-reviewer` default to `pro`, because design and visual judgement are where lighter settings fail; `researcher` uses `flash` and `Explore` uses `flash_lite`. Images cost many tokens, so frames are checked as small contact sheets first. On a plan with tight quota limits, setup can set the `asset-builder` to `flash` for routine tickets.
+- During work: the `producer`, `asset-builder`, and `visual-reviewer` default to `pro`, because design and visual judgement are where lighter settings fail; `researcher` uses `flash`, and `frame-prep` and `Explore` use `flash_lite`. Images cost many tokens, so `frame-prep` extracts frames and contact sheets first and the producer only opens images at approval gates. On a plan with tight quota limits, setup can set the `asset-builder` to `flash` for routine tickets.
 
 ## Opinionated defaults (and how to change them)
 Setup explains these and asks which to change; afterwards, change them in the files named. To override a decision (C-xx), add a project decision (D-xx) in `DECISIONS.md` with the reason.
@@ -73,7 +73,7 @@ Setup explains these and asks which to change; afterwards, change them in the fi
 
 ## What lands in the project
 - Docs: `AGENTS.md`, `WORKFLOW.md`, `TODO.md`, `HANDOFF.md`, `DECISIONS.md`, `PRD.md` (brief), `STYLE.md`, `REFERENCES.md`, `tickets/_TEMPLATE.md`, in English or Indonesian.
-- `.agents/agents/`: `asset-builder`, `visual-reviewer`, `researcher`, `Explore`.
+- `.agents/agents/`: `frame-prep`, `asset-builder`, `visual-reviewer`, `researcher`, `Explore`.
 - `.agents/skills/`: `producer`, `content-fundamentals`, `motion-principles`, `design-basics`, `character-design`, `verification-before-completion`, `systematic-debugging`.
 - `.agents/hooks.json` + `tools/env-guard.js`: `PreToolUse` hook that blocks reading, editing, writing, or running shell commands on `.env` files.
 - `tools/`: `scope.sh` (files changed outside a ticket's Allow list; needs git), `verify.sh` (runs a ticket's checks), `env-guard.js`.

@@ -77,7 +77,7 @@ The flow is the same on every surface; only starting the router differs.
 
 ## Cost
 - Always loaded: about 170 tokens per session for the two setup skills (`claude plugin details`).
-- During work: the router uses the strongest model you pick; workers and testers use `sonnet`; reviewers use `opus` for security work and `sonnet` otherwise; Explore uses `haiku`. Each spawned agent re-reads its ticket and files (roughly 20k to 25k tokens), so the router does small jobs itself. You can change every model at setup.
+- During work: the router uses the strongest model you pick; workers and testers use `sonnet`; reviewers use `opus` for security work and `sonnet` otherwise; `scoper` and `Explore` use `haiku`. Each spawned agent re-reads its ticket and files (roughly 20k to 25k tokens), so the router does small jobs itself and uses `scoper` to locate `path:line` ranges without reading raw source files into its own context. You can change every model at setup.
 
 ## Opinionated defaults (and how to change them)
 Setup explains these and asks which to change; afterwards, change them in the files named. To override a decision (W-xx), add a project decision (D-xx) in `DECISIONS.md` with the reason.
@@ -96,7 +96,7 @@ Setup explains these and asks which to change; afterwards, change them in the fi
 
 ## What lands in the project
 - Docs: `PRD.md`, `CLAUDE.md`, `AGENTS.md`, `WORKFLOW.md`, `TODO.md`, `HANDOFF.md`, `DECISIONS.md`, `tickets/_TEMPLATE.md`, in English or Indonesian.
-- `.claude/agents/`: router, worker, tester, reviewer, Explore.
+- `.claude/agents/`: router, scoper, worker, tester, reviewer, Explore.
 - `.claude/skills/`: `verification-before-completion`, `systematic-debugging`, `test-driven-development`, `receiving-code-review`, `writing-plans`.
 - `.claude/settings.json`: Read deny for `.env` files, status line.
 - `tools/`: `workflow.conf`, `wt.sh` (worktrees), `guard.sh`, `verify.sh`, `statusline.js`.
@@ -107,7 +107,7 @@ Setup explains these and asks which to change; afterwards, change them in the fi
 - One repo or several: `tools/workflow.conf` lists each repo with its alias, path, and working branch.
 
 ## Status
-Version 0.3. Setup (`adopt`, `bootstrap`) tested end to end on sample projects on Windows (Git Bash). The rules and the router flow come from daily use in a real project before they became a plugin. Not yet tested: macOS, Linux, router mode inside the desktop app, a full interactive setup with the real question cards. Reports welcome: see [Contributing](../../CONTRIBUTING.md).
+Version 0.4. Setup (`adopt`, `bootstrap`) tested end to end on sample projects on Windows (Git Bash). The rules and the router flow come from daily use in a real project before they became a plugin. Not yet tested: macOS, Linux, router mode inside the desktop app, a full interactive setup with the real question cards. Reports welcome: see [Contributing](../../CONTRIBUTING.md).
 
 ## Layout of this plugin
 ```

@@ -19,7 +19,8 @@ Profil router adalah `.claude/agents/router.md`. Alurnya sama di setiap surface;
 ## Peran
 | Peran | Model / effort | Tugas | Batas |
 |---|---|---|---|
-| router (sesi utama) | {{ROUTER_MODEL}} / high | merencanakan, menulis brief, dispatch, verify, merge, menulis `TODO.md` | satu-satunya penulis `TODO.md`, `HANDOFF.md`, `DECISIONS.md`, `tickets/`; di `PRD.md` hanya Status dan Bukti sebuah persyaratan |
+| router (sesi utama) | {{ROUTER_MODEL}} / high | merencanakan, menulis brief, dispatch, verify, merge, menulis `TODO.md` | satu-satunya penulis `TODO.md`, `HANDOFF.md`, `DECISIONS.md`, `tickets/`; di `PRD.md` hanya Status dan Bukti sebuah persyaratan; tidak membaca file kode mentah |
+| scoper | {{EXPLORE_MODEL}} / low | mencari `path:line` dan mengembalikan draf ticket siap pakai | read-only, laporan maksimal 35 baris |
 | worker | {{WORKER_MODEL}} / low | mengerjakan satu ticket di worktree | hanya file di Allow, tanpa commit |
 | tester | {{TESTER_MODEL}} / medium | test red-green, mutation check | hanya file test |
 | reviewer | opus atau sonnet / high, sesuai tingkat risiko (di bawah) | review read-only atas ticket dan diff | tidak menulis, tidak menjalankan test |
@@ -32,7 +33,7 @@ Profil router adalah `.claude/agents/router.md`. Alurnya sama di setiap surface;
 - Router menjalankan "Execution order" di `TODO.md` sampai kosong, tanpa `Ready` per ticket. Item Inbox atau `Proposed` boleh dinaikkan menjadi ticket berikutnya kalau tidak butuh keputusan pemilik dan bisa dibatalkan; alasannya ditulis satu baris di antrian.
 - Merge `--no-ff` ke working branch tanpa persetujuan setelah guard, verify, dan reviewer bersih. Merge dianggap berhasil kalau suite setelah merge hijau, worktree sudah dihapus, dan data test sudah dibersihkan; baru setelah itu ticket lain di repo yang sama boleh di-merge atau dimulai.
 - Push otomatis setelah satu ticket kalau repo punya remote. Ticket kecil boleh berbagi push dengan ticket berikutnya; tidak boleh ada commit working branch yang belum di-push di akhir sesi. Dokumen di-commit di akhir setiap ticket.
-- Laporan ke pemilik: satu ringkasan per pasang ticket, dan satu ketika antrian kosong.
+- Laporan ke pemilik: satu ringkasan singkat (maksimal 8 sampai 10 baris) per pasang ticket dan satu ketika antrian kosong, selalu menulis `<ID> (<judul singkat>)` (bukan ID saja), dengan 3 butir: (1) **Done**, (2) **Next** (ditambah pengingat `/compact` setiap selesai sepasang ticket), dan (3) **Needs your decision**.
 
 ### Tingkat risiko reviewer (W-05)
 | Jenis ticket | Reviewer |
@@ -50,7 +51,11 @@ Satu putaran perbaikan atas temuan reviewer boleh diverifikasi router tanpa revi
 
 ## Tools (`tools/`)
 - `workflow.conf`: repo (alias, path, working branch), file yang disalin ke worktree, perintah install, pola guard.
-- `wt.sh add|rm <repo-alias> <ID>`: worktree di `_wt/<ID>-<alias>`, branch `t/<ID>` dari working branch, menyalin `COPY_FILES` tanpa membacanya, menjalankan `INSTALL_CMD`. `rm` menolak worktree dengan perubahan yang belum di-commit (`WT_DISCARD=1` untuk sengaja membuangnya), lalu menghapusnya dan menjalankan `branch -d` (menolak kalau belum di-merge).
+- `wt.sh add|rm|check|land <repo-alias> <ID> [argumen...]`:
+  - `add`: membuat worktree di `_wt/<ID>-<alias>`, branch `t/<ID>` dari working branch, menyalin `COPY_FILES` tanpa membacanya, menjalankan `INSTALL_CMD`.
+  - `check`: menjalankan `guard.sh`, `verify.sh`, dan `git diff --stat` dalam satu perintah sebelum commit apa pun.
+  - `land "<pesan-commit>"`: mengecek `guard.sh`, commit di branch `t/<ID>`, merge `--no-ff` ke working branch, menghapus worktree dan branch ticket, serta menjalankan ulang `verify.sh` di working branch dalam satu perintah.
+  - `rm`: menolak worktree dengan perubahan yang belum di-commit (`WT_DISCARD=1` untuk sengaja membuangnya), lalu menghapusnya dan menjalankan `branch -d` (menolak kalau belum di-merge).
 - `guard.sh <wt> <base> <ticket>`: gagal kalau ada file di luar Allow, test yang dihapus, penanda skip/only/todo yang ditambahkan, baris assertion yang berkurang, atau commit apa pun di branch ticket di atas base (subagent tidak boleh commit). Karena itu router menjalankan guard **sebelum** commit.
 - `verify.sh <wt> <ticket>`: menjalankan blok `verify` ticket, mencetak 25 baris terakhir dan exit code setiap baris.
 - `statusline.js`: status line yang menyimpan JSON status Claude Code ke `.claude/usage.json` untuk pengecekan pemakaian di bawah. Hanya berjalan di terminal.

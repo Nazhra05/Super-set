@@ -44,7 +44,7 @@ Show this table, explain it in one or two sentences, then ask "Keep the defaults
 | worker | `gpt-5-codex` | Works inside a strict Allow list with a detailed brief via `codex exec --full-auto`. |
 | tester | `gpt-5-codex` | Red-green and mutation checks need care but follow a fixed procedure. |
 | reviewer | `gpt-5-codex` (high reasoning) for auth, session, authorization, security; `codex-mini-latest` (or `gpt-5-mini`) for tests and ordinary logic; none for text-only | Matches W-05. The router passes `-m <model>` when running `codex exec --sandbox read-only`. |
-| Explore | `codex-mini-latest` | Only locates `path:line`; never judges. |
+| Explore, scoper | `codex-mini-latest` | Only locates `path:line` and prepares read-only ticket drafts (`scoper`); never judges. |
 
 Adjust the recommendation to what the owner says about their plan: on a plan with tight usage limits, `codex-mini-latest` (or `gpt-5-mini`) for routine worker/tester tickets with `gpt-5-codex` kept for the router and security reviews is the cheaper option; say so as a trade-off, not as the default. When a model changes, update the Roles table in `WORKFLOW.md` and the `router` skill instructions.
 

@@ -19,7 +19,7 @@ Sumber kebenaran nama (tabel, kolom, route, type): {{SOURCE_OF_TRUTH}}.
 4. **Jangan mengarang** nama tabel, kolom, fungsi, file, atau angka. Verifikasi di sumber kebenaran di atas dan di kode.
 5. **Verifikasi lewat tool, bukan laporan.** Klaim "selesai" atau "lulus" hanya dengan output perintah yang baru dijalankan (skill `verification-before-completion`). Laporan agent dan dokumen lama bukan bukti. Jangan melemahkan atau melewati test supaya lulus. **Test yang sudah ada tidak dianggap asli (W-01).** Untuk setiap perubahan: (a) buktikan red-green: test baru harus gagal pada kode sebelum perbaikan; (b) untuk logika otorisasi atau keamanan, jalankan mutation check (rusak pengecekannya sebentar, test harus gagal), lalu kembalikan dan bandingkan dengan backup; (c) bersihkan sisa test; (d) jalankan seluruh suite di akhir. Perubahan teks, dokumen, atau config tanpa logika tidak perlu test baru, cukup suite yang relevan.
 6. **Jangan commit atau push kecuali diminta**, kecuali router dalam alur ticket (W-06). Conventional Commits, subject maksimal 72 karakter. Cek `git status` dulu; jangan menyentuh perubahan lokal di luar task.
-7. **Ringkasan untuk saya dalam bahasa sederhana**: apa yang berubah, risikonya, keputusan apa yang dibutuhkan dari saya. Kalau perubahan UI belum dicek di browser, katakan.
+7. **Ringkasan singkat untuk saya dalam bahasa sederhana (maksimal 8 sampai 10 baris)**: selalu tulis `<ID> (<judul singkat>)`, jangan pernah menulis ID saja (`T-xx`, `FR-xx`, `D-xx`). Sebutkan apa yang berubah, risikonya, dan keputusan apa yang dibutuhkan dari saya (tanpa dump log perintah atau daftar panjang path file). Kalau perubahan UI belum dicek di browser, katakan.
 8. Bahasa: balas saya dalam {{OWNER_LANGUAGE}}, mengikuti "Istilah" di bawah. Dokumen dalam Bahasa Indonesia. Kode, identifier, komentar, dan commit dalam bahasa Inggris. Tanpa em dash di dokumen.
 
 ## Aturan kode dan test (berlaku untuk semua agent)
@@ -28,7 +28,7 @@ Sumber kebenaran nama (tabel, kolom, route, type): {{SOURCE_OF_TRUTH}}.
 - **Dokumen:** baca hanya dokumen yang relevan dengan task (petanya di bawah). Tidak wajib membaca semuanya atau melaporkan skill di setiap balasan; sebut skill atau dokumen hanya kalau memengaruhi hasil.
 
 ## Istilah (Terms)
-Berlaku untuk balasan, laporan, dan dokumen. Istilah ini tetap dalam bahasa Inggris, satu bentuk saja: ticket, task, worktree, branch, commit, merge, push, router, worker, tester, reviewer, guard, verify, Inbox, Allow, done criteria, blocked by, nilai status (`Ready`, `In progress`, `Planned`, `Met`, dan seterusnya), PRD, ID (`FR-01`, `W-01`, `D-01`), dan nama bagian yang dirujuk agent (misalnya "Execution order"). Istilah project yang disepakati dengan pemilik:
+Berlaku untuk balasan, laporan, dan dokumen. Gunakan Bahasa Indonesia yang natural untuk penjelasan, tetapi **seluruh istilah workflow dan istilah teknis software engineering wajib tetap dalam bahasa Inggris** (jangan diterjemahkan secara kaku): ticket, task, worktree, branch, commit, merge, push, router, scoper, worker, tester, reviewer, guard, verify, Inbox, Allow, done criteria, blocked by, nilai status (`Ready`, `In progress`, `Planned`, `Met`, dan seterusnya), PRD, ID (`FR-01`, `W-01`, `D-01`), nama bagian (misalnya "Execution order"), serta istilah teknis pemrograman seperti endpoint, route, middleware, payload, request, response, query, schema, migration, index, state, props, component, hook, context, render, build, bundle, lint, type-check, runtime, auth, session, token, mock, assertion, regression, dan refactor. Istilah project yang disepakati dengan pemilik:
 
 | Pakai | Jangan campur dengan |
 |---|---|
@@ -43,7 +43,7 @@ Tambahkan entri hanya setelah terbukti oleh output perintah, dengan tanggal.
 
 ## Skill dan prompt peran
 - Di `.codex/skills/`: `router`, `verification-before-completion`, `systematic-debugging`, `test-driven-development`, `receiving-code-review`, `writing-plans`. Alasan: `DECISIONS.md` W-08; lisensi: `.codex/skills/NOTICE`.
-- Prompt peran di `.codex/agents/`: `worker.md`, `tester.md`, `reviewer.md`, `Explore.md` (dijalankan lewat `codex exec`).
+- Prompt peran di `.codex/agents/`: `scoper.md`, `worker.md`, `tester.md`, `reviewer.md`, `Explore.md` (dijalankan lewat `codex exec`).
 - TDD hanya untuk logika bisnis (lokasinya di atas).
 - Jangan menambah skill atau hook yang memaksa ritual sebelum setiap balasan, atau skill worktree atau subagent terpisah; alur ticket sudah mencakupnya (W-04, W-08).
 - **Alur ticket (W-04):** membagi kerja ke worktree dan subagent hanya lewat `WORKFLOW.md`, dalam sesi router (`$router` atau skill `router`). Di luar alur itu, subagent dijalankan hanya kalau saya minta. Aturan 1 sampai 8 berlaku untuk setiap agent.

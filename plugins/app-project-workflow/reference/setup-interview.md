@@ -44,6 +44,6 @@ Show this table, explain it in one or two sentences, then ask "Keep the defaults
 | worker | `sonnet`, effort low | Works inside a strict Allow list with a detailed brief. Raise to `opus` for a ticket that failed twice. |
 | tester | `sonnet`, effort medium | Red-green and mutation checks need care but follow a fixed procedure. |
 | reviewer | `opus` for auth, session, authorization, security; `sonnet` for tests and ordinary logic; none for text-only | Matches W-05. The router passes `model: sonnet` for the lower tier. |
-| Explore | `haiku`, effort low | Only locates `path:line`; never judges. |
+| Explore, scoper | `haiku`, effort low | Only locates `path:line` and prepares read-only ticket drafts (`scoper`); never judges. |
 
 Adjust the recommendation to what the owner says about their plan: on a plan with tight usage limits, a `sonnet` router with `opus` kept for security reviews is the cheaper option; say so as a trade-off, not as the default. When a model changes, edit the `model:` line in that agent file and the Roles table in `WORKFLOW.md`.

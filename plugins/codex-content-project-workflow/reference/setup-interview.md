@@ -43,7 +43,7 @@ Show this table, explain it in one or two sentences, then ask "Keep the defaults
 | asset-builder | `gpt-5-codex` | Draws characters and builds scenes in code; lower capability here produced flat, unconvincing art in real use. Lower to `codex-mini-latest` for mechanical tasks (renaming layers, timing data). |
 | visual-reviewer | `gpt-5-codex` | Reads frames against the storyboard, style, and references; must separate what it sees from what it infers. |
 | researcher | `gpt-5-codex` | Clones and reads sources, writes cited notes; follows a fixed procedure. |
-| Explore | `codex-mini-latest` | Only locates files and lines. |
+| Explore, frame-prep | `codex-mini-latest` | Only locates files/lines (`Explore`) or runs `verify --with-scope` and extracts frames into `.review/` (`frame-prep`). |
 
 On a plan with tight usage limits, `codex-mini-latest` (or `gpt-5-mini`) for the asset-builder on routine tickets is the cheaper option; say so as a trade-off. When a model changes, update the Roles table in `WORKFLOW.md` and the `producer` skill instructions.
 

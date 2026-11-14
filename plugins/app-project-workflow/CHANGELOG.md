@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.4.0 (2026-11-14)
+- Token efficiency for the router: added lightweight `scoper` subagent (`haiku` default) so the router prepares ticket drafts without reading raw source files into its own context; added composite `tools/wt.sh check` (`guard.sh` + `verify.sh` + `git diff --stat`) and `tools/wt.sh land` (`guard.sh` + commit + `merge --no-ff` + `wt.sh rm` + `verify.sh` on the working branch); earlier `/compact` cadence after every completed ticket pair.
+- Owner replies and Terms: concise 8-to-10-line summary format (Done, Next, Needs your decision) that always writes `<ID> (<short title>)` instead of bare IDs; expanded `## Terms` in `CLAUDE.md` so standard software engineering terms stay in English when replying in another language.
+
 ## 0.3.3 (2026-11-11)
 - README: what it looks like (example output from a test setup), when not to use it, cost, and status. No change in behaviour.
 

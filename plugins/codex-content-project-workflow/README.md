@@ -52,7 +52,7 @@ The flow is identical in the OpenAI Codex CLI (`codex`) and the Codex desktop/ID
 - The producer works through the gates and tickets in `TODO.md`, stops at every approval gate, and sends heavy work (building assets, reviewing frames, research) to isolated `codex exec` runs so its own turns stay short.
 
 ## Cost and model tiers
-- During work: the `producer`, `asset-builder`, and `visual-reviewer` default to `gpt-5-codex`, because design and visual judgement are where lighter settings fail; `researcher` and `Explore` use `codex-mini-latest`. Images cost many tokens, so frames are checked as small contact sheets first. On a plan with tight quota limits, setup can set the `asset-builder` to `codex-mini-latest` for routine tickets.
+- During work: the `producer`, `asset-builder`, and `visual-reviewer` default to `gpt-5-codex`, because design and visual judgement are where lighter settings fail; `frame-prep`, `researcher`, and `Explore` use `codex-mini-latest`. Images cost many tokens, so `frame-prep` extracts frames and contact sheets first and the producer only opens images at approval gates. On a plan with tight quota limits, setup can set the `asset-builder` to `codex-mini-latest` for routine tickets.
 
 ## Opinionated defaults (and how to change them)
 Setup explains these and asks which to change; afterwards, change them in the files named. To override a decision (C-xx), add a project decision (D-xx) in `DECISIONS.md` with the reason.
@@ -73,7 +73,7 @@ Setup explains these and asks which to change; afterwards, change them in the fi
 
 ## What lands in the project
 - Docs: `AGENTS.md`, `WORKFLOW.md`, `TODO.md`, `HANDOFF.md`, `DECISIONS.md`, `PRD.md` (brief), `STYLE.md`, `REFERENCES.md`, `tickets/_TEMPLATE.md`, in English or Indonesian.
-- `.codex/agents/`: `asset-builder.md`, `visual-reviewer.md`, `researcher.md`, `Explore.md`.
+- `.codex/agents/`: `frame-prep.md`, `asset-builder.md`, `visual-reviewer.md`, `researcher.md`, `Explore.md`.
 - `.codex/skills/`: `producer`, `content-fundamentals`, `motion-principles`, `design-basics`, `character-design`, `verification-before-completion`, `systematic-debugging`.
 - `tools/`: `scope.sh` (files changed outside a ticket's Allow list; needs git), `verify.sh` (runs a ticket's checks).
 

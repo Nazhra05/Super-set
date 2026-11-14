@@ -11,7 +11,7 @@ List every file the setup will create or change in the project, marked `new` or 
 | `PRD.md` | `TEMPLATES/PRD.md` or `TEMPLATES/id/PRD.md`; not installed when `adopt` keeps an existing PRD (`reference/prd.md`) |
 | `tickets/_TEMPLATE.md` | `TEMPLATES/tickets/_TEMPLATE.md` or `TEMPLATES/id/tickets/_TEMPLATE.md` |
 | `tools/wt.sh`, `tools/guard.sh`, `tools/verify.sh`, `tools/workflow.conf` | `TEMPLATES/tools/` |
-| `.codex/agents/{worker,tester,reviewer,Explore}.md` | `TEMPLATES/.codex/agents/` |
+| `.codex/agents/{scoper,worker,tester,reviewer,Explore}.md` | `TEMPLATES/.codex/agents/` |
 | `.codex/skills/router/SKILL.md` | `TEMPLATES/.codex/skills/router/SKILL.md` |
 | `.codex/skills/` (5 discipline skills, `NOTICE`, `LICENSE-superpowers`) | `TEMPLATES/.codex/skills/`, copied unchanged |
 | `.gitattributes` | `TEMPLATES/.gitattributes` |

@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.0 (2026-11-14)
+- Token efficiency for the producer and visual-reviewer: added lightweight `frame-prep` subagent (`haiku` default) and `tools/verify.sh --with-scope` to run scope/verify checks, extract review frames and downscaled contact sheets into `.review/`, and measure pixel hex/audio before `visual-reviewer` runs; the producer opens frames only at approval gates and asks for `/compact` at every gate boundary.
+- Owner replies and Terms: concise 8-to-10-line summary format (Done, Next / Gate, Needs your decision) that always writes `<ID> (<short title>)` instead of bare IDs; expanded `## Terms` in `CLAUDE.md` so standard motion graphics, video, graphic design, and software terms stay in English when replying in another language.
+
 ## 0.1.2 (2026-11-11)
 - README: what it looks like (example output from a test setup), when not to use it, cost, and status. No change in behaviour.
 

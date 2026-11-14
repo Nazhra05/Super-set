@@ -48,7 +48,7 @@ The flow is identical across Antigravity 2.0 desktop app, Antigravity IDE, and A
 - Every ticket boundary is kept compact-ready (`TODO.md`, the ticket, and `HANDOFF.md` current; docs committed; no subagent running).
 
 ## Cost and model tiers
-- During work: the router runs in your main session (`pro` recommended); `worker` and `tester` subagents default to `flash`; `reviewer` uses `pro` for security/auth work and `flash` otherwise; `Explore` uses `flash_lite`. Each spawned subagent re-reads its ticket and files, so the router does small jobs itself. You can change every model tier at setup.
+- During work: the router runs in your main session (`pro` recommended); `worker` and `tester` subagents default to `flash`; `reviewer` uses `pro` for security/auth work and `flash` otherwise; `scoper` and `Explore` use `flash_lite`. Each spawned subagent re-reads its ticket and files, so the router does small jobs itself and uses `scoper` to locate `path:line` ranges without reading raw source files into its own context. You can change every model tier at setup.
 
 ## Opinionated defaults (and how to change them)
 Setup explains these and asks which to change; afterwards, change them in the files named. To override a decision (W-xx), add a project decision (D-xx) in `DECISIONS.md` with the reason.
@@ -67,7 +67,7 @@ Setup explains these and asks which to change; afterwards, change them in the fi
 
 ## What lands in the project
 - Docs: `PRD.md`, `AGENTS.md`, `WORKFLOW.md`, `TODO.md`, `HANDOFF.md`, `DECISIONS.md`, `tickets/_TEMPLATE.md`, in English or Indonesian.
-- `.agents/agents/`: `worker`, `tester`, `reviewer`, `Explore`.
+- `.agents/agents/`: `scoper`, `worker`, `tester`, `reviewer`, `Explore`.
 - `.agents/skills/`: `router`, `verification-before-completion`, `systematic-debugging`, `test-driven-development`, `receiving-code-review`, `writing-plans`.
 - `.agents/hooks.json` + `tools/env-guard.js`: `PreToolUse` hook that blocks reading, editing, writing, or running shell commands on `.env` files.
 - `tools/`: `workflow.conf`, `wt.sh` (worktrees), `guard.sh`, `verify.sh`, `env-guard.js`.
