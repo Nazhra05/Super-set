@@ -116,4 +116,4 @@ Help is welcome, and you do not need to write code to give it. The most useful c
 Questions go to [Discussions, Q&A](https://github.com/Nazhra05/Super-set/discussions/categories/q-a), early ideas to [Discussions, Ideas](https://github.com/Nazhra05/Super-set/discussions/categories/ideas), and bugs and field reports to [Issues](https://github.com/Nazhra05/Super-set/issues/new/choose). Read [CONTRIBUTING.md](CONTRIBUTING.md) before opening a pull request.
 
 ## License
-MIT, see `LICENSE`. Each plugin carries its own copy and any third-party notices.
+MIT, see `LICENSE`. Each plugin carries its own copy and any third-party notices. The bundled discipline skills (`verification-before-completion`, `systematic-debugging`, `test-driven-development`, `receiving-code-review`, `writing-plans`) are adapted from [obra/superpowers](https://github.com/obra/superpowers) by Jesse Vincent (MIT); see each plugin's `NOTICE` and `LICENSE-superpowers`.
