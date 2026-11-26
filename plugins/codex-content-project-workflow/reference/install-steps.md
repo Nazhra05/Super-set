@@ -9,10 +9,12 @@ List every file the setup will create or change in the project, marked `new` or 
 |---|---|
 | `AGENTS.md`, `WORKFLOW.md`, `TODO.md`, `HANDOFF.md`, `DECISIONS.md`, `PRD.md`, `STYLE.md`, `REFERENCES.md` | `TEMPLATES/<same name>`, or `TEMPLATES/id/<same name>` when the document language is Indonesian. `PRD.md` is not installed when `adopt` keeps an existing brief. |
 | `tickets/_TEMPLATE.md` | `TEMPLATES/tickets/_TEMPLATE.md` or `TEMPLATES/id/tickets/_TEMPLATE.md` |
-| `tools/scope.sh`, `tools/verify.sh` | `TEMPLATES/tools/` |
+| `tools/scope.sh`, `tools/verify.sh`, `tools/tools-check.sh` | `TEMPLATES/tools/` |
+| `tools/audio/` (`timing.py`, `master_audio.py`, `delivery_check.py`, `requirements.txt`) | `TEMPLATES/tools/audio/`; with the preset `vox`, or when the owner has a recorded voice-over and wants word timing, captions, mastering, or the delivery check |
 | `.codex/agents/{asset-builder,frame-prep,visual-reviewer,researcher,Explore}.md` | `TEMPLATES/.codex/agents/` |
 | `.codex/skills/producer/SKILL.md` | `TEMPLATES/.codex/skills/producer/SKILL.md` |
-| `.codex/skills/` (6 skills, `NOTICE`, `LICENSE-superpowers`) | `TEMPLATES/.codex/skills/`, copied unchanged |
+| `.codex/skills/` (6 skills, `NOTICE`, `LICENSE-superpowers`) | `TEMPLATES/.codex/skills/` without `vox-editorial/` and `producer/` (installed separately), copied unchanged |
+| `.codex/skills/vox-editorial/` (`SKILL.md`, `vox-kit.js`) | `TEMPLATES/.codex/skills/vox-editorial/`, only with the preset `vox` |
 | `.gitattributes` | `TEMPLATES/.gitattributes` |
 | `.gitignore` | lines below |
 | `docs/research/`, `{{SESSION_REPORT_DIR}}` | new folders |
@@ -37,6 +39,7 @@ If a file with the same path already exists, never replace it. Merge instead:
 .research/
 .env*
 ```
+With the audio kit also `.venv/`.
 Plus the generated folders the owner chose to ignore (for example renders, caches). Never ignore originals without asking. For `.env*`, check first that no tracked file matches (`git ls-files | grep -E '(^|/)\.env'`); if one does, report it and ask.
 
 ## 4. Smoke test (proves the tools work here; reversible)
@@ -48,7 +51,10 @@ Plus the generated folders the owner chose to ignore (for example renders, cache
 
 Quote the real output of each step in the report. If a step fails, use `systematic-debugging`; do not edit the tools to make it pass without telling the owner why.
 
-## 5. Report and stop
+## 5. Tools
+Follow `tools.md` (run `bash tools/tools-check.sh`, ask once, install what the owner chose, re-check, record). It runs before `.workflow-setup/` is deleted.
+
+## 6. Report and stop
 Delete `.workflow-setup/` first and confirm that it is gone.
-In plain language in the owner's language: what was created or merged, what was found, the smoke test result, what was not verified, the decisions waiting for the owner, the recommended tool skills (`{{TOOL_SKILLS}}`, the owner installs them), and how to start the producer on any Codex surface (CLI, desktop app, or IDE): invoke the `producer` skill (`$producer` or ask Codex to "start the producer session and work through `TODO.md`"). Do not commit unless the owner asks.
+In plain language in the owner's language: what was created or merged, what was found, the smoke test result, what was not verified, the decisions waiting for the owner, the tools check before and after (what was installed, declined, or failed), and how to start the producer on any Codex surface (CLI, desktop app, or IDE): invoke the `producer` skill (`$producer` or ask Codex to "start the producer session and work through `TODO.md`"). Do not commit unless the owner asks.
 

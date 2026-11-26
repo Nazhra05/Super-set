@@ -5,7 +5,7 @@
 - **References:** <REF-xx from REFERENCES.md, each with what to take from it>
 - **Executor:** producer | asset-builder (then visual-reviewer)
 - **Model:** (subagent default from `WORKFLOW.md`; write only when different, with the reason)
-- **Budget:** maxTurns = agent limit (asset-builder 40, visual-reviewer 30), target about 60%; report no later than tool call (limit - 8); fix rounds max 2
+- **Budget:** maxTurns = agent limit (asset-builder 40, visual-reviewer 30), target about 60%; Report skeleton written by tool call 3; report no later than tool call (limit - 8); fix rounds max 2
 - **Status:** Ready | In progress | Review | Done | Blocked
 - **Blocked by:** -
 

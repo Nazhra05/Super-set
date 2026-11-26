@@ -21,8 +21,8 @@
     {
       "name": "content-project-workflow",
       "source": "./plugins/content-project-workflow",
-      "description": "For video, animation, and content projects: sets up a brief, style guide, reference list, approval gates, and agents that build, check frames, and research, so Claude follows your references and shows designs before building on them.",
-      "version": "0.2.0",
+      "description": "For video, animation, and content projects: sets up a brief, style guide, reference list, approval gates, and agents that build, check frames, and research, so Claude follows your references and shows designs before building on them. Optional Vox editorial collage preset with HyperFrames and a tools check that installs what production needs.",
+      "version": "0.3.0",
       "author": {
         "name": "Nazhra05"
       },

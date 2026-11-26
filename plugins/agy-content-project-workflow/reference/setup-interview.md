@@ -2,6 +2,8 @@
 
 Shared by the `adopt` and `bootstrap` skills. Ask with the `ask_question` tool, at most 4 questions per call. Never guess an answer: when the owner has not given it and it cannot be read from the project, ask. In `adopt`, propose answers found in the project as the first option, prefixed with `(Recommended)`, so the owner only confirms.
 
+The style preset (`style-presets.md`) is asked before this interview; with the preset `vox`, the rows marked "vox" below take the preset's default as the first option.
+
 Reply to the owner in the language they write in. Documents are written in the document language chosen below; code, identifiers, comments, and commits are always English.
 
 Start by explaining the defaults in `.workflow-setup/README.md`, section "Opinionated defaults (and how to change them)", in the owner's language and in plain words, then ask which ones to change. Record each change as a project decision (D-xx) in `DECISIONS.md` with the reason, and apply it to the files named in that table.
@@ -18,9 +20,11 @@ Start by explaining the defaults in `.workflow-setup/README.md`, section "Opinio
 | (no placeholder) | Document language: English or Bahasa Indonesia | Recommended default: Bahasa Indonesia when the owner writes in Indonesian, otherwise English. Decides the source of the core docs in `install-steps.md` step 1. Agent prompts, skills, and tools stay English in both. |
 | `{{PROJECT_TERMS}}` | Project terms that stay in one form (for example "link", not "tautan"; names of characters, segments, brand words) | Asked when replies or documents are not in English, and always for character and brand names. Rows `\| use \| do not mix with \|`. None: one row `\| None yet. \| \|`. |
 | `{{FOLDER_TABLE}}` | What lives where: script, recordings, original art, references, the video tool project, renders | Rows `\| part \| path \|`. Mark originals; they are protected (see `{{IRREVERSIBLE_ACTIONS}}`). |
-| `{{TOOLCHAIN}}` | The video or design tool and its version (for example HyperFrames, Remotion, After Effects, Figma) | Ask; never pick for the owner. "Not decided" goes to `DECISIONS.md` section C. |
-| `{{TOOL_SKILLS}}` | Official agent skills for that tool | Offer what the tool documents (for example HyperFrames: `npx skills add heygen-com/hyperframes`; Remotion: its Agent Skills). Installing them is the owner's step; write the command, do not run it. "None" is a valid answer. |
-| `{{COMMANDS}}` | Check, preview, render, frame-grab, audio-measure commands | Run each once before writing it down; write only the ones that ran, with the date. A preview the owner runs is written as "run by the owner". |
+| `{{TOOLCHAIN}}` | The video or design tool (for example HyperFrames, Remotion, After Effects, Figma) | Ask; never pick for the owner. "Not decided" goes to `DECISIONS.md` section C. vox: offer "HyperFrames, latest stable release (npm tag `latest`), HTML + GSAP (Recommended)". HyperFrames is not pinned to a version. |
+| `{{TOOL_SKILLS}}` | Official agent skills for that tool | Offer what the tool documents (for example HyperFrames: `npx --yes skills@latest add heygen-com/hyperframes -a antigravity -y`; Remotion: its Agent Skills). They are installed in the tools step (`tools.md`) only after the owner says yes. "None" is a valid answer. |
+| `{{COMMANDS}}` | Check, preview, render, frame-grab, audio-measure commands | Run each once before writing it down; write only the ones that ran, with the date. A preview the owner runs is written as "run by the owner". Commands that need a tool not installed yet are added in the tools step. vox: the lines in `style-presets.md`. |
+| `{{PRESET_SKILLS}}` | (from the preset) | `style-presets.md`: `None.` or the `vox-editorial` line. |
+| (no placeholder) | Where the script and the recorded voice-over are (vox, or any project with recorded speech) | Paths only; the audio kit uses the owner's own script and recording and never generates speech. |
 | `{{DEFAULT_VERIFY}}` | Default `verify` block for tickets | Usually the project check command plus a frame grab of the shot. |
 | `{{FRAME_COMMAND}}` | How to grab a frame at a given time from a render or preview | For example an `ffmpeg -ss <t> -i <file> -frames:v 1 <out>.png` line or the tool's snapshot command. "Not set up yet" is allowed. |
 | `{{IRREVERSIBLE_ACTIONS}}` | Actions that always need approval in this project | Always included: overwriting or deleting originals (script, recordings, source art), publishing or uploading, paid services. Ask what else (for example sending material to an external AI service). |

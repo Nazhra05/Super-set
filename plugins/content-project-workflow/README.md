@@ -12,7 +12,7 @@ Use it if you make explainer videos, social reels, animations, or motion graphic
 - One request turning into an hour-long run that fills the context.
 - Missing basics: a weak hook, text under the app buttons, captions that do not match the voice-over.
 
-**When not to use it:** a single graphic or a one-off clip with no script (the gates are more process than you need), or software projects (use `app-project-workflow`). Version 0.1 is written for video and motion graphics; slides and static design are not its focus yet.
+**When not to use it:** a single graphic or a one-off clip with no script (the gates are more process than you need), or software projects (use `app-project-workflow`). It is written for video and motion graphics; slides and static design are not its focus yet.
 
 ## What it does for you
 | Problem | What the plugin sets up |
@@ -26,10 +26,15 @@ Use it if you make explainer videos, social reels, animations, or motion graphic
 | Low-effort characters | A character-design skill: options side by side, turnaround, expressions, mouth shapes, poses, rig, and an originality rule |
 | Long runs | A producer agent that hands one shot at a time to builders and reviewers and stops at every gate |
 | Missing craft knowledge | Skills for content basics (hook, pacing, safe zones, captions, loudness), motion (the 12 principles, easing), and design (hierarchy, type, color, contrast) |
+| Agent-drawn characters that never look right | A rule on where character art comes from (a human artist painting to the agent's rig spec, an owned or licensed asset, or photo cut-outs) and a ticket budget for hard parts such as hands |
+| Finished film rejected for reasons a rough cut would have shown | Delegation never skips the animatic or the new vertical-slice gate; motion is shown as clips with sound |
+| A specific look you want without designing it from zero | Optional **Vox editorial collage** preset: a style skill plus `vox-kit.js`, tested HyperFrames + GSAP helpers (paper boil on twos, torn sticker edges, printed ink, highlighter, stamps, whip pans, caption karaoke) |
+| Tools missing halfway through | A tools check at the end of setup that lists what production needs, with the install command for your OS, and installs what you select |
+| Captions and lip sync that drift from the voice-over | An audio kit: word timing from your own recording and script, mouth tracks, loudness mastering, and a delivery check before upload |
 
 ## How a project runs
-1. Setup writes the brief, style guide, and reference list with you.
-2. The producer plans the next gate: storyboard, style frames, character sheets, animatic, shots, final.
+1. Setup asks for a style preset (none, or Vox editorial collage), writes the brief, style guide, and reference list with you, then checks and offers to install the production tools.
+2. The producer plans the next gate: storyboard, style frames, character sheets, animatic, vertical slice, shots, final.
 3. An asset-builder makes one piece; a visual-reviewer grabs the frames and checks them against the brief, style, script, and references.
 4. At each approval gate the producer shows you the frames or sheets and waits for your yes.
 
@@ -64,9 +69,12 @@ The same run noticed that the "voice-over" file was a text placeholder, not audi
 | `/content-project-workflow:adopt` | The project already has a script, recordings, assets, renders, or its own Claude Code setup | Reads everything first, lists every reference, keeps or drafts the brief and style from what exists, merges existing rules, never overwrites originals |
 | `/content-project-workflow:bootstrap` | New or empty folder | Interviews you, writes the first brief, style guide, and reference list; no production yet |
 
-Both explain the defaults below and ask which to change, show the list of files before writing, smoke-test the tools, and end with a plain-language report. Nothing is committed unless you ask.
+Both start with the style preset, explain the defaults below and ask which to change, show the list of files before writing, smoke-test the tools, run the tools check and install only what you select, and end with a plain-language report. Nothing is committed unless you ask.
 
-Install: `claude plugin install content-project-workflow@super-set` after adding the marketplace (see the [Super-set README](../../README.md#quick-start)). The plugin works with any video tool; setup asks which one you use and recommends its official agent skills (for example HyperFrames or Remotion), which you install yourself.
+### Style preset: Vox editorial collage
+Pick it as the first answer of the setup. It recommends HyperFrames (always the `latest` stable release, never pinned), installs the `vox-editorial` skill with `vox-kit.js`, seeds `STYLE.md` with the preset's defaults (to confirm at the style-frame gate), installs the audio kit, and marks HyperFrames, its official skills, ffmpeg, agent-browser, and Python as required in the tools check. Your script and your recorded voice-over are the input; the plugin generates no speech or text.
+
+Install: `claude plugin install content-project-workflow@super-set` after adding the marketplace (see the [Super-set README](../../README.md#quick-start)). Without a preset the plugin works with any video tool; setup asks which one you use and offers its official agent skills in the tools step.
 
 ## Daily use
 - **Terminal:** `claude --agent producer --model <producer model> --effort high` from the project root.
@@ -94,27 +102,30 @@ Setup explains these and asks which to change; afterwards, change them in the fi
 | Facts and dialogue on screen come only from the script or a named source | Invented numbers, text that does not match the recording | `CLAUDE.md` rule 4 |
 | Originals (script, recordings, source art) are never overwritten without approval | They cannot be recreated | `WORKFLOW.md` |
 | Docs in English or Bahasa Indonesia; code and commits in English; common terms in one form | Readable docs, no mixed terms | `CLAUDE.md` rule 9, "Terms" |
+| Character art from a human artist, an owned or licensed asset, or photo cut-outs; hard parts get a ticket budget | Agent-drawn characters rejected after many rounds | skill `character-design`, C-10 |
+| Delegation never skips the animatic, the vertical slice, or the final | Literal metaphors found only after the full render | `WORKFLOW.md`, C-11 |
+| Software is installed only after you say yes, in one question at the end of setup | Installs are machine-wide | `reference/tools.md` |
 
 ## What lands in the project
 - Docs: `CLAUDE.md`, `WORKFLOW.md`, `TODO.md`, `HANDOFF.md`, `DECISIONS.md`, `PRD.md` (brief), `STYLE.md`, `REFERENCES.md`, `tickets/_TEMPLATE.md`, in English or Indonesian.
 - `.claude/agents/`: producer, frame-prep, asset-builder, visual-reviewer, researcher, Explore.
 - `.claude/skills/`: `content-fundamentals`, `motion-principles`, `design-basics`, `character-design`, `verification-before-completion`, `systematic-debugging`.
 - `.claude/settings.json`: Read deny for `.env` files, status line.
-- `tools/`: `scope.sh` (files changed outside a ticket's Allow list; needs git), `verify.sh` (runs a ticket's checks), `statusline.js`.
+- `tools/`: `scope.sh` (files changed outside a ticket's Allow list; needs git), `verify.sh` (runs a ticket's checks), `statusline.js`, `tools-check.sh` (which production tools are installed, with install commands).
+- With the Vox preset or a recorded voice-over: `tools/audio/` (`timing.py`, `master_audio.py`, `delivery_check.py`); with the Vox preset: `.claude/skills/vox-editorial/` (`SKILL.md`, `vox-kit.js`).
 
 ## Requirements
-- Node.js (status line) and Bash (Git Bash on Windows).
-- Git is recommended; without it the scope check does not run.
-- Frame grabs usually need `ffmpeg` or the video tool's snapshot command.
+- Node.js and Bash (Git Bash on Windows). Git is recommended; without it the scope check does not run.
+- The rest is checked at the end of setup by `tools/tools-check.sh` and installed only if you select it: ffmpeg, HyperFrames (Node.js 22+), its official skills, agent-browser, Python 3.9+ with `faster-whisper` for the audio kit, gh, yt-dlp. With the Vox preset the production tools are required.
 
 ## Status
-Version 0.2, early. Tested: `adopt` end to end on a sample project, and the `scope.sh` and `verify.sh` tools, on Windows (Git Bash). Not yet tested: `bootstrap`, the producer with its helper agents on a real project, macOS, Linux, and the desktop app. The rules come from problems seen in a real video project. Field reports are the most valuable help right now: see [Contributing](../../CONTRIBUTING.md).
+Version 0.3, early. Tested on Windows (Git Bash): `adopt` end to end on a sample project (0.1), the `scope.sh` and `verify.sh` tools, `tools-check.sh`, the audio kit on a real voice-over and render, and every `vox-kit.js` helper in a HyperFrames composition (`check` with 0 errors). The workflow ran a full production of a 9:16 explainer. Not yet tested: the 0.3 setup flow (preset question and tools step) in an interactive run, macOS, Linux, and the desktop app. The rules come from problems seen in a real video project. Field reports are the most valuable help right now: see [Contributing](../../CONTRIBUTING.md).
 
 ## Layout of this plugin
 ```
 .claude-plugin/   plugin.json
 skills/           adopt, bootstrap
-reference/        setup-interview.md, brief-and-style.md, install-steps.md
+reference/        style-presets.md, setup-interview.md, brief-and-style.md, install-steps.md, tools.md
 scripts/          stage.sh (copies setup material into the project during setup)
 templates/        everything copied into a project (English docs)
 templates/id/     the docs in Indonesian

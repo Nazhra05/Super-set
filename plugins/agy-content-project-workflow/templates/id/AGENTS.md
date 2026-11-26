@@ -39,7 +39,8 @@ Tambahkan entri hanya setelah terbukti oleh output perintah, dengan tanggal.
 
 ## Skill
 - Di `.agents/skills/`: `producer`, `content-fundamentals`, `motion-principles`, `design-basics`, `character-design` (pengetahuan, dibaca saat task membutuhkannya), `verification-before-completion`, `systematic-debugging`. Lisensi: `.agents/skills/NOTICE`.
-- Skill untuk tool video: {{TOOL_SKILLS}}.
+- Style preset: {{PRESET_SKILLS}}
+- Skill untuk tool video: {{TOOL_SKILLS}}. Tool produksi dicek dengan `bash tools/tools-check.sh`.
 - **Alur ticket:** membagi kerja ke subagent hanya lewat `WORKFLOW.md`, dalam sesi producer (skill `producer`). Di luar alur itu, subagent dibuat hanya kalau saya minta. Aturan 1 sampai 9 berlaku untuk setiap agent.
 
 ## Peta dokumen (baca yang dibutuhkan task, bukan semuanya)

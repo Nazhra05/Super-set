@@ -5,7 +5,7 @@
 - **References:** <REF-xx dari REFERENCES.md, masing-masing dengan apa yang diambil>
 - **Executor:** producer | asset-builder (lalu visual-reviewer)
 - **Model:** (default subagent dari `WORKFLOW.md`; tulis hanya kalau berbeda, dengan alasannya)
-- **Budget:** maxTurns = batas agent (asset-builder 40, visual-reviewer 30), target sekitar 60%; laporan paling lambat di tool call (batas - 8); putaran perbaikan maksimal 2
+- **Budget:** maxTurns = batas agent (asset-builder 40, visual-reviewer 30), target sekitar 60%; kerangka Report ditulis paling lambat di tool call 3; laporan paling lambat di tool call (batas - 8); putaran perbaikan maksimal 2
 - **Status:** Ready | In progress | Review | Done | Blocked
 - **Blocked by:** -
 

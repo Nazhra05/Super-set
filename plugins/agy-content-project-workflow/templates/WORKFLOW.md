@@ -25,16 +25,19 @@ Production moves through these gates in order. A gate marked **approval** stops 
 | Script and storyboard | script locked to the recording; one panel per shot with time code, framing, action, text on screen | report |
 | Style frames | 2 to 4 full-color still frames of key shots, shown next to the references they answer | **approval** |
 | Character sheets | per character: turnaround, expression sheet, mouth chart, pose sheet, colors (skill `character-design`) | **approval** |
-| Animatic | timed rough cut with the real audio | **approval** |
+| Animatic | timed rough cut with the real audio; the visual concept of every script line is approved here | **approval** |
+| Vertical slice | one scene built to final quality: rendered, mastered, watched with sound by the owner; it sets the bar for every other scene | **approval** |
 | Shots | each shot built and reviewed per ticket | report per pair of tickets |
 | Final | full render, audio measured, captions checked, watched with sound by the owner | **approval** |
 
-A gate may be skipped only by a project decision (D-xx) with the reason, for example "no characters in this project".
+A gate may be skipped only by a project decision (D-xx) with the reason, for example "no characters in this project". **Delegation is not a skip (C-11):** when the owner says "you choose", the producer picks between options, but the brief, animatic, vertical slice, and final gates still stop for the owner.
+
+Evidence that moves is shown moving: for the animatic, the vertical slice, and motion questions, show a short MP4 of the range with sound, not only stills. Stills are for style frames and sheets.
 
 ## Ticket loop
 1. Take the next item from "Execution order" in `TODO.md`. Skip anything with an open `Blocked by` or `Waiting decision`, or behind a gate that is not approved.
 2. Fill the ticket from `tickets/_TEMPLATE.md`: goal, the requirement (`R-xx`), the references (`REF-xx`) and what to take from each, Allow globs, verify commands, the frames the reviewer must check. Size it to one shot, one asset, or one sheet.
-3. Dispatch one `asset-builder` via `invoke_subagent` with the ticket path. The builder works in the project folder (no worktrees: renders and art are large), so only one builder runs at a time; the researcher, visual-reviewer, and Explore may run beside it.
+3. Dispatch one `asset-builder` via `invoke_subagent` with the ticket path. The builder works in the project folder (no worktrees: renders and art are large), so only one builder runs at a time; the researcher, visual-reviewer, and Explore may run beside it. Builders and researchers write the skeleton of their Report (or of the research note) within their first 3 tool calls and fill it as they go, so a run cut off at its limit still leaves its state.
 4. When it returns, its report is a claim. Dispatch `frame-prep` via `invoke_subagent` with the ticket path: it runs `bash tools/verify.sh --with-scope <ticket>`, extracts the review frames and contact sheet into `.review/`, and records pixel/audio measurements.
 5. Dispatch `visual-reviewer` via `invoke_subagent` with the ticket path and the `.review/` paths from `frame-prep`. It checks the prepared frames and reports per check item `seen` or `inferred`. The producer does not open raw frame images on ordinary shot tickets; it opens contact sheets or frames only at **approval** gates.
 6. Fix rounds: at most two; then diagnose (`systematic-debugging`) or split the ticket. Never a third blind retry.
@@ -56,6 +59,8 @@ A source is read, not summarized from its front page.
 - Images are expensive. Look at downscaled contact sheets first; open a full frame only where a detail matters.
 - One ticket per dispatch, one gate per stretch of work: report at the gate instead of running on for hours.
 - **Stop-ready boundaries:** keep every ticket boundary compact-ready (`TODO.md`, the ticket, and `HANDOFF.md` current; docs committed; no subagent running). When the conversation grows long, ask the owner to run `/compact`. When the platform shows a quota or usage-limit notice, finish only the piece in hand, update the files above, and stop with a report.
+- **Light mode** (a slow machine, or the owner using it for other work): one heavy job at a time (render, check, snapshot, painting), never two; run checks on one scene composition rather than the whole film when the tool allows; snapshot only the frames the ticket names.
+- **Lean documents:** `HANDOFF.md` is overwritten each session, never stacked; the `TODO.md` Done log keeps the last 20 entries and older ones move to `docs/archive/TODO-done.md`; superseded decisions move from `DECISIONS.md` section B to `docs/archive/DECISIONS-old.md` with a one-line pointer left behind.
 - **Session report:** at session end write `{{SESSION_REPORT_DIR}}/Session_<date>_<topic>.md`: tickets finished, gates passed, decisions, Inbox findings, and spawn/retry counts.
 
 ## Frame checks

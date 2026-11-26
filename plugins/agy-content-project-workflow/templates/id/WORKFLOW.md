@@ -25,16 +25,19 @@ Produksi melewati gate berikut secara berurutan. Gate bertanda **approval** meng
 | Script dan storyboard | naskah dikunci sesuai rekaman; satu panel per shot dengan time code, framing, aksi, teks di layar | laporan |
 | Style frames | 2 sampai 4 still frame berwarna penuh dari shot kunci, ditampilkan di samping referensi yang dijawabnya | **approval** |
 | Character sheets | per karakter: turnaround, expression sheet, mouth chart, pose sheet, warna (skill `character-design`) | **approval** |
-| Animatic | rough cut berwaktu dengan audio asli | **approval** |
+| Animatic | rough cut berwaktu dengan audio asli; konsep visual setiap baris naskah disetujui di sini | **approval** |
+| Vertical slice | satu scene dibangun sampai kualitas final: di-render, di-master, ditonton pemilik dengan suara; menjadi patokan untuk semua scene lain | **approval** |
 | Shots | setiap shot dibangun dan di-review per ticket | laporan per pasang ticket |
 | Final | render penuh, audio diukur, caption dicek, ditonton pemilik dengan suara | **approval** |
 
-Gate hanya boleh dilewati lewat keputusan project (D-xx) beserta alasannya, misalnya "tidak ada karakter di project ini".
+Gate hanya boleh dilewati lewat keputusan project (D-xx) beserta alasannya, misalnya "tidak ada karakter di project ini". **Delegasi bukan melewati gate (C-11):** saat pemilik berkata "terserah kamu", producer memilih di antara opsi, tetapi gate brief, animatic, vertical slice, dan final tetap berhenti untuk pemilik.
+
+Bukti yang bergerak ditunjukkan bergerak: untuk animatic, vertical slice, dan pertanyaan soal gerak, tunjukkan MP4 pendek bersuara dari rentang itu, bukan hanya still. Still untuk style frame dan sheet.
 
 ## Alur ticket
 1. Ambil item berikutnya dari "Execution order" di `TODO.md`. Lewati item dengan `Blocked by` atau `Waiting decision` yang masih terbuka, atau yang berada di balik gate yang belum disetujui.
 2. Isi ticket dari `tickets/_TEMPLATE.md`: tujuan, persyaratan (`R-xx`), referensi (`REF-xx`) dan apa yang diambil dari masing-masing, glob Allow, perintah verify, frame yang harus dicek reviewer. Ukurannya satu shot, satu asset, atau satu sheet.
-3. Dispatch satu `asset-builder` lewat `invoke_subagent` dengan path ticket. Builder bekerja di folder project (tanpa worktree: render dan art berukuran besar), jadi hanya satu builder berjalan pada satu waktu; researcher, visual-reviewer, dan Explore boleh berjalan bersamaan.
+3. Dispatch satu `asset-builder` lewat `invoke_subagent` dengan path ticket. Builder bekerja di folder project (tanpa worktree: render dan art berukuran besar), jadi hanya satu builder berjalan pada satu waktu; researcher, visual-reviewer, dan Explore boleh berjalan bersamaan. Builder dan researcher menulis kerangka Report (atau kerangka catatan riset) dalam 3 tool call pertama lalu mengisinya bertahap, supaya run yang terpotong di batasnya tetap meninggalkan jejak.
 4. Saat kembali, laporannya adalah klaim. Dispatch `frame-prep` lewat `invoke_subagent` dengan path ticket: subagent ini menjalankan `bash tools/verify.sh --with-scope <ticket>`, mengekstrak frame review dan contact sheet ke `.review/`, serta mencatat pengukuran piksel/audio.
 5. Dispatch `visual-reviewer` lewat `invoke_subagent` dengan path ticket dan path `.review/` dari `frame-prep`. Reviewer memeriksa frame yang sudah disiapkan dan melaporkan setiap butir cek sebagai `seen` atau `inferred`. Producer tidak membuka gambar frame mentah di ticket shot biasa; producer hanya membuka contact sheet atau frame saat berhenti di **approval** gate.
 6. Putaran perbaikan maksimal dua; setelah itu diagnosis (`systematic-debugging`) atau pecah ticket. Tidak ada percobaan ketiga yang buta.
@@ -56,6 +59,8 @@ Sumber dibaca, bukan diringkas dari halaman depannya (C-05).
 - Gambar mahal. Lihat contact sheet yang diperkecil dulu; buka frame penuh hanya di tempat detailnya penting.
 - Satu ticket per dispatch, satu gate per rentang kerja: lapor di gate alih-alih berjalan terus berjam-jam.
 - **Batas ticket siap-berhenti:** jaga setiap batas ticket siap compact (`TODO.md`, ticket, dan `HANDOFF.md` terkini; dokumen sudah di-commit; tidak ada subagent berjalan). Ketika percakapan mulai panjang, minta pemilik menjalankan `/compact`. Ketika platform menampilkan pemberitahuan batas kuota atau pemakaian, selesaikan bagian yang sedang dipegang saja, perbarui file di atas, lalu berhenti dengan laporan.
+- **Mode ringan** (mesin lambat, atau dipakai pemilik untuk pekerjaan lain): satu pekerjaan berat pada satu waktu (render, check, snapshot, melukis), tidak pernah dua; jalankan check per komposisi scene alih-alih seluruh film bila tool mengizinkan; snapshot hanya frame yang disebut ticket.
+- **Dokumen ramping:** `HANDOFF.md` ditimpa setiap sesi, tidak ditumpuk; Done log di `TODO.md` menyimpan 20 entri terakhir dan sisanya pindah ke `docs/archive/TODO-done.md`; keputusan yang sudah digantikan pindah dari `DECISIONS.md` bagian B ke `docs/archive/DECISIONS-old.md` dengan satu baris penunjuk yang ditinggalkan.
 - **Laporan sesi:** di akhir sesi tulis `{{SESSION_REPORT_DIR}}/Session_<date>_<topic>.md`: ticket yang selesai, gate yang dilewati, keputusan, temuan Inbox, dan jumlah spawn/retry.
 
 ## Frame checks

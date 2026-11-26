@@ -39,7 +39,8 @@ Add an entry only after it has been proven by command output, with the date.
 
 ## Skills
 - In `.claude/skills/`: `content-fundamentals`, `motion-principles`, `design-basics`, `character-design` (knowledge, read when the task needs it), `verification-before-completion`, `systematic-debugging`. License: `.claude/skills/NOTICE`.
-- Skills for the video tool: {{TOOL_SKILLS}}.
+- Style preset: {{PRESET_SKILLS}}
+- Skills for the video tool: {{TOOL_SKILLS}}. Production tools are checked with `bash tools/tools-check.sh`.
 - **Ticket flow:** splitting work into subagents happens only through `WORKFLOW.md`, in a producer session. Outside that flow, subagents are created only when I ask. Rules 1 to 9 apply to every agent.
 
 ## Document map (read what the task needs, not everything)

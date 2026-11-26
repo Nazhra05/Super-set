@@ -42,6 +42,14 @@ Setiap aturan menjawab kegagalan yang terlihat dalam pekerjaan konten nyata deng
 ### C-09 Satu tempat untuk status; file instruksi pendek
 - **Keputusan:** status kerja hanya ada di `TODO.md` dan `HANDOFF.md`; dokumen lain tidak memuat angka status. `CLAUDE.md` tetap pendek dan merujuk dokumen alih-alih menyalinnya. Tidak ada aturan yang mewajibkan agent membaca semua dokumen.
 
+### C-10 Art karakter berasal dari manusia atau sumber berlisensi
+- **Alasan:** dalam sebuah project nyata, karakter yang dilukis manusia bisa di-rig dengan baik, sedangkan karakter yang digambar agent dari nol menghabiskan sekitar dua puluh lima ticket, empat belas di antaranya untuk tangan dan lengan, dan tetap ditolak. Yang akhirnya menyelesaikan masalah adalah menyembunyikan tangan (pilihan penempatan), bukan menggambar ulang.
+- **Keputusan:** art karakter berasal dari ilustrator manusia yang melukis mengikuti spesifikasi rig, asset milik sendiri atau berlisensi, atau potongan foto berlisensi; karakter yang digambar agent hanya untuk gaya datar sederhana yang diterima pemilik. Bagian tubuh yang sulit diberi anggaran ticket di gate Character sheets; bila melewati anggaran, penempatannya yang diubah, bukan gambarnya (skill `character-design`).
+
+### C-11 Delegasi tidak pernah melewati animatic, vertical slice, atau final
+- **Alasan:** saat pemilik mendelegasikan pilihan dan meminta film jadi, animatic dilewati; metafora yang diterjemahkan mentah dan tata letak yang penuh card baru ketahuan setelah render penuh, dan beberapa scene dibangun ulang dua sampai tiga kali.
+- **Keputusan:** producer boleh memilih di antara opsi saat pemilik mendelegasikan, tetapi animatic (dengan satu konsep visual yang disetujui per baris naskah) dan vertical slice (satu scene berkualitas final, ditonton dengan suara) disetujui pemilik sebelum scene lain dibangun, dan final selalu milik pemilik. Gerak ditunjukkan sebagai klip pendek bersuara, bukan still.
+
 ## B. Keputusan project
 {{PROJECT_DECISIONS}}
 

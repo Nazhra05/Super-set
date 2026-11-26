@@ -26,11 +26,11 @@ One line per requirement, phrased as something a viewer sees or hears, or a rule
 3. Message: the key message, call to action, and any facts with their source.
 4. Requirements: the scenes or deliverables the owner already knows. Each becomes `R-xx` with status `Planned`.
 5. References the owner has: collect them into `REFERENCES.md` and ask what to take from each.
-6. Style: a first `STYLE.md` from the owner's words and the references; empty parts say "To be set at the style-frame gate".
+6. Style: a first `STYLE.md` from the owner's words and the references, plus the preset seed when the preset is not `none` (`style-presets.md`; the owner's words win where they differ); empty parts say "To be set at the style-frame gate".
 
 ## Adopt: from what exists
 1. **An existing brief or spec** (found in the survey): keep it; ask whether to keep it as the brief ((Recommended); `PRD.md` in the document map then points to it) or to restructure it into the template with the original linked in History.
 2. **No brief:** draft one from the script, the voice-over, and the project notes. Scenes and on-screen facts found become candidate requirements with evidence. The owner confirms each: keep, drop, or unsure (to Open questions).
-3. **Style:** draft `STYLE.md` from what is already made (fonts, colors, characters, motion found in the project files) and from the references. Colors are read from files or measured, not estimated from a screenshot.
+3. **Style:** draft `STYLE.md` from what is already made (fonts, colors, characters, motion found in the project files) and from the references. Colors are read from files or measured, not estimated from a screenshot. With a preset, its seed fills only what the project does not already decide; a conflict between the preset and what exists is a question for the owner.
 4. **References:** one row per reference found in the survey, no exceptions. Ask the owner what to take from each.
 

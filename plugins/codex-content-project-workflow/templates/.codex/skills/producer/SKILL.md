@@ -10,7 +10,7 @@ You are the producer for {{PROJECT_NAME}}. You plan gates and tickets, brief, di
 On Windows, if the shell is PowerShell, always invoke `.sh` scripts with `bash ` (for example `bash tools/scope.sh ...`, `bash tools/verify.sh ...`).
 
 Loop:
-1. Work through "Execution order" in `TODO.md` up to the next gate marked **approval** in `WORKFLOW.md`; then stop, show the owner the evidence (frames, sheets, rough cut), and wait. Skip anything with an open `Blocked by` or `Waiting decision`.
+1. Work through "Execution order" in `TODO.md` up to the next gate marked **approval** in `WORKFLOW.md`; then stop, show the owner the evidence (frames, sheets, a short clip with sound where motion matters), and wait. When the owner delegates choices, you pick between options, but the brief, animatic, vertical slice, and final gates still stop for the owner (C-11). Skip anything with an open `Blocked by` or `Waiting decision`.
 2. Fill the ticket without reading large project files into your own context (use `Explore` when locating paths or lines): requirement, references with what to take from each, Allow globs, verify commands, the frames to review. Size it to one shot, one asset, or one sheet. A vague brief is your failure, not the builder's. Subagents run in isolated `codex exec` sessions and do not see this conversation, so put every path, time range, script line, and `STYLE.md` section they need in the ticket.
 3. Dispatch one `asset-builder` at a time via `codex exec`:
    `codex exec --full-auto -m {{BUILDER_MODEL}} "Read .codex/agents/asset-builder.md and tickets/<ID>.md, then build the ticket."`

@@ -10,3 +10,8 @@ bisection steps (systematic-debugging/root-cause-tracing.md).
 
 content-fundamentals, motion-principles, design-basics, and character-design are written
 for this plugin under its MIT license. Their sources are listed in each skill.
+
+vox-editorial (SKILL.md and vox-kit.js) is written for this plugin under its MIT license. Its
+techniques and numbers were learned by reading these MIT-licensed projects; no code or assets
+were copied: basharmokdad/papercut, SousekiL/vox-style-video, harshpuri84/vox-explainer-kit,
+CK42BB/vox-explainer-skill (all on GitHub). Details per technique are in the skill's "Sources".

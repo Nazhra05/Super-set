@@ -42,6 +42,14 @@ Each rule answers a failure seen in real content work with Claude Code.
 ### C-09 One place for status; short instruction files
 - **Decision:** work status lives only in `TODO.md` and `HANDOFF.md`; other documents hold no status numbers. `CLAUDE.md` stays short and points to documents instead of copying them. No rule obliges an agent to read every document.
 
+### C-10 Character art comes from people or licensed sources
+- **Reason:** in a real project, a character painted by a human rigged well, while a character the agent drew from scratch took about twenty-five tickets, fourteen of them for hands and arms, and was still rejected. Hiding the hands (a staging choice) finally solved what redrawing did not.
+- **Decision:** character art comes from a human artist painting to a rig spec, an owned or licensed asset, or licensed photo cut-outs; agent-drawn characters only for simple flat styles the owner accepts. Hard body parts get a ticket budget at the character-sheet gate; over budget, the staging changes instead of the drawing (skill `character-design`).
+
+### C-11 Delegation never skips the animatic, the vertical slice, or the final
+- **Reason:** when the owner delegated choices and asked for the finished film, the animatic was skipped; literal metaphors and a card-heavy layout were found only after the full render, and scenes were rebuilt two or three times.
+- **Decision:** the producer may choose between options when the owner delegates, but the animatic (with one approved visual concept per script line) and a vertical slice (one scene at final quality, watched with sound) are approved by the owner before the other scenes are built, and the final is always the owner's. Motion is shown as short clips with sound, not stills.
+
 ## B. Project decisions
 {{PROJECT_DECISIONS}}
 

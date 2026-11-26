@@ -9,9 +9,11 @@ List every file the setup will create or change in the project, marked `new` or 
 |---|---|
 | `CLAUDE.md`, `WORKFLOW.md`, `TODO.md`, `HANDOFF.md`, `DECISIONS.md`, `PRD.md`, `STYLE.md`, `REFERENCES.md` | `TEMPLATES/<same name>`, or `TEMPLATES/id/<same name>` when the document language is Indonesian. `PRD.md` is not installed when `adopt` keeps an existing brief. |
 | `tickets/_TEMPLATE.md` | `TEMPLATES/tickets/_TEMPLATE.md` or `TEMPLATES/id/tickets/_TEMPLATE.md` |
-| `tools/scope.sh`, `tools/verify.sh`, `tools/statusline.js` | `TEMPLATES/tools/` |
+| `tools/scope.sh`, `tools/verify.sh`, `tools/statusline.js`, `tools/tools-check.sh` | `TEMPLATES/tools/` |
+| `tools/audio/` (`timing.py`, `master_audio.py`, `delivery_check.py`, `requirements.txt`) | `TEMPLATES/tools/audio/`; with the preset `vox`, or when the owner has a recorded voice-over and wants word timing, captions, mastering, or the delivery check |
 | `.claude/agents/{producer,asset-builder,frame-prep,visual-reviewer,researcher,Explore}.md` | `TEMPLATES/.claude/agents/` |
-| `.claude/skills/` (6 skills, `NOTICE`, `LICENSE-superpowers`) | `TEMPLATES/.claude/skills/`, copied unchanged |
+| `.claude/skills/` (6 skills, `NOTICE`, `LICENSE-superpowers`) | `TEMPLATES/.claude/skills/` without `vox-editorial/`, copied unchanged |
+| `.claude/skills/vox-editorial/` (`SKILL.md`, `vox-kit.js`) | `TEMPLATES/.claude/skills/vox-editorial/`, only with the preset `vox` |
 | `.claude/settings.json` | `TEMPLATES/.claude/settings.json` |
 | `.gitattributes` | `TEMPLATES/.gitattributes` |
 | `.gitignore` | lines below |
@@ -40,6 +42,7 @@ If a file with the same path already exists, never replace it. Merge instead:
 .claude/usage.json
 .env*
 ```
+With the audio kit also `.venv/`.
 Plus the generated folders the owner chose to ignore (for example renders, caches). Never ignore originals without asking. For `.env*`, check first that no tracked file matches (`git ls-files | grep -E '(^|/)\.env'`); if one does, report it and ask.
 
 ## 4. Smoke test (proves the tools work here; reversible)
@@ -55,6 +58,9 @@ Quote the real output of each step in the report. If a step fails, use `systemat
 - **Terminal:** ask the owner to restart Claude Code in the project root. After one reply, `.claude/usage.json` must exist with a fresh `savedAt`.
 - **Desktop app:** the status line does not run there, so skip the `usage.json` check and say so. If the owner wants producer mode now, write the keys from `WORKFLOW.md` ("Starting a producer session") into `.claude/settings.local.json` (merge, never replace the file), ask them to open a new session in the project, and confirm the producer answers by naming `WORKFLOW.md` as its first read. Until that has been seen, report producer mode as not verified on this machine.
 
-## 6. Report and stop
+## 6. Tools
+Follow `tools.md` (run `tools/tools-check.sh`, ask once, install what the owner chose, re-check, record). It runs before `.workflow-setup/` is deleted.
+
+## 7. Report and stop
 Delete `.workflow-setup/` first and confirm with `ls -A` that it is gone.
-In plain language in the owner's language: what was created or merged, what was found, the smoke test result, what was not verified, the decisions waiting for the owner, the recommended tool skills (`{{TOOL_SKILLS}}`, the owner installs them), and how to start the producer: `claude --agent producer --model <producer model> --effort high` in a terminal, or producer mode in `.claude/settings.local.json` for the desktop app. Do not commit unless the owner asks.
+In plain language in the owner's language: what was created or merged, what was found, the smoke test result, what was not verified, the decisions waiting for the owner, the tools check before and after (what was installed, declined, or failed), and how to start the producer: `claude --agent producer --model <producer model> --effort high` in a terminal, or producer mode in `.claude/settings.local.json` for the desktop app. Do not commit unless the owner asks.
